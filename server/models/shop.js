@@ -3,7 +3,7 @@ const {Schema, model } = require("mongoose")
 const ShopSchema = new Schema({
     name: {type: String, require: true},
     city: {type: String, require: true},
-    addres: {type: String, require: true},
+    address: {type: String, require: true},
     tel: {type: String, require: true},
     working_time: {
         open: String,//example: 10:30

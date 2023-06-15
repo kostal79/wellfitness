@@ -3,7 +3,7 @@ const { Schema, model, } = require("mongoose");
 
 const DeviceSchema = new Schema({
     name: { type: String, require: true },
-    brend: { type: ObjectId, ref: "Brend", require: true },
+    brand: { type: ObjectId, ref: "Brend", require: true },
     price: {
         diler: Number,
         retail: Number,

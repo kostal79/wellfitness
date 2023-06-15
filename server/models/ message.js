@@ -4,6 +4,7 @@ const getNextSequenceValue = require("../utils/getNextSequenceMessage")
 
 const MessageSchema = new Schema({
     user_id: {type: ObjectId, ref: "User", require: true},
+    number: {type: Number},
     issue: {type: String, require: true},
     text: {type: String, require: true},
     created_at: {type: Date, default: Date.now}
