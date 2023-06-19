@@ -8,6 +8,6 @@ router.post("/create", isAdmin, multerBlogMiddleware.array("image", 10), blogCon
 router.get("/all", blogController.readAll);
 router.get("/:id", blogController.readOne);
 router.put("/:id", isAdmin, blogController.update);
-router.delete("/:id", isAdmin, blogController.delete)
+router.delete("/:id", isAdmin, blogController.remove)
 
 module.exports = router;

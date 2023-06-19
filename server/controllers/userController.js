@@ -42,14 +42,11 @@ class UserConroller {
         }
     }
 
-    async delete(req, res) {
+    async remove(req, res) {
         try {
             const user = await User.findById(req.params.id);
             const basket_id = user.basket;
-            const deletedUser = await Promise.allSettled([User.findByIdAndDelete(user.id), Basket.findByIdAndDelete(basket_id)]);
-            if (!deletedUser) {
-                return res.status(404).json({message: "User not found"})
-            }
+            const deletedUser = await Promise.all([User.findByIdAndDelete(user.id), Basket.findByIdAndDelete(basket_id)]);
             return res.json(deletedUser)
         } catch (error) {
             console.log(error)

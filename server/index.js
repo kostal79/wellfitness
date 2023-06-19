@@ -7,9 +7,7 @@ const router = require("./routes/index");
 require("./passport")
 const app = express()
 const PORT = process.env.PORT || 5000;
-// const errorHandler = require("./middleware/ErrorMiddleware")
 const session = require("express-session")
-const User = require("./models/user")
 const cookieParser = require("cookie-parser")
 
 app.use(express.urlencoded({ extended: true }));
@@ -24,8 +22,8 @@ app.use(
         methods: "GET,POST,PUT,DELETE",
         credentials: true,
     })
-);
-
+    );
+    
 //session middleware
 app.use(session({
     secret: process.env.SECRET_SESSION,
@@ -41,7 +39,6 @@ app.use(passport.session());
 
 app.use("/api", router)
 
-// app.use(errorHandler)
 
 const start = async () => {
     try {

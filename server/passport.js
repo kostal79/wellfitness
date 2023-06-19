@@ -5,8 +5,8 @@ const passport = require("passport")
 const User = require("./models/user");
 const Basket = require('./models/basket');
 
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const GOOGLE_CLIENT_ID = "143816524808-epo6t6kq9m7rl9m96is2kgdsh429onrv.apps.googleusercontent.com";
+const GOOGLE_CLIENT_SECRET = "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";
 const FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID;
 const FACEBOOK_APP_SECRET =process.env.FACEBOOK_APP_SECRET;
 

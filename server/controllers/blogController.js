@@ -4,7 +4,7 @@ const fs = require("fs");
 class BlogController {
     async create(req, res) {
         try {
-            const { header, promotext, text } = req.body;
+            const { header, promotext, text, use } = req.body;
             const files = req.files;
             const images_refs = files.map(file => file.path);
 
@@ -13,6 +13,7 @@ class BlogController {
                 promotext,
                 text,
                 images_refs,
+                use,
             });
 
             return res.status(201).json(newBlog);
@@ -49,13 +50,14 @@ class BlogController {
     async update(req, res) {
         try {
             const { id } = req.params;
-            const { header, promotext, text, images_refs} = req.body;
+            const { header, promotext, text, images_refs, use} = req.body;
 
             const updatedPost = await Blog.findByIdAndUpdate(id, {
                 header,
                 promotext,
                 text,
                 images_refs,
+                use
             },
                 { new: true }
             );
@@ -70,7 +72,7 @@ class BlogController {
         }
     }
 
-    async delete(req, res) {
+    async remove(req, res) {
         try {
             const { id } = req.params;
             const post = await Blog.findById(id);

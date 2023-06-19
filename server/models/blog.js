@@ -5,7 +5,8 @@ const BlogSchema = new Schema({
     promotext: {type: String, require: true},
     text: {type: String, require: true}, 
     created_at: {type: Date, default: Date.now},
-    images_refs: [{type: String}]
+    images_refs: [{type: String}],
+    use:{type: String, default: "home", enum: ["home, fitnessclub"]}
 })
 
 module.exports = new model("Blog", BlogSchema)

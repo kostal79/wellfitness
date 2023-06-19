@@ -17,7 +17,6 @@ class BrandController {
 
             return res.status(201).json(newBrand);
         } catch (error) {
-            // console.error(error);
             return res.status(500).json({ message: "Server error" })
         }
     }
@@ -26,7 +25,7 @@ class BrandController {
             const collection = await Brand.find();
             return res.status(200).json(collection);
         } catch (error) {
-            // console.error(error);
+            console.error(error);
             return res.status(500).json({ message: "Server error" })
         }
     }
@@ -57,11 +56,11 @@ class BrandController {
             return res.status(200).json(updatedBrand)
 
         } catch (error) {
-            // console.error(error);
+            console.error(error);
             return res.status(500).json({ message: "Server error" })
         }
     }
-    async delete(req, res) {
+    async remove(req, res) {
         try {
             const { id } = req.params;
             const brand = await Brand.findById(id);
@@ -74,7 +73,7 @@ class BrandController {
                 res.status(200).json({message: `Brand id: ${id} was deleted`})
             }         
         } catch (error) {
-            // console.error(error);
+            console.error(error);
             return res.status(500).json({ message: "Server error" })
         }
 
