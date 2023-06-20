@@ -1,12 +1,12 @@
 const { ObjectId } = require("mongodb")
 const {Schema, model } = require("mongoose")
+const getNextSequenceValue = require("../utils/getNextSequenceValue")
 
 const ServisSchema = new Schema({
     number: {type: Number},
-    user_id: {type: ObjectId, ref: "User", required: true},
     created_at: {type: Date, default: Date.now },
     device:{
-        brand: {type: ObjectId, ref: "Brend"},
+        brand: {type: ObjectId, ref: "Brand"},
         model: {type: ObjectId, ref: "Device"}
     },
     serial_number: {type: String, required: true},
@@ -15,9 +15,9 @@ const ServisSchema = new Schema({
     address:{
         city:{type:String, required: true},
         street: String,
-        house: Number,
-        block: Number,
-        apart: Number,
+        house: String,
+        block: String,
+        apart: String,
     },
     message: String,
     file_ref: String,
