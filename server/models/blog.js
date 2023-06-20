@@ -1,9 +1,9 @@
 const {Schema, model } = require("mongoose")
 
 const BlogSchema = new Schema({
-    header: {type: String, require: true},
-    promotext: {type: String, require: true},
-    text: {type: String, require: true}, 
+    header: {type: String, required: true},
+    promotext: {type: String, required: true},
+    text: {type: String, required: true}, 
     created_at: {type: Date, default: Date.now},
     images_refs: [{type: String}],
     use:{type: String, default: "home", enum: ["home, fitnessclub"]}

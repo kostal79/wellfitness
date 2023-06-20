@@ -3,7 +3,7 @@ const {Schema, model} = require("mongoose")
 const getNextSequenceValue = require("../utils/getNextSequenceMessage")
 
 const MessageSchema = new Schema({
-    user_id: {type: ObjectId, ref: "User", require: true},
+    user_id: {type: ObjectId, ref: "User", required: true},
     number: {type: Number},
     issue: {type: String, require: true},
     text: {type: String, require: true},
@@ -16,3 +16,5 @@ MessageSchema.pre("save", async function(next) {
     };
     next();
 })
+
+module.exports = model("Message", MessageSchema);

@@ -2,7 +2,7 @@ const { ObjectId } = require("mongodb");
 const { Schema, model, } = require("mongoose");
 
 const DeviceSchema = new Schema({
-    name: { type: String, require: true },
+    name: { type: String, required: true },
     brand: { type: ObjectId, ref: "Brand", },
     price: {
         diler: Number,
@@ -93,7 +93,10 @@ const DeviceSchema = new Schema({
     sign_new: Boolean,  
     use: String,
     type: String,
-    feedback_ids: [{type: ObjectId, ref: "Feedback"}],
+    feedback: {
+        feedbacks_ids: {type: [ObjectId], ref: "Feedback"},
+        users_ids:{type: [ObjectId], ref: "User"}
+    },
     docs_ids: [{type: ObjectId, ref: "Doc"}]
 })
 
@@ -157,8 +160,25 @@ DeviceSchema.method("removeDoc", function(docId) {
    this.docs_ids.pull(docId);
 });
 
-DeviceSchema.method("removeBrand", function(feedId) {
-    this.feedback_ids.pull(feedId);
+
+DeviceSchema.method("isPostUnique", function(userId){
+    const usersList = this.feedback.users_ids;
+    if (usersList.includes(userId)){
+        return true
+    }
+    return false
+}) 
+
+DeviceSchema.method("addFeedback", function(fbId, userId) {
+    const feedbackList = this.feedback.feedbacks_ids;
+    const usersIds = this.feedback.users_ids;
+    feedbackList.push(fbId);
+    usersIds.push(userId);
+})
+
+DeviceSchema.method("removePost", function(feedId, userId) {
+    this.feedback.feedbacks_ids.pull(feedId);
+    this.feedback.users_ids.pull(userId);
 });
 
-module.exports = model("Device", DeviceSchema)
+module.exports = new model("Device", DeviceSchema)

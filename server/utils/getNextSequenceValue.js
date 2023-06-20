@@ -4,7 +4,7 @@ async function getNextSequenceValue(sequenceId) {
     const sequence = await OrderSequence.findByIdAndUpdate(
         sequenceId,
         {$inc: {value: 1}},
-        {new: true, upset: true}
+        {new: true, upsert: true}
     );
     return sequence.value
 }

@@ -2,12 +2,13 @@ const { ObjectId } = require("mongodb");
 const { Schema, model } = require("mongoose");
 
 const FeedbackSchema = new Schema({
-    userId: {type: ObjectId, ref: "User", require: true},
-    tel: {type: String, require: true},
-    email: {type: String, require: true},
-    message: {type: String, require: true},
-    createdAt: {type: Date, defaul: Date.now},
-    rating: {type: ObjectId, ref: "Rating"}
+    device_id: {type: ObjectId, ref: "Device", required: true},
+    user_id: {type: ObjectId, ref: "User", required: true},
+    tel: {type: String, required: true},
+    email: {type: String, required: true},
+    message: {type: String, required: true},
+    created_at: {type: Date, default: Date.now},
+    rating_id: {type: ObjectId, ref: "Rating"}
 })
 
-module.exports = model("Feedback", FeedbackSchema)
+module.exports = model("Feedback", FeedbackSchema);

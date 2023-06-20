@@ -11,7 +11,7 @@ const UserSchema = new Schema({
     tel: {type: String, },
     birth_date: {type: Date, },
     city: {type: String, },
-    adress: {type: String},
+    address: {type: String},
     gender: {type: String},
     role: {type: [String], default: ["user"]},
     bonuses: [BonusScheme], //TODO BonusesScheme

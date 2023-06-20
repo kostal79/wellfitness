@@ -4,9 +4,12 @@ const getNextSequenceValue = require("../utils/getNextSequenceValue");
 
 const OrderSchema = new Schema({
     number: Number,
-    user_id: { type: ObjectId, ref: "User" },
+    user: { type: ObjectId, ref: "User" },
     created_at: { type: Date, default: Date.now },
-    devices: [{ type: ObjectId, ref: "Device" }],
+    devices: [{
+        device_id: {type: ObjectId, ref: "Device" },
+        quantity: {type: Number}
+    }],
     payment_method: String,
     order_status: {
         type: String, enum: [

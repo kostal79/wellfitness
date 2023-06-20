@@ -1,7 +1,7 @@
 const {Schema, model} = require("mongoose")
 
 const OrderSequenceSchema = new Schema({
-    _id: {type: String, require: true},
+    _id: {type: String, required: true},
     value: {type: Number, default: 0}
 })
 

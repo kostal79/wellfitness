@@ -6,14 +6,22 @@ const userRouter = require("./user.routes");
 const blogRouter = require("./blog.routes");
 const brandRouter = require("./brand.routes");
 const deviceRouter = require("./device.routes");
-const docRouter = require("./docRouter")
+const docRouter = require("./doc.routes");
+const feedbackRouter = require("./feedback.routes");
+const messageRouter = require("./message.routes");
+const orderRouter = require("./order.routes");
+const projectRouter = require("./project.routes");
 
 router.use("/auth", authRouter);
-router.use("/basket", basketRouter);
-router.use("/user", userRouter);
-router.use("/blog", blogRouter);
-router.use("/brand", brandRouter);
-router.use("/device", deviceRouter);
-router.use("/doc", docRouter)
+router.use("/baskets", basketRouter);
+router.use("/users", userRouter);
+router.use("/blogs", blogRouter);
+router.use("/brands", brandRouter);
+router.use("/devices", deviceRouter);
+router.use("/docs", docRouter);
+router.use("/feedback", feedbackRouter);
+router.use("/messages", messageRouter);
+router.use("/orders", orderRouter);
+router.use("/projects", projectRouter);
 
 module.exports = router
