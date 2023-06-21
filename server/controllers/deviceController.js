@@ -98,4 +98,4 @@ class DeviceController {
     }
 }
 
-module.exports = new DeviceController;
+module.exports = new DeviceController();

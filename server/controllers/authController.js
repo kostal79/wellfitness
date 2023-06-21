@@ -36,7 +36,7 @@ class authController {
 
             newUser.basket = basket_id;
 
-            await Promise.allSettled([newUser.save(), newBasket.save()]);
+            await Promise.all([newUser.save(), newBasket.save()]);
 
             req.login(newUser, (err) => {
                 if (err) {
@@ -80,4 +80,4 @@ class authController {
     }
 }
 
-module.exports = new authController;
+module.exports = new authController();

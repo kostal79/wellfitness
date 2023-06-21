@@ -90,4 +90,4 @@ class MessageController {
     }
 }
 
-module.exports = new MessageController;
+module.exports = new MessageController();

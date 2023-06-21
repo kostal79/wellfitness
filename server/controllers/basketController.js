@@ -1,135 +1,96 @@
 const Basket = require("../models/basket")
 const User = require("../models/user")
 
-function findDevice(basket, device_id) {
-    for (let item of basket) {
-        if (item.device.toString() === device_id) {
-            return item._id
-        };
-    }
-    return false
-}
-
 class BasketController {
-    async getAll(req, res) {
+    async create(req, res) {
         try {
-            const baskets = await Basket.find()
-            return res.json(baskets)
+            const { user_id } = req.body;
+            const user = await User.findById(user_id);
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
+            if (user.basket) {
+                return res.status(403).json({ message: "Basket already exists" })
+            }
+            const newBasket = await Basket.create(req.body);
+            user.basket = newBasket._id;
+            await user.save();
+            res.status(201).json(newBasket)
+
         } catch (error) {
-            res.status(500).json({ message: "No baskets yet" })
+            console.error(error);
+            res.status(500).json({ message: "Error creating basket" })
         }
     }
-
-    async getOne(req, res) {
-        const {id} = req.params;
+    async readAll(req, res) {
         try {
-            const basket = await Basket.findById(id)
-            if (basket) {
-                return res.status(200).json(basket)
-            } else {
-                return res.status(400).json({ message: "Basket don't exist" })
-            }
+            const collection = await Basket.find();
+            res.status(200).json(collection);
         } catch (error) {
-            console.log(error)
-            res.status(500).json({ message: "Error: can't get basket" })
+            console.error(error);
+            res.status(500).json({ message: "Error reading baskets" })
         }
     }
-
-    async add(req, res) {
+    async readOne(req, res) {
         try {
-            const {basket_id, device_id, quantity} = req.body;
-            const basket = await Basket.findById(basket_id)
-            if (basket) {
-                if(!findDevice(basket.devices, device_id)) {
-                    basket.devices.push({device: device_id, quantity: quantity})
-                    await basket.save();
-                    return res.status(200).json(basket)
-                } else {
-                    res.status(400).json({message: "Device already in basket. Use incrementation"})
-                }
-            } else {
-                res.status(400).json({message: "Basket don't exist"})
+            const { basketId } = req.params;
+            const userId = req.user.id;
+            const basket = await Basket.findById(basketId)
+                .populate("user_id")
+                .populate("devices.device");
+            if (!basket) {
+                return res.status(404).json({ message: "Basket not found" })
+            };
+            if (!basket.user_id._id.equals(userId)) {
+                return res.status(403).json({ message: "Forbidden" });
             }
+            res.status(200).json(basket)
         } catch (error) {
-            console.log(error)
-            res.status(500).json({message: "Server error"})
+            console.error(error);
+            res.status(500).json({ message: "Error reading basket" })
         }
     }
-
-    async removeFrom(req, res) {
-        const {basket_id, device_id} = req.body;
-        const basket = await Basket.findById(basket_id)
+    async update(req, res) {
         try {
-            const searchedDevice = findDevice(basket.devices, device_id);
-            if (searchedDevice){
-                const subdoc = basket.devices.id(searchedDevice)
-                await subdoc.deleteOne()
-                await basket.save()
-                res.status(200).json(basket)
-            } else {
-                res.status(400).json({message: "Device in basket did't found"})
+            const { basketId } = req.params;
+            const userId = req.user.id;
+            const basketData = req.body;
+            const basket = await Basket.findById(basketId)
+            if (!basket) {
+                return res.status(404).json({ message: "Basket not found" })
+            };
+            if (!basket.user_id.equals(userId)) {
+                return res.status(403).json({ message: "Forbidden" });
             }
+            const updatedBasket = await Basket.findByIdAndUpdate(
+                basketId,
+                basketData,
+                { new: true }
+            );
+            res.status(200).json(updatedBasket);
         } catch (error) {
-            console.log(error)
-            res.status(500).json({message: "Server error"})
+            console.error(error);
+            res.status(500).json({ message: "Error updating basket" })
         }
     }
-
-    async incrementQuantity(req, res) {
-        const {basket_id, device_id} = req.body;
-        const basket = await Basket.findById(basket_id)
+    async remove(req, res) {
         try {
-            const searchedDevice = findDevice(basket.devices, device_id);
-            if (searchedDevice){
-                const subdoc = basket.devices.id(searchedDevice)
-                subdoc.quantity += 1;
-                await basket.save()
-                res.status(200).json(basket)
-            } else {
-                res.status(400).json({message: "Device in basket did't found"})
+            const { basketId } = req.params;
+            const userId = req.user.id;
+            const basket = await Basket.findById(basketId)
+            if (!basket) {
+                return res.status(404).json({ message: "Basket not found" })
+            };
+            if (!basket.user_id.equals(userId)) {
+                return res.status(403).json({ message: "Forbidden" });
             }
+            await basket.remove();
+            res.status(200).json({ message: "Basket deleted successfully" });
         } catch (error) {
-            console.log(error)
-            res.status(500).json({message: "Server error"})
-        }
-    }
-
-    async decrementQuantity(req, res) {
-        const {basket_id, device_id} = req.body;
-        const basket = await Basket.findById(basket_id)
-        try {
-            const searchedDevice = findDevice(basket.devices, device_id);
-            if (searchedDevice){
-                const subdoc = basket.devices.id(searchedDevice)
-                subdoc.quantity -= 1;
-                await basket.save()
-                res.status(200).json(basket)
-            } else {
-                res.status(400).json({message: "Device in basket did't found"})
-            }
-        } catch (error) {
-            console.log(error)
-            res.status(500).json({message: "Server error"})
-        }
-    }
-
-    async clear(req, res) {
-        const basket_id = req.body.basket_id;
-        try {
-            const filter = {_id: basket_id};
-            const update = {devices: []};
-            const option = {new: true}
-            const basket = await Basket.findOneAndUpdate(filter, update, option)
-            if (basket) {
-                return res.status(200).json(basket)
-            } else {
-                res.status(400).json({message: "Basket don't exist"})
-            }
-        } catch (error) {
-            console.log(error)
-            res.status(500).json({message: "Server error"})
+            console.error(error);
+            res.status(500).json({ message: "Error deleting basket" })
         }
     }
 }
 
-module.exports = new BasketController;
+module.exports = new BasketController();

@@ -82,7 +82,7 @@ class BlogController {
                 post.images_refs.forEach(imageRef => {
                     fs.unlinkSync(imageRef)
                 });
-                await Blog.findByIdAndDelete(id);
+                await post.remove();
                 return res.status(200).json({ message: "Post deleted successfully" });
             }
         } catch (error) {
@@ -92,4 +92,4 @@ class BlogController {
     }
 }
 
-module.exports = new BlogController;
+module.exports = new BlogController();

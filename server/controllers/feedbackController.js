@@ -90,4 +90,4 @@ class FeedbackController {
     }
 }
 
-module.exports = new FeedbackController;
+module.exports = new FeedbackController();

@@ -56,4 +56,4 @@ class UserConroller {
 
 }
 
-module.exports = new UserConroller;
+module.exports = new UserConroller();

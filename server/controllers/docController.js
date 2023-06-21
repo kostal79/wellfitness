@@ -63,4 +63,4 @@ class DocController {
     }
 }
 
-module.exports = new DocController;
+module.exports = new DocController();

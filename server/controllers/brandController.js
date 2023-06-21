@@ -9,7 +9,7 @@ class BrandController {
             if (candidate) {
                 return res.status(409).json({ message: "Brand name already exists" })
             }
-            const file = req.file;
+            const file = req.file ? req.file: "";
             const newBrand = await Brand.create({
                 name,
                 logo_ref: file.path,
@@ -32,7 +32,7 @@ class BrandController {
     async readOne(req, res) {
         const { id } = req.params
         try {
-            const brand = await Brand.findById(id);
+            const brand = await Brand.findById(id).populate("devices_ids");
             if (!brand) {
                 return res.status(404).json({ message: "Brand not found" })
             }
@@ -80,4 +80,4 @@ class BrandController {
     }
 }
 
-module.exports = new BrandController;
+module.exports = new BrandController();
