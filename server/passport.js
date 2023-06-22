@@ -5,16 +5,11 @@ const passport = require("passport")
 const User = require("./models/user");
 const Basket = require('./models/basket');
 
-const GOOGLE_CLIENT_ID = "143816524808-epo6t6kq9m7rl9m96is2kgdsh429onrv.apps.googleusercontent.com";
-const GOOGLE_CLIENT_SECRET = "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";
-const FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID;
-const FACEBOOK_APP_SECRET =process.env.FACEBOOK_APP_SECRET;
-
 passport.use(
   new GoogleStrategy(
     {
-      clientID: GOOGLE_CLIENT_ID,
-      clientSecret: GOOGLE_CLIENT_SECRET,
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: "/api/auth/google/callback",
     },
     async function (accessToken, refreshToken, profile, done) {
@@ -48,8 +43,8 @@ passport.use(
 passport.use(
   new FacebookStrategy(
     {
-      clientID: FACEBOOK_APP_ID,
-      clientSecret: FACEBOOK_APP_SECRET,
+      clientID: process.env.FACEBOOK_APP_ID,
+      clientSecret: process.env.FACEBOOK_APP_SECRET,
       callbackURL: "/api/auth/google/callback",
     },
     async function (accessToken, refreshToken, profile, done) {
