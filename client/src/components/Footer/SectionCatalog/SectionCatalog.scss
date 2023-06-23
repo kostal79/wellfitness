@@ -1,0 +1,20 @@
+@import "../../../styles/main.scss";
+
+.footer_menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer_menu-header {
+    font-size: $fonts-medium;
+    margin-bottom: 16px;
+    color: white;
+}
+
+.footer_menu-item {
+    margin-bottom: 10px;
+}
+
+.menu-item--active{
+    color: white;
+}

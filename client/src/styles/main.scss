@@ -1,0 +1,31 @@
+@import "foundation";
+
+
+
+html {
+    box-sizing: border-box;
+    }
+    *, *:before, *::after {
+        box-sizing: inherit;
+    }
+    body,
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    ul,
+    li,
+    figure,
+    figcaption {
+        margin: 0;
+    }
+
+    body {
+        min-width: 320px;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }

@@ -1,8 +1,22 @@
 import React from 'react';
 import Styles from "./HomePage.module.scss"
-import { Link } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
-const HomePage = ({navigateWithQueryParams}) => {
+const HomePage = () => {
+    const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
+    for (let [key, value] of searchParams.entries()) {
+      console.log("key === > ", key)
+      console.log("value === > ", value)
+
+    }
+
+  const navigateWithQueryParams = (path, queryParams) => {
+    navigate({
+      pathname: path,
+      search: new URLSearchParams(queryParams).toString(),
+    });
+  };
   const handleButtonClick = () => {
     const queryParams = {
       param1: "value1",

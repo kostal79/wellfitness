@@ -91,8 +91,8 @@ const DeviceSchema = new Schema({
     sign_profit: Boolean,
     sign_recomend: Boolean,
     sign_new: Boolean,  
-    use: String,
-    type: String,
+    use: String,//"home", "prof"
+    type: {type: String},
     feedback: {
         feedbacks_ids: {type: [ObjectId], ref: "Feedback"},
         users_ids:{type: [ObjectId], ref: "User"}

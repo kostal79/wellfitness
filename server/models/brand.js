@@ -4,6 +4,7 @@ const { Schema, model } = require("mongoose");
 const BrandSchema = new Schema({
     name: {type: String, required: true, unique: true},
     logo_ref: {type: String},
+    is_own: {type: Boolean},
     devices_ids: [{type: ObjectId, ref: "Device"}]
 })
 

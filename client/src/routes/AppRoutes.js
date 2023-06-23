@@ -1,24 +1,26 @@
-import { Route, RouterProvider, Routes, createBrowserRouter, createRoutesFromElements, useNavigate } from "react-router-dom";
+import {
+  Route,
+  RouterProvider, 
+  createBrowserRouter,
+  createRoutesFromElements
+} from "react-router-dom";
 import Layout from "@layout/Layout";
 import HomePage from "@pages/HomePage/HomePage";
+import CatalogPage from "@pages/CatalogPage/CatalogPage"
 
 const AppRoutes = () => {
-  // const navigate = useNavigate();
-
-  // const handleNavigateWithQueryParams = (path, queryParams) => {
-  //   navigate({
-  //     pathname: path,
-  //     search: new URLSearchParams(queryParams).toString(),
-  //   });
-  // };
-
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
         <Route
           path="/home"
           element={<HomePage />}
-          
+
+        />
+        <Route
+          path="/catalog"
+          element={<CatalogPage />}
+
         />
       </Route>
     )

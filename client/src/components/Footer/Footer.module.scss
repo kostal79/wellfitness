@@ -1,0 +1,11 @@
+@import "../../styles/main.scss";
+
+.footer {
+    background-color: $color-dark-grey;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: $color-fonts-grey;
+    font-size: $fonts-small-upper;
+  }
