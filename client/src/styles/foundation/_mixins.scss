@@ -1,0 +1,14 @@
+@mixin centerElement {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+@mixin hideButton {
+    width: fit-content;
+    padding: 0;
+    font-size: $fonts-small-upper;
+    color: $color-fonts-grey;
+    background-color: transparent;
+    border: none;
+}

@@ -20,7 +20,7 @@ html {
     figcaption {
         margin: 0;
     }
-
+    
     body {
         min-width: 320px;
     }
@@ -28,4 +28,8 @@ html {
     a {
         text-decoration: none;
         color: inherit;
+    }
+
+    button:active {
+        opacity: .6;
     }

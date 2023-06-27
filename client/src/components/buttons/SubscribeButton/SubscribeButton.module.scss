@@ -1,0 +1,23 @@
+@import "@styles/main.scss";
+
+.button {
+    width: 100%;
+    max-width: 300px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(133, 143, 164, 0.15);
+    color: $color-fonts-grey;
+    font-size: $fonts-small-upper;
+    padding: 14px 17px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 979px) {
+    .button{
+        font-size: $fonts-small;
+    }
+}
+

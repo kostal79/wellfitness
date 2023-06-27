@@ -21,7 +21,8 @@ class DeviceController {
     }
     async readAll(req, res) {
         try {
-            const collection = await Device.find();
+            const query = req.query;
+            let collection = await Device.find(query);
             return res.status(200).json(collection);
         } catch (error) {
             console.log(error);
@@ -31,7 +32,7 @@ class DeviceController {
     async readOne(req, res) {
         try {
             const { id } = req.params;
-            const device = await Device.findById(id);
+            const device = await Device.findById(id).populate("brand");
             if (!device) {
                 return res.status(404).json({ message: "Device not found" })
             }
@@ -89,7 +90,7 @@ class DeviceController {
             if (price) device.voteRatingPrice(functionality, userId)
             const updatedDevice = await Device.findByIdAndUpdate(deviceId, {
                 rating: device.rating
-            }, {new: true});
+            }, { new: true });
             res.status(200).json(updatedDevice)
         } catch (error) {
             console.log(error);
