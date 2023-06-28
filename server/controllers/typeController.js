@@ -79,7 +79,12 @@ class TypeController {
                 return res.status(403).json({ message: "Type consist subtypes. Impossible delete type" })
             }
             if (type.image_ref) {
-                fs.unlinkSync(type.image_ref)
+                try {
+                    fs.unlinkSync(type.image_ref)
+                } catch (error) {
+                    console.error(error);
+                    return res.status(500).json({message: "Error in deleting file"})
+                }
             }
             await Type.deleteOne({ _id: typeId });
             res.status(200).json({ message: "Type deleted successfully" })
