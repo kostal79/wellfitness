@@ -86,13 +86,12 @@ const DeviceSchema = new Schema({
         }
     },
     discount_price: Number,
-    usage: String,
+    usage: String,//"home", "prof"
     bonuses: Number,
     sign_profit: Boolean,
     sign_recomend: Boolean,
     sign_new: Boolean,  
-    use: String,//"home", "prof"
-    type: {type: String},
+    subtype: {type: String},//Беговые дорожки
     feedback: {
         feedbacks_ids: {type: [ObjectId], ref: "Feedback"},
         users_ids:{type: [ObjectId], ref: "User"}

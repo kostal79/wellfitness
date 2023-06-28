@@ -12,8 +12,8 @@ const SectionCatalog = () => {
       <ul className="list">
         <li className="list_item">
           <NavLink
-            to={"/catalog?use=home"}
-            className={(obj) => giveName({ ...obj, filter: "use=home" })}
+            to={"/catalog?usage=home"}
+            className={(obj) => giveName({ ...obj, filter: "usage=home" })}
             end
           >
             Для дома
@@ -21,8 +21,8 @@ const SectionCatalog = () => {
         </li>
         <li className="list_item">
           <NavLink
-            to={"/catalog?use=prof"}
-            className={(obj) => giveName({ ...obj, filter: "use=prof" })}
+            to={"/catalog?usage=prof"}
+            className={(obj) => giveName({ ...obj, filter: "usage=prof" })}
             end
           >
             Для фитнес клубов
