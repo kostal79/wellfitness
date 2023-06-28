@@ -3,3 +3,12 @@
 .button {
     @include hideButton
 }
+
+@media screen and (min-width: 1390px) {
+    .button {
+        border: 1px solid $color-grey-button;
+        border-radius: 6px;
+        padding: 10px;
+        z-index: 1;
+    }
+}

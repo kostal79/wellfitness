@@ -64,7 +64,7 @@
 
 @media screen and (min-width: 1390px) {
     .section {
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: 1fr 1fr 1fr 2fr 255px;;
     }
 
     .picture {
