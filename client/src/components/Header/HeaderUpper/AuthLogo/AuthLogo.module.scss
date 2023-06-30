@@ -1,0 +1,21 @@
+@import "@styles/main.scss";
+
+.container {
+  @include centerElement;
+  flex-direction: row;
+  column-gap: 14px;
+}
+
+.avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    @include centerElement;
+    cursor: pointer;
+}
+
+.button {
+  @include hideButton;
+  color: white;
+  font-size: $fonts-small-upper;
+}

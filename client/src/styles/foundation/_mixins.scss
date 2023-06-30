@@ -13,3 +13,17 @@
     border: none;
     cursor: pointer;
 }
+
+@mixin circleElement {
+    position: absolute;
+    @include centerElement;
+    background-color: $color-red;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    font-size:10px;
+    color: white;
+    border: 2px solid $color-dark-grey;
+    top: -1px;
+    right: -8px;
+}

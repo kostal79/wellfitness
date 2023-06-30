@@ -1,0 +1,46 @@
+@import "@styles/main.scss";
+
+.container {
+@include centerElement;
+flex-direction: row;
+column-gap: 30px;
+color: white;
+}
+
+.container::after, .container::before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 100%;
+    background-color:transparentize($color: $color-fonts-grey, $amount: 0.85);
+}
+
+.tel {
+    margin-right: 4px;
+}
+
+.select{
+    border: none;
+    background-color: transparent;
+    color: $color-fonts-grey;
+    font-size: $fonts-small-upper;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: no-repeat url("../../../../assets/svg/polygon1.svg");
+    background-position: right;
+    padding: 0 10px 0 10px;
+    cursor: pointer;
+}
+
+.option {
+    background-color: $color-dark-grey;
+}
+
+.select:focus {
+    outline: none;
+}
+
+.container button {
+    color: $color-red !important
+}

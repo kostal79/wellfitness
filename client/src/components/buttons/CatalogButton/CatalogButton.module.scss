@@ -1,0 +1,21 @@
+@import "@styles/main.scss";
+
+.button {
+  @include centerElement;
+  flex-direction: row;
+  background-color: $color-red;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 20px;
+  cursor: pointer;
+}
+
+.text {
+  margin-left: 6px;
+  font-size: $fonts-small-upper;
+  color: white;
+}
+
+.button:hover {
+  background-color: $color-red-hover;
+}

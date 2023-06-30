@@ -9,7 +9,7 @@ const SectionService = () => {
   return (
     <section className="footer_menu">
       <h5 className="footer_menu-header">Услуги</h5>
-      <ul>
+      <ul className="list">
         <li className="list_item">
           <NavLink
             to={"project3d"}

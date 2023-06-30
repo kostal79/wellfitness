@@ -1,0 +1,21 @@
+@import "@styles/main.scss";
+
+.container{
+    margin-left: 0;
+    margin-right: auto;
+    padding: 0 34px;
+}
+
+.menu_list{
+    margin:0;
+    padding:0;
+    flex-direction:row;
+    @include centerElement;
+    column-gap: 36px;
+    font-size: $fonts-small-upper;
+    color: white;
+}
+
+.menu_item {
+    list-style: none;
+}

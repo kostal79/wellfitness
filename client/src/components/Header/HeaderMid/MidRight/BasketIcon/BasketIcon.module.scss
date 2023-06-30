@@ -1,0 +1,16 @@
+@import "@styles/main.scss";
+
+.container {
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    cursor: pointer;
+}
+
+.container:hover path {
+    stroke: $color-red;
+}
+
+.circle {
+    @include circleElement;
+}

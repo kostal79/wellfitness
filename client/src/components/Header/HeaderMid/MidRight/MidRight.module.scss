@@ -1,0 +1,42 @@
+@import "@styles/main.scss";
+
+.right-side {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.icons {
+  display: flex;
+  flex-direction: row;
+  column-gap: 30px;
+}
+
+.basket {
+  transform: scale(0.8);
+}
+
+.hide {
+  display: none;
+}
+
+@media screen and (min-width: 979px) {
+  .right-side {
+    column-gap: 30px;
+  }
+
+  .hide {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .basket {
+    transform: scale(1);
+  }
+}
+
+@media screen and (min-width: 1410px) {
+
+}

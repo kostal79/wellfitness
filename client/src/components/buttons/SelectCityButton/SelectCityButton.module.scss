@@ -1,0 +1,9 @@
+@import "@styles/main.scss";
+
+.button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+    @include hideButton;
+}

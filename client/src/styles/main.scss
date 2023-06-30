@@ -1,36 +1,49 @@
 @import "foundation";
 
-
-
 html {
-    box-sizing: border-box;
-    }
-    *, *:before, *::after {
-        box-sizing: inherit;
-    }
-    body,
-    p,
-    h1,
-    h2,
-    h3,
-    h4,
-    ul,
-    li,
-    figure,
-    figcaption {
-        margin: 0;
-    }
-    
-    body {
-        min-width: 320px;
-        scroll-behavior: smooth;
-    }
+  box-sizing: border-box;
+  height: 100%;
+}
+*,
+*:before,
+*::after {
+  box-sizing: inherit;
+}
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+ul,
+li,
+figure,
+figcaption {
+  margin: 0;
+}
 
-    a {
-        text-decoration: none;
-        color: inherit;
-    }
+body {
+  min-width: 320px;
+  scroll-behavior: smooth;
+  height: 100%;
+}
 
-    button:active {
-        opacity: .6;
-    }
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+main {
+  min-height: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button:active {
+  opacity: 0.6;
+}

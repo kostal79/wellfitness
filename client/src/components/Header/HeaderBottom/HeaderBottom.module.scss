@@ -1,0 +1,40 @@
+@import "@styles/main.scss";
+
+.wrapper {
+  width: 100%;
+  background-color: $color-secondary-dark-grey;
+}
+
+.container {
+  padding: 4px 10px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  max-width: 1410px;
+  margin: 0 auto;
+}
+
+.button {
+  @include centerElement;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: $fonts-small;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 6px 0 4px 0;
+}
+
+.text {
+  margin-right: 10px;
+}
+
+#filter_home::after {
+  content: "";
+  display:block;
+  width: 1px;
+  margin-left: 10px;
+  height: 30px;
+  background-color: transparentize($color: white, $amount: 0.85);
+}
+
