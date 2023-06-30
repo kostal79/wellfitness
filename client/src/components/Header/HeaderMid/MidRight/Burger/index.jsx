@@ -1,16 +1,28 @@
-import React from 'react';
-import Styles from "./Burger.module.scss"
-import {ReactComponent as BurgerSVG} from "@assets/svg/burger.svg"
-
+import React, { useState } from "react";
+import Styles from "./Burger.module.scss";
+import { ReactComponent as BurgerSVG } from "@assets/svg/burger.svg";
+import MenuModalContent from "@components/modals/MenuModalContent";
+import { createPortal } from "react-dom";
 const Burger = () => {
-  const onClickHandler = () => {
-    console.log("Hamburger clicked")
-  }
-    return (
-      <div className={Styles.container} onClick={onClickHandler}>
-          <BurgerSVG/>
-      </div>
-    );
-}
+  const [showModal, setShowModal] = useState(false);
 
-export default Burger
+  const onOpen = () => {
+    setShowModal(true);
+  };
+
+  const onClose = () => {
+    setShowModal(false);
+  };
+
+  return (
+    <>
+      <button className={Styles.container} onClick={onOpen}>
+        <BurgerSVG />
+      </button>
+      {showModal &&
+        createPortal(<MenuModalContent close={onClose} />, document.body)}
+    </>
+  );
+};
+
+export default Burger;

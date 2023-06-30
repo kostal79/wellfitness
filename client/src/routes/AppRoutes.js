@@ -11,6 +11,7 @@ import { lazy } from "react";
 import { getAllBrands } from "../services/brandsAPI";
 import { get } from "../services/api";
 import { brandsLoader } from "../pages/Brands";
+import ErrorPage from "../pages/ErrorPage";
 
 const Home = lazy(() => import("@pages/Home"));
 const Catalog = lazy(() => import("@pages/Catalog"));
@@ -137,21 +138,25 @@ const AppRoutes = () => {
 
         </Route>
         <Route
-            path="/blog"
-            element={<Blog />}
-          />
+          path="/blog"
+          element={<Blog />}
+        />
         <Route
-            path="/showrooms"
-            element={<Showrooms />}
-          />
+          path="/showrooms"
+          element={<Showrooms />}
+        />
         <Route
-            path="/contacts"
-            element={<Contacts />}
-          />
+          path="/contacts"
+          element={<Contacts />}
+        />
         <Route
-            path="/private-policy"
-            element={<PrivatePolicy />}
-          />
+          path="/private-policy"
+          element={<PrivatePolicy />}
+        />
+        <Route
+          path="/*"
+          element={<ErrorPage />}
+        />
 
 
       </Route>

@@ -3,8 +3,8 @@ import Styles from "./HeaderMid.module.scss";
 import SearchIcon from "./SearchIcon/SearchIcon";
 import { ReactComponent as LogoSVG } from "@assets/svg/logo.svg";
 import MidRight from "./MidRight";
-import Navigation from "./Navigation/Navigation";
-import CatalogButton from "../../buttons/CatalogButton/CatalogButton";
+import Navigation from "./Navigation";
+import CatalogButton from "@components/buttons/CatalogButton/CatalogButton";
 
 const HeaderMid = () => {
   return (

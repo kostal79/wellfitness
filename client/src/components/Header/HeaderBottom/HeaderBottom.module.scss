@@ -6,15 +6,17 @@
 }
 
 .container {
-  padding: 4px 10px;
+  padding: 10px 0 0 4px;
   display: flex;
   flex-direction: row;
   column-gap: 10px;
   max-width: 1410px;
   margin: 0 auto;
+  align-items: center;
 }
 
-.button {
+.item {
+  list-style: none;
   @include centerElement;
   background-color: transparent;
   border: none;
@@ -22,7 +24,8 @@
   font-size: $fonts-small;
   font-weight: 700;
   cursor: pointer;
-  padding: 6px 0 4px 0;
+  padding: 6px 0;
+  height: 100%;
 }
 
 .text {
@@ -34,7 +37,6 @@
   display:block;
   width: 1px;
   margin-left: 10px;
-  height: 30px;
+  height: 100%;
   background-color: transparentize($color: white, $amount: 0.85);
 }
-

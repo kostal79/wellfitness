@@ -38,5 +38,10 @@
 }
 
 @media screen and (min-width: 1410px) {
-
+  .burger {
+    display: none;
+  }
+  .right-side {
+    padding-right: 7px;
+  }
 }
