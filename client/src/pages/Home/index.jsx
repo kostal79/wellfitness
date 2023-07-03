@@ -1,34 +1,20 @@
-import React from 'react';
+import React from "react";
 import Styles from "./Home.module.scss";
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import BannerSlider from "../../components/Sliders/BannerSlider";
+import CategoriesHome from "../../components/CategoriesHome";
 
 const Home = () => {
-    const navigate = useNavigate();
-    const [searchParams, setSearchParams] = useSearchParams();
-    for (let [key, value] of searchParams.entries()) {
-      console.log("key === > ", key)
-      console.log("value === > ", value)
-
-    }
-
-  const navigateWithQueryParams = (path, queryParams) => {
-    navigate({
-      pathname: path,
-      search: new URLSearchParams(queryParams).toString(),
-    });
-  };
-  const handleButtonClick = () => {
-    const queryParams = {
-      param1: "value1",
-      param2: "value2",
-    };
-    navigateWithQueryParams("/home", queryParams);
-  };
-    return (
-      <div>
-          <button onClick={handleButtonClick}>Navigate whith query params</button>
+  return (
+    <div className="wrapper">
+      <div className="limited-wrapper">
+        <div className={Styles.banner}>
+          <BannerSlider />
+        </div>
+        <CategoriesHome />
+        <CategoriesHome />
       </div>
-    );
-}
+    </div>
+  );
+};
 
-export default Home
+export default Home;

@@ -39,3 +39,8 @@ a {
 button:active {
   opacity: 0.6;
 }
+
+.limited-wrapper {
+  max-width: 1410px;
+  margin: 0 auto
+}

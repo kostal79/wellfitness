@@ -3,6 +3,7 @@ import Styles from "./Burger.module.scss";
 import { ReactComponent as BurgerSVG } from "@assets/svg/burger.svg";
 import MenuModalContent from "@components/modals/MenuModalContent";
 import { createPortal } from "react-dom";
+
 const Burger = () => {
   const [showModal, setShowModal] = useState(false);
 
@@ -11,7 +12,7 @@ const Burger = () => {
   };
 
   const onClose = () => {
-    setShowModal(false);
+    setTimeout(() => setShowModal(false), 300);
   };
 
   return (

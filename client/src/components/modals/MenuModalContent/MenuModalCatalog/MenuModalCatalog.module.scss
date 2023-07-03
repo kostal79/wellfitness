@@ -11,9 +11,10 @@
     font-size: $fonts-small-upper;
     font-weight: 700;
     padding: 0;
+    list-style: none;
 }
 
-.item {
+.item a{
     display: flex;
     margin-top: 8px;
     flex-direction: row;

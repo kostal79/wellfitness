@@ -1,0 +1,16 @@
+.wrapper {
+  padding: 20px 10px 50px 10px;
+}
+
+@media screen and (min-width: 980px) {
+  .wrapper {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media screen and (min-width: 1410px) {
+  .wrapper {
+    padding: 40px 0;
+  }
+}

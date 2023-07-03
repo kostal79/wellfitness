@@ -45,7 +45,7 @@ const AppRoutes = () => {
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
         <Route
-          path="/home"
+          path="/"
           element={<Home />}
 
         />

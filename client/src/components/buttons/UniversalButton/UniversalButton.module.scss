@@ -1,0 +1,44 @@
+@import "@styles/main.scss";
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px 13px 20px;
+  font-size: $fonts-small-upper;
+  font-weight: 700;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button--red-fill {
+  background-color: $color-red;
+  color: white;
+}
+
+.button--red-fill:hover{
+  background-color: $color-red-hover;
+}
+
+.button--red-empty {
+    background-color: transparent;
+    border: 1px solid $color-red;
+    color: $color-red;
+}
+
+.button--red-empty:hover {
+  color: $color-red-hover;
+  border-color: $color-red-hover;
+}
+
+.button--grey-empty {
+    background-color: transparent;
+    border: 1px solid $color-light-grey;
+    color: $color-light-grey;
+}
+
+.button--grey-empty:hover {
+  color: $color-secondary-light-grey;
+  border-color: $color-secondary-light-grey;
+}

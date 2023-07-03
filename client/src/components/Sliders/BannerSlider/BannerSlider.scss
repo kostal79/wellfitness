@@ -1,0 +1,39 @@
+@import "@styles/main.scss";
+
+.banner-slider {
+    position: relative;
+}
+
+.banner-custom-navigation-block {
+    position: absolute;
+    z-index: 1;
+    bottom: 20px;
+    right: 15px;
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+}
+
+.swiper-custom-button-next, .swiper-custom-button-prev {
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    @include centerElement;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 980px) {
+    .banner-custom-navigation-block {
+        bottom: 30px;
+        right: 30px;
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    .banner-custom-navigation-block {
+        bottom: 30px;
+        right: 195px;
+    }
+}
+

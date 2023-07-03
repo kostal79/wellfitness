@@ -1,0 +1,128 @@
+@import "@styles/main.scss";
+
+.slide_container {
+  position: relative;
+  display: flex;
+  height: 460px;
+  padding: 29px 19px 0;
+  background: linear-gradient(180deg, #dedfe7 0%, rgba(233, 234, 239, 0) 100%),
+  #e9eaef;
+  border-radius: 5.282px;
+  mix-blend-mode: darken;
+}
+
+.infoblock {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  width: 268px;
+}
+
+.image {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  mix-blend-mode: darken;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 648px;
+  max-height: calc(100% + 29px);
+}
+
+.title {
+  color: $color-red;
+  font-size: $fonts-small-upper;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.text {
+  color: $color-dark-grey;
+  font-size: $fonts-large;
+  font-weight: 900;
+  line-height: 110%;
+  text-transform:uppercase;
+}
+
+.text span {
+  display: inline-block;
+  font-weight: 500;
+}
+
+.slide_container button {
+  width: 130px;
+}
+
+.slide_container:after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 9vw;
+  background-color: transparentize($color-red, 0);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  max-height: 80px;
+  min-width: 320px;
+  clip-path: polygon(0 100%, 100% 100%, 65% 0);
+  mix-blend-mode: darken;
+}
+
+@media screen and (min-width: 980px) {
+  .slide_container {
+    height: 266px;
+    padding: 54px 35px 0;
+  }
+  
+  .image {
+    max-height: none;
+    height: 317px;
+    width: 408px;
+    right: 56px;
+  }
+  
+  
+  .slide_container:after {
+    height: 58px;
+    clip-path: polygon(0 100%, 77% 100%, 50% 0)
+  }
+
+  .text {
+    font-size: $fonts-large-2;
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .slide_container {
+    height: 417px;
+    padding: 83px 195px 0 203px;
+  }
+
+  .infoblock {
+    row-gap: 24px;
+    width: 512px;
+  }
+
+  .image {
+    box-sizing: border-box;
+    width: 648px;
+    height: 500px;
+    right: 112px;
+  }
+
+  .title {
+    font-size: $fonts-large;
+  }
+
+  .text {
+    font-size:49px;
+
+  }
+
+  .slide_container:after {
+    height: 80px;
+    clip-path: polygon(148px 100%, 80% 100%, 60% 0)
+  }
+
+  
+}
