@@ -1,0 +1,16 @@
+@import "@styles/main.scss";
+
+.icon,
+.icon--active {
+  cursor: pointer;
+}
+
+.icon rect,
+.icon path {
+  fill: $color-fonts-grey;
+}
+
+.icon:hover rect,
+.icon:hover path {
+  fill: $color-red;
+}

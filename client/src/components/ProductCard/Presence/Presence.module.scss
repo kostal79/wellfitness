@@ -1,0 +1,31 @@
+@import "@styles/main.scss";
+
+.presence_quantity {
+  display: flex;
+  flex-direction: row;
+  column-gap: 6px;
+  align-items: center;
+  color: $color-green;
+  font-size: $fonts-small;
+}
+
+.presence_quantity--few {
+  color: $color-gold;
+}
+
+.presence_quantity--few svg circle {
+  stroke: $color-gold;
+}
+
+.presence_quantity--few .filled-circle svg circle {
+  stroke: $color-gold;
+  fill: $color-gold;
+}
+
+.presence_quantity--inactive {
+  color: $color-red;
+}
+
+.presence_quantity--inactive svg circle {
+  stroke: $color-red;
+}

@@ -1,0 +1,51 @@
+@import "@styles/main.scss";
+
+.wrapper {
+  background-color: $color-dark-grey;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1430px;
+  padding: 80px 10px 60px 10px;
+}
+
+.title {
+  font-size: $fonts-medium-high;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.button div {
+  margin-top: 30px;
+  font-size: $fonts-small !important;
+}
+
+@media screen and (min-width: 450px) {
+  .content {
+    flex-direction: row;
+    column-gap: 10px;
+  }
+  .banners {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .banners::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
+
+@media screen and (min-width: 980px) {
+  .content {
+    column-gap: 30px;
+  }
+}

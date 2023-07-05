@@ -1,0 +1,193 @@
+@import "@styles/main.scss";
+
+.container {
+  width: 220px;
+  min-width:220px;
+  height: 387px;
+  border-radius: 4px;
+  padding: 8px 16px 20px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.container:hover {
+  box-shadow: 0px 4px 30px 0px rgba(19, 15, 38, 0.1),
+    0px 0px 5px 0px rgba(0, 0, 0, 0.12);
+}
+
+.wrapper {
+  position: relative;
+}
+
+.marks {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.marks svg {
+  width: 26px;
+  height: 26px;
+}
+
+.marks svg:nth-child(2) {
+  position: relative;
+  left: -5px;
+}
+
+.marks svg:nth-child(3) {
+  position: relative;
+  left: -12px;
+}
+
+.icons {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  column-gap: 8px;
+}
+
+.image {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.imagebox {
+  margin-left: -16px;
+  margin-right: -16px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  margin-top: 16px;
+}
+
+.info_showroom {
+  color: $color-blue;
+  font-size: $fonts-small;
+  font-weight: 500;
+}
+
+.info_name {
+  font-size: $fonts-small-upper;
+}
+
+.info_rating {
+  display: flex;
+  flex-direction: row;
+  column-gap: 2px;
+}
+
+.info_rating p {
+  font-size: $fonts-small;
+  color: $color-light-grey;
+  margin-right: 4px;
+  align-items: center;
+}
+
+.info_rating svg {
+  width: 12px;
+  height: 12px;
+}
+
+.button {
+  display: none;
+}
+
+.info_bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.info_price--current {
+  font-size: $fonts-medium;
+  font-weight: 700;
+}
+
+.info_price--old {
+  font-size: $fonts-small-upper;
+  font-weight: 400;
+  text-decoration: line-through;
+  color: $color-fonts-grey;
+}
+
+@media screen and (min-width: 980px) {
+  .container {
+    width: 270px;
+    min-width: 270px;
+    height: 475px;
+    padding: 10px 20px;
+  }
+
+
+  .imagebox {
+    height: 270px;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-top: -10px;
+  }
+  
+  .marks {
+    left: -10px;
+  }
+  .marks svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .icons {
+    top: 10px;
+    right: -10px;
+  }
+
+  .info_presence {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .info {
+    margin-top: 20px;
+  }
+
+  .info_name {
+    font-size: $fonts-medium;
+  }
+
+  .info_bottom {
+    margin-top: 10px;
+    grid-template-columns: 1fr 117px;
+  }
+
+  .info_price--current {
+    font-size: 17px;
+  }
+
+  .info_price--old {
+    font-size: $fonts-medium;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+  }
+  .button {
+    display: block;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+  }
+
+  .button span {
+    display: flex;
+    align-items: center;
+  }
+
+}

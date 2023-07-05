@@ -22,7 +22,7 @@ const CategoriesHome = () => {
           <NavLink to="/">
             <div className={Styles.layer}>
               <p className={Styles.category}>Беговые<br/>дорожки</p>
-              <img className={Styles.image} src={treadmill} />
+              <img className={Styles.image} src={treadmill} alt="category"/>
             </div>
           </NavLink>
         </li>
@@ -30,7 +30,7 @@ const CategoriesHome = () => {
           <NavLink to="/">
             <div className={Styles.layer}>
               <p className={Styles.category}>Эллиптические<br/>тренажеры</p>
-              <img className={Styles.image} src={ellipse} />
+              <img className={Styles.image} src={ellipse}  alt="category" />
             </div>
           </NavLink>
         </li>
@@ -38,7 +38,7 @@ const CategoriesHome = () => {
           <NavLink to="/">
             <div className={Styles.layer}>
               <p className={Styles.category}>Велотренажеры</p>
-              <img className={Styles.image} src={bike} />
+              <img className={Styles.image} src={bike}  alt="category" />
             </div>
           </NavLink>
         </li>
@@ -46,7 +46,7 @@ const CategoriesHome = () => {
           <NavLink to="/">
             <div className={Styles.layer}>
               <p className={Styles.category}>Горнолыжные<br/>тренажеры</p>
-              <img className={Styles.image} src={ski} />
+              <img className={Styles.image} src={ski}  alt="category" />
             </div>
           </NavLink>
         </li>
@@ -54,7 +54,7 @@ const CategoriesHome = () => {
           <NavLink to="/">
             <div className={Styles.layer}>
               <p className={Styles.category}>Силовые<br/>тренажеры</p>
-              <img className={Styles.image} src={strength} />
+              <img className={Styles.image} src={strength}  alt="category" />
             </div>
           </NavLink>
         </li>
@@ -62,7 +62,7 @@ const CategoriesHome = () => {
           <NavLink to="/">
             <div className={Styles.layer}>
               <p className={Styles.category}>Батуты</p>
-              <img className={Styles.image} src={trampoline} />
+              <img className={Styles.image} src={trampoline}  alt="category" />
             </div>
           </NavLink>
         </li>
@@ -70,7 +70,7 @@ const CategoriesHome = () => {
           <NavLink to="/">
             <div className={Styles.layer}>
               <p className={Styles.category}>Игровые<br/>столы</p>
-              <img className={Styles.image} src={tables} />
+              <img className={Styles.image} src={tables}  alt="category" />
             </div>
           </NavLink>
         </li>
@@ -78,7 +78,7 @@ const CategoriesHome = () => {
           <NavLink to="/">
             <div className={Styles.layer}>
               <p className={Styles.category}>Гребные<br/>тренажеры</p>
-              <img className={Styles.image} src={rowing} />
+              <img className={Styles.image} src={rowing}  alt="category"/>
             </div>
           </NavLink>
         </li>
@@ -86,7 +86,7 @@ const CategoriesHome = () => {
           <NavLink to="/">
             <div className={Styles.layer}>
               <p className={Styles.category}>Массажные<br/>кресла</p>
-              <img className={Styles.image} src={massage} />
+              <img className={Styles.image} src={massage}  alt="category"/>
             </div>
           </NavLink>
         </li>
@@ -94,7 +94,7 @@ const CategoriesHome = () => {
           <NavLink to="/">
             <div className={Styles.layer}>
               <p className={Styles.category}>Фитнес<br/>аксессуары </p>
-              <img className={Styles.image} src={accessoires} />
+              <img className={Styles.image} src={accessoires} alt="category" />
             </div>
           </NavLink>
         </li>

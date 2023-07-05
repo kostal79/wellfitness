@@ -1,0 +1,113 @@
+@import "@styles/main.scss";
+
+.section {
+  width: 100%;
+  position: relative;
+  height: 160px;
+  display: flex;
+  justify-content: flex-end;
+  overflow: hidden;
+  border-radius: 4px;
+  min-width: 280px;
+}
+
+.cover {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 15.8px;
+  width: 100%;
+  height: 100%;
+  background-color: $color-red;
+}
+
+.cover p:nth-child(1) {
+  width: 66%;
+}
+
+.image-box {
+  clip-path: polygon(45% 0, 0 100%, 100% 100%, 100% 0);
+  z-index: 1;
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  top: 0;
+  right: 0;
+}
+
+.image {
+  width: 150%;
+}
+
+.dial {
+  width: 51px;
+  height: 56px;
+  mix-blend-mode: lighten;
+}
+
+.cover p:nth-child(1) {
+  color: white;
+  font-size: $fonts-medium;
+  font-weight: 700;
+}
+
+.training-time {
+  display: flex;
+  flex-direction: row;
+  font-size: 10px;
+  align-items: center;
+}
+
+.training-time span {
+  font-weight: 700;
+}
+
+.logo {
+  margin-top: 5px;
+  width: 86px;
+  height: 33px;
+}
+
+@media screen and (min-width: 980px) {
+  .section {
+    min-width: 690px;
+    height: 400px;
+  }
+
+  .cover {
+    padding: 30px;
+  }
+
+  .cover p:nth-child(1) {
+    max-width: 310px;
+    font-size: $fonts-large-medium;
+  }
+
+  .cover p:nth-child(1) span {
+    text-transform: uppercase;
+  }
+
+  .image-box {
+    clip-path: polygon(45% 0, 0 80%, 20% 100%, 100% 100%, 100% 0);
+  }
+
+  .image {
+    width: 115%;
+  }
+
+  .training-time {
+    margin-top: 15px;
+    font-size: $fonts-medium-upper;
+  }
+
+  .dial {
+    width: 98px;
+    height: 106px;
+  }
+  
+  .logo {
+    width:165px;
+    height: 63px;
+    margin-top: 44px
+  }
+}

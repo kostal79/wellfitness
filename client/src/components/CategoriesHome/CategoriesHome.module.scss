@@ -1,7 +1,7 @@
 @import "@styles/main.scss";
 
 .container {
-  padding: 80px 10px 0 10px;
+  padding: 80px 0 0 0;
   width: 100%;
 }
 
@@ -36,7 +36,6 @@
   position: relative;
   padding: 18px 11px 0 11px;
   height: 140px;
-  // mix-blend-mode: darken;
   border-radius: 4px;
   background: $color-image-background;
   display: flex;
@@ -87,6 +86,10 @@
   .image {
     max-height: 140px;
   }
+}
+
+.list_item:hover .layer {
+  background: transparentize($color-dark-grey, .8);
 }
 
 @media screen and (min-width: 650px) {

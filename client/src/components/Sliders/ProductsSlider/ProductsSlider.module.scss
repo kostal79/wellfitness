@@ -1,0 +1,18 @@
+@import "@styles/main.scss";
+
+.wrapper {
+  max-width: 1410px;
+  margin: 0 auto;
+}
+
+.content {
+  position: relative;
+  overflow-x: scroll;
+  cursor: grab;
+}
+
+.slider {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+}

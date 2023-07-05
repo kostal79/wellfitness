@@ -1,0 +1,58 @@
+@import "@styles/main.scss";
+
+.section {
+    position: relative;
+    width: 100%;
+    height: 160px;
+    min-width: 280px;
+}
+
+.layer {
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+    background-color: $color-underlayer;
+    padding: 23px 21px;
+}
+
+.layer p {
+    font-size: $fonts-medium;
+    font-weight: 700;
+    width: 50%;
+    line-height: 110%;
+}
+
+.layer p span {
+    color: $color-red;
+}
+
+.image {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: -21px;
+    mix-blend-mode: darken;
+}
+
+@media screen and (min-width: 980px) {
+    .section {
+        min-width: 330px;
+        height: 400px;
+    }
+
+    .layer p {
+        font-size: $fonts-medium-upper;
+        width: auto;
+        text-transform: uppercase;
+    }
+
+    .image {
+        top: 80px;
+    }
+
+    .layer p span {
+        font-size: $fonts-large-medium;
+        line-height: 150%;
+    }
+    
+}
