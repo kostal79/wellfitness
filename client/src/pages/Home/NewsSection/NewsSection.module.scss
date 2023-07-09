@@ -1,0 +1,31 @@
+@import "@styles/main.scss";
+
+.container {
+  margin-bottom: 60px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  overflow-x: scroll;
+  margin-bottom: 40px;
+}
+
+.bookmarks {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  font-size: $fonts-medium-high;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.bookmark {
+  color: $color-secondary-light-grey;
+  cursor: pointer;
+}
+
+.bookmark--active {
+  color: $color-grey-3;
+}

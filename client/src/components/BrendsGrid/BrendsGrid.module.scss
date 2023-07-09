@@ -1,0 +1,114 @@
+@import "@styles/main.scss";
+
+.container {
+    padding-top: 80px;
+    padding-bottom: 60px;
+}
+
+.title {
+    @include subtitleElement;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    column-gap: 6px;
+    font-size: $fonts-small;
+    font-weight: 700;
+    white-space: nowrap;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    overflow-x: scroll;
+}
+
+.list_item {
+    color: $color-grey-3;
+    cursor: pointer;
+}
+
+.list_item--active {
+    color: $color-dark-grey;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid transparentize($color-fonts-grey, .8);
+    border-radius: 5px;
+    border-width: 1px 0 0 1px;
+    overflow: hidden;
+
+}
+
+.grid-cell {
+    border: 1px solid transparentize($color-fonts-grey, .8);
+    @include centerElement;
+    border-width: 0 1px 1px 0;
+    padding: 13px 17px;
+    background-color: #fff;
+}
+
+.grid-cell:hover {
+    box-shadow: 0 4px 30px 0 transparentize($color-fonts-grey, .8);
+background-color: #fff;
+}
+
+.grid-cell svg {
+    width: 100%;
+    height: 100%;
+}
+
+.button {
+    margin-top: 20px;
+}
+
+@media screen and (min-width: 980px) {
+    .container {
+        padding-top: 100px;
+        padding-bottom: 60px;
+    }
+
+    .list{
+        font-size: $fonts-medium;
+        font-weight: 500;
+        column-gap: 30px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+
+    }
+
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .grid-cell {
+        height: 140px;
+        padding: 30px 40px;
+    }
+
+    .button {
+        margin-top: 30px;
+    }
+}
+
+@media screen and (min-width: 1410px) {
+    .container {
+        padding-top: 120px;
+        padding-bottom: 40px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .grid-cell {
+        height: 150px;
+        padding: 33px 50px;
+    }
+
+    .button {
+        margin-top: 30px;
+    }
+}

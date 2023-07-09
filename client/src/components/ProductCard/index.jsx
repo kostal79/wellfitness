@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Styles from "./ProductCard.module.scss";
 
 import { ReactComponent as DiscountSVG } from "@assets/svg/discount.svg";
@@ -78,4 +78,4 @@ const ProductCard = ({
   );
 };
 
-export default ProductCard;
+export default memo(ProductCard);

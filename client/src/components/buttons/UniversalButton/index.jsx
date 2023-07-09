@@ -5,7 +5,7 @@ import Styles from "./UniversalButton.module.scss";
  * @component
  * @param {string} text text inside button
  * @param {funct} click clickHandler
- * @param {string} styles  approved: "red-fill", "red-empty", "grey-fill", "grey-empty"
+ * @param {string} styles  approved: "red-fill", "red-empty", "grey-fill", "white-empty", "grey-empty"
 
  *  
  * @description Universal button 

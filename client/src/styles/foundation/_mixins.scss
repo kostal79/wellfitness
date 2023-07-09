@@ -35,3 +35,13 @@
 @mixin imageGradientLight {
     background: linear-gradient(to right, #C2C4CE, #E9EAEF)
 }
+
+@mixin subtitleElement {
+    font-size: 22px;
+    font-weight: 700;
+  
+    @media (min-width: 980px) {
+      font-size: 30px;
+      font-weight: 700;
+    }
+}

@@ -1,0 +1,20 @@
+@import "@styles/main.scss";
+
+.container {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+    font-size: $fonts-medium-high;
+    font-weight: 700;
+}
+
+.filter--active {
+    color: $color-dark-grey;
+    white-space: nowrap;
+}
+
+.filter {
+    color: $color-grey-3;
+    cursor: pointer;
+    white-space: nowrap;
+}

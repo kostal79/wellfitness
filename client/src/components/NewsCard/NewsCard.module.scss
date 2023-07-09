@@ -1,0 +1,40 @@
+@import "@styles/main.scss";
+
+.container {
+  width: 250px;
+  height: 420px;
+  min-width: 250px;
+  min-height: 420px;
+  border-radius: 6px;
+  overflow: hidden;
+  padding-bottom: 20px;
+  cursor: grab;
+}
+
+.image-box {
+  width: 250px;
+  height: 260px;
+  @include centerElement;
+  overflow: hidden;
+}
+
+.title {
+  font-size: $fonts-medium;
+  font-weight: 800;
+  line-height: 110%;
+  margin-bottom: 10px;
+}
+
+.promotext {
+  font-size: $fonts-small-upper;
+  font-weight: 400;
+  line-height: 140%;
+  margin-bottom: 10px;
+  width: 90%;
+}
+
+.date {
+  color: $color-secondary-light-grey;
+  opacity: 0.5;
+  font-size: $fonts-medium;
+}

@@ -5,16 +5,12 @@ const cors = require("cors")
 const passport = require("passport")
 const router = require("./routes/index");
 require("./passport")
-const app = express()
-const PORT = process.env.PORT || 5000;
+const path = require("path")
 const session = require("express-session")
 const cookieParser = require("cookie-parser")
 
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use(express.json());
-app.use(express.static("static"));
-
+const PORT = process.env.PORT || 5000;
+const app = express()
 //cors middleware
 app.use(
     cors({
@@ -22,8 +18,23 @@ app.use(
         methods: "GET,POST,PUT,DELETE",
         credentials: true,
     })
+);
+
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(express.json());
+
+// Set Content-Security-Policy header
+app.use((req, res, next) => {
+    res.setHeader(
+      "Content-Security-Policy",
+      "default-src 'self'; img-src 'self' data:"
     );
-    
+    next();
+  });
+
+app.use(express.static(path.join(__dirname, "static")));
+
 //session middleware
 app.use(session({
     secret: process.env.SECRET_SESSION,

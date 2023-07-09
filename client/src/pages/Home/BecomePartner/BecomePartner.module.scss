@@ -1,0 +1,67 @@
+@import "@styles/main.scss";
+
+.container {
+  padding: 64px 20px 0 28px;
+  background-color: $color-dark-grey;
+  border-radius: 6px;
+  position: relative;
+  margin-bottom: 80px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: calc(100% - 70px)
+}
+
+.text {
+  font-size: 18px;
+  color: white;
+  line-height: 120%;
+  font-weight: 500;
+}
+
+.text--red {
+  color: $color-red;
+}
+
+.image {
+    width: 100%;
+    position: relative;
+    bottom: -4px;
+}
+
+@media screen and (min-width: 640px) {
+    .container {
+        display: flex;
+        flex-direction: row-reverse;
+        padding: 56px 30px 0 0;
+        column-gap: 80px;
+    }
+
+    .container button {
+        width: fit-content;
+    }
+
+    .image {
+        bottom: 0;
+    }
+
+}
+
+@media screen and (min-width: 980px) {
+    .text {
+        font-size: $fonts-large;
+    }
+}
+
+@media screen and (min-width: 1410px) {
+    .container {
+        padding: 76px 115px 0 0;
+        column-gap: 140px;
+    }
+    .text {
+        font-size: 36px;
+    }
+}

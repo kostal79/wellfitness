@@ -1,0 +1,132 @@
+@import "@styles/main.scss";
+
+.container {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  row-gap: $fonts-medium-upper;
+  position: relative;
+}
+
+.title {
+  @include subtitleElement;
+}
+
+.text:nth-child(2) {
+  font-size: 18px;
+}
+
+.text:nth-child(3),
+.text:nth-child(4) {
+  font-size: $fonts-small-upper;
+}
+
+.button div {
+  font-size: $fonts-small !important;
+}
+
+.map {
+  position: relative;
+  overflow: hidden;
+  top: -40px;
+  z-index: -1;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.map svg {
+  width: 130%;
+  height: auto;
+}
+
+@media screen and (min-width: 980px) {
+  .container {
+    padding: 100px 0px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .title {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+
+  .text:nth-child(3),
+  .text:nth-child(4) {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    font-size: 18px;
+  }
+
+  .map {
+    margin-left: -20px;
+    margin-right: -20px;
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+
+  .map svg {
+    width: 105%;
+    height: auto;
+  }
+
+  .text:nth-child(2) {
+    font-size: $fonts-large;
+  }
+}
+
+@media screen and (min-width: 1410px) {
+  .container {
+    padding: 120px 0px 0;
+    grid-template-columns: 570px auto;
+  }
+
+  .text:nth-child(2),
+  .text:nth-child(3),
+  .text:nth-child(4),
+  .title {
+    grid-column-start: 1;
+    grid-column-end: 2;
+  }
+
+  .button {
+    grid-column-start: 1;
+    grid-column-end: 2;
+  }
+
+  .map {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 6;
+  }
+
+  .text:nth-child(2) {
+    font-size: 34px;
+  }
+  
+  .text:nth-child(3), .text:nth-child(4) {
+    font-size: 18px;
+  }
+
+  .map {
+    margin-right: auto;
+    margin-left: 0;
+    overflow: visible;
+  }
+
+  .map svg {
+    width: 990px
+  }
+
+  // .text:nth-child(3) {
+  //     grid-row-start: 2;
+  //     grid-row-end: 4;
+  // }
+
+  // .text:nth-child(4) {
+  //     grid-row-start: 3;
+  //     grid-row-end: 5;
+  // }
+}

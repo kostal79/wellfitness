@@ -2,6 +2,7 @@
 
 .banner-slider {
     position: relative;
+    margin-top: 20px;
 }
 
 .banner-custom-navigation-block {
@@ -34,6 +35,10 @@
     .banner-custom-navigation-block {
         bottom: 30px;
         right: 195px;
+    }
+
+    .banner-slider {
+        margin-top: 40px;
     }
 }
 

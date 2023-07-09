@@ -6,8 +6,7 @@
 }
 
 .title {
-  font-size: $fonts-medium-high;
-  font-weight: 700;
+  @include subtitleElement;
   margin-bottom: 20px;
 }
 
@@ -156,9 +155,7 @@
     height: 100%;
   }
 
-  .title {
-    font-size: $fonts-large-medium;
-  }
+
 }
 
 @media screen and (min-width: 1410px) {

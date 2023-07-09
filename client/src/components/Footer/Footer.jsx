@@ -5,7 +5,7 @@ import SectionSupport from "./SectionSupport";
 import SectionService from "./SectionService";
 import SectionAbout from "./SectionAbout";
 import SubscribeButton from "../buttons/SubscribeButton/SubscribeButton";
-import BecomePartnerButton from "../buttons/BecomePartnerButton/BecomePartnerButton";
+import BecomePartnerButton from "../buttons/BecomePartnerButton";
 import ForDillersButton from "../buttons/ForDillersButton/ForDillersButton";
 import PhoneContacts from "./PhoneContacts/PhoneContacts";
 import EmailContacts from "./EmailContacts/EmailContacts";

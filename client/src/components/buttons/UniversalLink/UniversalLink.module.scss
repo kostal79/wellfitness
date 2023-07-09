@@ -11,6 +11,7 @@
   border-radius: 4px;
   cursor: pointer;
   width: fit-content;
+  transition: .35s;
 }
 
 .button--red-fill {
@@ -29,8 +30,8 @@
 }
 
 .button--red-empty:hover {
-  color: $color-red-hover;
-  border-color: $color-red-hover;
+  color: white;
+  background-color: $color-red;
 }
 
 .button--grey-empty {
@@ -51,6 +52,12 @@
 }
 
 .button--white-empty:hover {
-color: $color-secondary-light-grey;
-border-color: $color-secondary-light-grey;
+border-color: $color-red;
+background-color: $color-red;
+}
+
+@media screen and (max-width: 979px) {
+  .button {
+    font-size: $fonts-small;
+  }
 }

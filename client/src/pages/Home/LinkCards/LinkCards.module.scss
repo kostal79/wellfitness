@@ -1,0 +1,166 @@
+@import "@styles/main.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  border: 1px solid transparentize($color-fonts-grey, 0.8);
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.section {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  row-gap: 10px;
+  background-color: #fff;
+  border: 1px solid transparentize($color-fonts-grey, 0.8);
+}
+
+.image_container {
+  width: 60px;
+  height: 60px;
+}
+
+.image_container svg {
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  font-size: $fonts-medium;
+  font-weight: 800;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.text {
+  font-size: $fonts-small-upper;
+  font-weight: 400;
+}
+
+.link {
+    display: flex;
+    flex-direction: row;
+    column-gap: 8px;
+    align-items: center;
+    font-size: $fonts-small;
+    font-weight: 700;
+    color: $color-red;
+}
+
+.link svg path{
+    stroke: $color-red;
+}
+
+.link:hover {
+    color: $color-red-hover;
+}
+
+.link:hover svg path{
+    stroke: $color-red-hover;
+}
+
+.section:nth-child(3) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: $color-red;
+    padding: 20px 0 0 20px;
+}
+
+.phone-image_box {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.subsection {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    row-gap: 8px;
+    color: white;
+    align-items: center;
+    justify-content: flex-start;
+    align-self: flex-start;
+}
+
+.subsection .link {
+    color: white;
+    stroke: white;
+}
+
+.subsection .link svg path {
+  stroke: white;
+}
+
+.phone-image {
+    max-width: 80%;
+}
+
+@media screen and (min-width: 640px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 980px) {
+  .section {
+    padding: 30px 40px 40px;
+    row-gap: 20px;
+  }
+
+  .section:nth-child(3) {
+    padding: 30px 0 0 40px
+  }
+
+  .title {
+    font-size: $fonts-medium-upper;
+  }
+
+  .text {
+    font-size: $fonts-medium;
+  }
+
+  .link {
+    font-size: $fonts-small-upper;
+  }
+}
+
+@media screen and (min-width: 1410px) {
+  .container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin:  100px 0 40px;
+    overflow: visible;
+  }
+
+  .section {
+    padding-top: 30px;
+  }
+
+  .section:nth-child(3) {
+    padding-top: 0;
+    position: relative;
+    border: none;
+}
+
+.section:nth-child(3)::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 30px;
+  background-color: $color-red;
+  position: absolute;
+  top: -30px;
+  left: 0;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+}

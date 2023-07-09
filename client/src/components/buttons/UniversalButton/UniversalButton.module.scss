@@ -28,8 +28,8 @@
 }
 
 .button--red-empty:hover {
-  color: $color-red-hover;
-  border-color: $color-red-hover;
+  color: white;
+  background-color: $color-red;
 }
 
 .button--grey-empty {
@@ -39,6 +39,23 @@
 }
 
 .button--grey-empty:hover {
-  color: $color-secondary-light-grey;
-  border-color: $color-secondary-light-grey;
+  background-color: $color-light-grey;
+  color: white;
+}
+
+.button--white-empty {
+  background-color: transparent;
+  border: 1px solid transparentize(white, .3);
+  color: white;
+}
+
+.button--white-empty:hover {
+border-color: $color-red;
+background-color: $color-red;
+}
+
+@media screen and (max-width: 979px) {
+  .button {
+    font-size: $fonts-small;
+  }
 }

@@ -22,7 +22,8 @@ const fileFilter = function (req, file, cb) {
     "text/plain",
     "application/rtf",
     "application/pdf",
-    "application/msword"
+    "application/msword",
+    "image/svg+xml"
   ];
   if (types.includes((file.mimetype))) {
     cb(null, true)

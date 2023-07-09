@@ -1,7 +1,7 @@
 import React from 'react';
 import Styles from "./ForDillers.module.scss"
 import ForDillersButton from "@components/buttons/ForDillersButton/ForDillersButton"
-import BecomePartnerButton from "@components/buttons/BecomePartnerButton/BecomePartnerButton"
+import BecomePartnerButton from "@components/buttons/BecomePartnerButton"
 
 const ForDillers = () => {
     return (
