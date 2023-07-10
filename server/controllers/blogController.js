@@ -1,3 +1,4 @@
+const path = require("path");
 const Blog = require("../models/blog");
 const fs = require("fs");
 
@@ -6,7 +7,7 @@ class BlogController {
         try {
             const { header, promotext, text, use } = req.body;
             const files = req.files;
-            const images_refs = files.map(file => file.path);
+            const images_refs = files && files.map(file => file.filename);
 
             const newBlog = await Blog.create({
                 header,
@@ -51,7 +52,6 @@ class BlogController {
         try {
             const { id } = req.params;
             const { header, promotext, text, images_refs, use} = req.body;
-
             const updatedPost = await Blog.findByIdAndUpdate(id, {
                 header,
                 promotext,
@@ -80,7 +80,8 @@ class BlogController {
                 return res.status(404).json({ message: "Post not found" });
             } else {
                 post.images_refs.forEach(imageRef => {
-                    fs.unlinkSync(imageRef)
+                    const filePath = path.resolve(__dirname, `../static/blogs/${imageRef}`)
+                    fs.unlinkSync(filePath)
                 });
                 await post.remove();
                 return res.status(200).json({ message: "Post deleted successfully" });

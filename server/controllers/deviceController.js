@@ -1,3 +1,4 @@
+const path = require("path");
 const Device = require("../models/device");
 const fs = require("fs");
 
@@ -9,7 +10,7 @@ class DeviceController {
             const files = req.files;
             if (files) {
                 for (let file of files) {
-                    images_refs.push(file.path)
+                    images_refs.push(file.filename)
                 }
             }
             const newDevice = await Device.create({ ...deviceData, images_refs });
@@ -65,7 +66,8 @@ class DeviceController {
             }
             const images_refs = device.images_refs;
             images_refs.forEach(image_ref => {
-                fs.unlinkSync(image_ref);
+                const filePath = path.resolve(__dirname, `../static/devices/${image_ref}`)
+                fs.unlinkSync(filePath);
             });
             await Device.findByIdAndDelete(id);
             res.status(200).json({ message: `Device id: ${id} was deleted` })

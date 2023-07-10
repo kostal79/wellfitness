@@ -1,13 +1,13 @@
 import React from "react";
 import Styles from "./Home.module.scss";
 import BannerSlider from "@components/Sliders/BannerSlider";
-import CategoriesHome from "@components/CategoriesHome";
-import Compilations from "@components/Compilations";
+import CategorySection from "./CategorySection";
+import CompilationsSection from "./CompilationsSection";
 import ProductsSlider from "@components/Sliders/ProductsSlider";
-import BrendsGrid from "@components/BrendsGrid";
-import LinkCards from "./LinkCards";
+import BrandsSection from "./BrandSection";
+import LinkCardsSection from "./LinkCardsSection";
 import AboutSection from "./AboutSection";
-import BecomePartner from "./BecomePartner";
+import BecomePartnerSection from "./BecomePartnerSection";
 import NewsSection from "./NewsSection";
 
 const Home = () => {
@@ -18,20 +18,20 @@ const Home = () => {
           <div className={Styles.banner}>
             <BannerSlider />
           </div>
-          <CategoriesHome />
-          <CategoriesHome />
+          <CategorySection title="Тренажеры для дома" usage="home"/>
+          <CategorySection title="Для фитнес клубов" usage="prof"/>
         </div>
       </div>
       <ProductsSlider />
       <div className={Styles.compilations}>
-        <Compilations />
+        <CompilationsSection />
       </div>
       <div className="wrapper">
         <div className="limited-wrapper">
-          <BrendsGrid />
-          <LinkCards />
+          <BrandsSection />
+          <LinkCardsSection />
           <AboutSection />
-          <BecomePartner />
+          <BecomePartnerSection />
           <NewsSection />
         </div>
       </div>

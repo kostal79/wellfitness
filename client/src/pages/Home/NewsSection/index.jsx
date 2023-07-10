@@ -3,6 +3,7 @@ import Styles from "./NewsSection.module.scss";
 import NewsCard from "@components/NewsCard";
 import dateFormat from "dateformat";
 import UniversalLink from "@components/buttons/UniversalLink";
+import ProductSliderContent from "../../../components/Sliders/ProductsSlider/ProductSliderContent/ProductSliderContent";
 
 const NewsSection = () => {
   const [bookmark, setBookmark] = useState("news");
@@ -25,6 +26,22 @@ const NewsSection = () => {
   const header = "В продажу поступили тренажеры Nautilus";
   const promotext = "Представляем тренажеры Nautilus 626 серии.";
   const date = dateFormat(new Date(), "yyyy.mm.dd");
+  const content = () => {
+    const arr = [];
+    for (let i = 0; i < 8; i++) {
+      arr.push(
+        <NewsCard
+          imageRef={imageRef}
+          header={header}
+          promotext={promotext}
+          date={date}
+          id={1}
+          key={i}
+        />
+      );
+    }
+    return arr;
+  };
 
   return (
     <div className={Styles.container}>
@@ -39,43 +56,7 @@ const NewsSection = () => {
           Блог
         </p>
       </div>
-      <div className={Styles.cards}>
-        <NewsCard
-          imageRef={imageRef}
-          header={header}
-          promotext={promotext}
-          date={date}
-          id={1}
-        />
-        <NewsCard
-          imageRef={imageRef}
-          header={header}
-          promotext={promotext}
-          date={date}
-          id={1}
-        />
-        <NewsCard
-          imageRef={imageRef}
-          header={header}
-          promotext={promotext}
-          date={date}
-          id={1}
-        />
-        <NewsCard
-          imageRef={imageRef}
-          header={header}
-          promotext={promotext}
-          date={date}
-          id={1}
-        />
-        <NewsCard
-          imageRef={imageRef}
-          header={header}
-          promotext={promotext}
-          date={date}
-          id={1}
-        />
-      </div>
+      <ProductSliderContent content={content()} />
       <UniversalLink text="Все новости" styles="red-empty" />
     </div>
   );

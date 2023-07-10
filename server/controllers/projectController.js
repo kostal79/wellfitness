@@ -1,3 +1,4 @@
+const path = require("path");
 const Project = require("../models/project");
 const fs = require("fs");
 
@@ -6,7 +7,7 @@ class ProjectController {
         try {
             const projectData = req.body;
             const files = req.files;
-            const images_refs = files && Array.isArray(files) ? files.map(file => file.path) : []   ;
+            const images_refs = files && Array.isArray(files) ? files.map(file => file.filename) : []   ;
 
             const newProject = await Project.create({
                 ...projectData,
@@ -70,7 +71,8 @@ class ProjectController {
                 return res.status(404).json({ message: "Post not found" });
             } else {
                 post.images_refs.forEach(imageRef => {
-                    fs.unlinkSync(imageRef)
+                    const filePath = path.resolve(__dirname, `../static/companyProjects/${imageRef}`)
+                    fs.unlinkSync(filePath)
                 });
                 await post.deleteOne({_id: id});
                 return res.status(200).json({ message: "Post deleted successfully" });

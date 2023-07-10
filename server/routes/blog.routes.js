@@ -4,7 +4,7 @@ const router = new Router();
 const isAdmin = require("../middleware/isAdminMiddleware");
 const multerBlogMiddleware = require("../middleware/multerBlogMiddleware");
 
-router.post("/create", isAdmin, multerBlogMiddleware.array("image", 10), blogController.create);
+router.post("/create", isAdmin, multerBlogMiddleware.array("blog", 10), blogController.create);
 router.get("/all", blogController.readAll);
 router.get("/:id", blogController.readOne);
 router.put("/:id", isAdmin, blogController.update);

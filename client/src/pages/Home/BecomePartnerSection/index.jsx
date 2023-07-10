@@ -1,9 +1,9 @@
 import React from "react";
-import Styles from "./BecomePartner.module.scss";
+import Styles from "./BecomePartnerSection.module.scss";
 import UniversalButton from "@components/buttons/UniversalButton";
 import partnerBanner from "@assets/images/partner-banner.png";
 
-const BecomePartner = () => {
+const BecomePartnerSection = () => {
   return (
     <div className={Styles.container}>
       <section className={Styles.info}>
@@ -19,4 +19,4 @@ const BecomePartner = () => {
   );
 };
 
-export default BecomePartner;
+export default BecomePartnerSection;

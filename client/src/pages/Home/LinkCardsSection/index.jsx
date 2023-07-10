@@ -1,5 +1,5 @@
 import React from "react";
-import Styles from "./LinkCards.module.scss";
+import Styles from "./LinkCardsSection.module.scss";
 import { ReactComponent as ShareSVG } from "@assets/svg/share.svg";
 import { ReactComponent as RequestSVG } from "@assets/svg/request.svg";
 import { ReactComponent as GymSVG } from "@assets/svg/gym.svg";
@@ -8,7 +8,7 @@ import { ReactComponent as LinkArrowSVG } from "@assets/svg/link-arrow.svg";
 import { NavLink } from "react-router-dom";
 import phoneImage from "@assets/images/phone.png"
 
-const LinkCards = () => {
+const LinkCardsSection = () => {
   return (
     <div className={Styles.container}>
       <section className={Styles.section}>
@@ -77,4 +77,4 @@ const LinkCards = () => {
   );
 };
 
-export default LinkCards;
+export default LinkCardsSection;

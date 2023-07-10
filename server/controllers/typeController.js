@@ -1,3 +1,4 @@
+const path = require("path");
 const Type = require("../models/type");
 const fs = require("fs");
 
@@ -6,12 +7,12 @@ class TypeController {
         try {
             const typeData = req.body;
             const name = typeData.name;
-            const filePath = req.file && req.file.path;
+            const fileName = req.file && req.file.filename;
             const type = await Type.findOne({ name });
             if (type) {
                 return res.status(403).json({ message: "Type already exists" })
             }
-            const newType = await Type.create({ ...typeData, image_ref: filePath });
+            const newType = await Type.create({ ...typeData, image_ref: fileName });
             res.status(201).json(newType);
         } catch (error) {
             console.error(error);
@@ -19,8 +20,9 @@ class TypeController {
         }
     }
     async readAll(req, res) {
+        const query = req.query ? req.query : {};
         try {
-            const collection = await Type.find().populate("subtypes");
+            const collection = await Type.find(query.query).limit(query.limit).sort(query.sort).populate("subtypes");
             res.status(200).json(collection)
         } catch (error) {
             console.error(error);
@@ -57,7 +59,7 @@ class TypeController {
     async updateImage(req, res) {
         try {
             const { typeId } = req.params;
-            const newImageRef = req.file && req.file.path;
+            const newImageRef = req.file && req.file.filename;
             const updatedType = await Type.findByIdAndUpdate(typeId, { image_ref: newImageRef }, { new: true });
             if (!updatedType) {
                 return res.status(404).json({ message: "Type not found" })
@@ -80,7 +82,8 @@ class TypeController {
             }
             if (type.image_ref) {
                 try {
-                    fs.unlinkSync(type.image_ref)
+                    const filePath = path.resolve(__dirname, `../static/typesImages/${type.image_ref}`)
+                    fs.unlinkSync(filePath)
                 } catch (error) {
                     console.error(error);
                     return res.status(500).json({message: "Error in deleting file"})

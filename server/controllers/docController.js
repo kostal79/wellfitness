@@ -1,6 +1,7 @@
 const Doc = require("../models/doc");
 const Device = require("../models/device");
 const fs = require("fs");
+const path = require("path");
 
 class DocController {
     async upload(req, res) {
@@ -8,7 +9,7 @@ class DocController {
         const docData = req.body;
         if (file) {
             try {
-                const file_ref = file.path;
+                const file_ref = file.filename;
                 const newDoc = await Doc.create({...docData, file_ref});
                 const updatedDevice = await Device.findByIdAndUpdate(docData.device_id, { $push: { docs_ids: newDoc._id } });
                 if (!updatedDevice) {
@@ -53,7 +54,8 @@ class DocController {
             if (device) {
                 await device.removeDoc(id);
             }
-            fs.unlinkSync(doc.file_ref);
+            const filePath = path.resolve(__dirname, `../static/docs/${doc.file_ref}`)
+            fs.unlinkSync(filePath);
             await doc.deleteOne();
             res.status(200).json({message: `Document id: ${id} was deleted`});
         } catch (error) {

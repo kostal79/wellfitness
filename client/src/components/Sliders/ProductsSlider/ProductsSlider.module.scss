@@ -7,45 +7,10 @@
   position: relative;
 }
 
-.arrow-left,
-.arrow-right {
-  display: none;
-}
-
 @media screen and (min-width: 980px) {
   .wrapper {
     padding: 100px 20px 50px;
     position: relative;
-  }
-
-  .arrow-left,
-  .arrow-right {
-    display: block;
-    position: absolute;
-    background-color: #fff;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    @include centerElement;
-    box-shadow: 4px 4px 30px 4px rgba(19, 15, 38, 0.3);
-    cursor: pointer;
-  }
-
-  .arrow-left:hover,
-  .arrow-right:hover {
-    transform: translateY(-5px);
-  }
-
-  .arrow-left {
-    top: 325px;
-    left: 66px;
-    z-index: 1;
-  }
-
-  .arrow-right {
-    top: 325px;
-    right: 66px;
-    z-index: 1;
   }
 }
 
@@ -53,5 +18,4 @@
   .wrapper {
     padding: 120px 0 100px;
   }
-
 }

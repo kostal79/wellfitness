@@ -38,3 +38,26 @@
   opacity: 0.5;
   font-size: $fonts-medium;
 }
+
+
+@media screen and (min-width: 980px) {
+  .image-box {
+    width: 315px;
+    height: 260px;
+  }
+  .title {
+    font-size: $fonts-medium-upper;
+  }
+
+  .promotext {
+    font-size: $fonts-medium;
+  }
+
+  .container {
+    width: 315px;
+    height: 440px;
+    min-width: 315px;
+    min-height: 440px;
+  }
+
+}

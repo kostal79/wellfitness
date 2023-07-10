@@ -19,13 +19,24 @@
   font-size: $fonts-medium-high;
   font-weight: 700;
   margin-bottom: 20px;
+  align-items: baseline;
 }
 
 .bookmark {
-  color: $color-secondary-light-grey;
+  color: $color-grey-3;
   cursor: pointer;
 }
 
 .bookmark--active {
-  color: $color-grey-3;
+  color: $color-dark-grey;
+}
+
+@media screen and (min-width:980px) {
+    .bookmarks {
+      column-gap: 30px;
+    }
+
+    .bookmark--active {
+      font-size: $fonts-large-medium;
+    }
 }

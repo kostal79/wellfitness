@@ -4,7 +4,7 @@ const multerBrandMiddleware = require("../middleware/multerBrandMiddleware");
 const brandController = require("../controllers/brandController");
 const isAdminMiddlaware = require("../middleware/isAdminMiddleware");
 
-router.post("/create", multerBrandMiddleware.single("logo"), brandController.create);
+router.post("/create", multerBrandMiddleware.single("brand"), brandController.create);
 router.get("/all", brandController.readAll);
 router.get("/:id", brandController.readOne);
 router.put("/:id",  brandController.update);

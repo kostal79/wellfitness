@@ -1,5 +1,9 @@
 @import "@styles/main.scss";
 
+.wrapper {
+  position: relative;
+}
+
 .content {
   position: relative;
   overflow-x: scroll;
@@ -9,15 +13,66 @@
   scroll-behavior: smooth;
 }
 
+.arrow-left,
+.arrow-right {
+  display: none;
+}
+
 .slider {
   display: flex;
   flex-direction: row;
   column-gap: 20px;
 }
 
+@media screen and (min-width: 980px) {
+  .arrow-left,
+  .arrow-right {
+    display: block;
+    position: absolute;
+    background-color: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    @include centerElement;
+    box-shadow: 4px 4px 30px 4px rgba(19, 15, 38, 0.3);
+    cursor: pointer;
+  }
+
+  .arrow-left:hover,
+  .arrow-right:hover {
+    transform: translateY(-5px);
+  }
+
+  .arrow-left {
+    top: 40%;
+    left: 66px;
+    z-index: 1;
+  }
+
+  .arrow-right {
+    top: 40%;
+    right: 66px;
+    z-index: 1;
+  }
+}
+
+@media screen and (min-width: 980px) {
+  .slider {
+    column-gap: 30px;
+  }
+
+  .content {
+    margin: 30px 0;
+  }
+}
+
 @media screen and (min-width: 1410px) {
   .content {
     margin: 30px 0;
+  }
+
+  .content {
+    cursor:auto;
   }
 }
 

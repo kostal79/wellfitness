@@ -13,5 +13,6 @@ export const orders = axios.create({baseURL: `${BASE_URL}/orders`});
 export const projects = axios.create({baseURL: `${BASE_URL}/projects`});
 export const servis = axios.create({baseURL: `${BASE_URL}/servis`});
 export const shops = axios.create({baseURL: `${BASE_URL}/shops`});
+export const types = axios.create({baseURL: `${BASE_URL}/types`});
 export const videoinstructions = axios.create({baseURL: `${BASE_URL}/videoinstructions`});
 

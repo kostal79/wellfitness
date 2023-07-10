@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
-import Styles from "./Compilations.module.scss";
+import Styles from "./CompilationsSection.module.scss";
 import FirstSection from "./FirstSection";
 import SecondSection from "./SecondSection";
 import UniversalLink from "@components/buttons/UniversalLink";
 
-const Compilations = () => {
+const CompilationsSection = () => {
   const bannersRef = useRef();
   const contentRef = useRef();
 
@@ -48,4 +48,4 @@ const Compilations = () => {
   );
 };
 
-export default Compilations;
+export default CompilationsSection;

@@ -1,3 +1,4 @@
+const path = require("path");
 const Servis = require("../models/servis");
 const fs = require("fs");
 
@@ -21,7 +22,7 @@ class ServisController {
                 email,
             } = req.body;
             const file = req.file;
-            const file_ref = file ? file.path : "";
+            const file_ref = file ? file.filename : "";
             const newServis = await Servis.create(
                 {
                     device: {
@@ -150,8 +151,9 @@ class ServisController {
             if (!deletedServis) {
                 return res.status(404).json({ message: "Order not found" });
             }
-            const file_ref = deletedServis.file_ref;
-            fs.unlinkSync(file_ref);
+            const fileRef= deletedServis.file_ref;
+            const filePath = path.resolve(__dirname, `../static/servis/${fileRef}`)
+            fs.unlinkSync(filePath);
             res.status(200).json({ message: "Order deleted successfully" });
         } catch (error) {
             console.error(error);
