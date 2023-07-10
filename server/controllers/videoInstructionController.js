@@ -12,8 +12,13 @@ class VideoInstructionController {
         }
     }
     async readAll(req, res) {
+        const query = req.query ? req.query : {}
         try {
-            const collection = await VideoInstruction.find();
+            const collection = await VideoInstruction.find(query.query)
+                .limit(query.limit)
+                .sort(query.sort)
+                .skip((query.page - 1) * query.limit)
+                .select(query.select)
             res.status(200).json(collection);
         } catch (error) {
             console.error(error);
@@ -22,10 +27,10 @@ class VideoInstructionController {
     }
     async readOne(req, res) {
         try {
-            const {instructionId} = req.params;
+            const { instructionId } = req.params;
             const candidate = await VideoInstruction.findById(instructionId);
             if (!candidate) {
-                return res.status(404).json({message: "Instruction not found"})
+                return res.status(404).json({ message: "Instruction not found" })
             }
             res.status(200).json(candidate);
         } catch (error) {
@@ -35,15 +40,15 @@ class VideoInstructionController {
     }
     async update(req, res) {
         try {
-            const {instructionId} = req.params;
+            const { instructionId } = req.params;
             const instructionData = req.body;
             const updatedInstruction = await VideoInstruction.findByIdAndUpdate(
                 instructionId,
                 instructionData,
-                {new: true}
+                { new: true }
             )
-            if (!updatedInstruction){
-                return res.status(404).json({message: "Instruction not found"})
+            if (!updatedInstruction) {
+                return res.status(404).json({ message: "Instruction not found" })
             }
             res.status(200).json(updatedInstruction);
 
@@ -54,14 +59,14 @@ class VideoInstructionController {
     }
     async remove(req, res) {
         try {
-            const {instructionId} = req.params;
+            const { instructionId } = req.params;
             const deletedInstruction = await VideoInstruction.findByIdAndDelete(
                 instructionId
             );
             if (!deletedInstruction) {
-                return res.status(404).json({message: "Instruction not found"});
+                return res.status(404).json({ message: "Instruction not found" });
             }
-            res.status(200).json({message: "Instruction deleted successfully"});
+            res.status(200).json({ message: "Instruction deleted successfully" });
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: "Error removing instruction" })

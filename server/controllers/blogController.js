@@ -25,8 +25,13 @@ class BlogController {
     }
 
     async readAll(req, res) {
+        const query = req.query ? req.query : {}
         try {
-            const collection = await Blog.find();
+            const collection = await Blog.find(query.query)
+                .limit(query.limit)
+                .sort(query.sort)
+                .skip((query.page - 1) * query.limit)
+                .select(query.select)
             return res.status(200).json(collection)
         } catch (error) {
             console.error(error);
@@ -51,7 +56,7 @@ class BlogController {
     async update(req, res) {
         try {
             const { id } = req.params;
-            const { header, promotext, text, images_refs, use} = req.body;
+            const { header, promotext, text, images_refs, use } = req.body;
             const updatedPost = await Blog.findByIdAndUpdate(id, {
                 header,
                 promotext,

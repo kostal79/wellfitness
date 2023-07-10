@@ -1,19 +1,19 @@
 import { handleError } from "../utils/handleError";
-import { brands } from "./api";
+import { blogs } from "./api";
 
-
-export async function createBrand(formData) {
+export async function getAllBlogs() {
     try {
-        const response = await brands.post("/create", formData);
+        const response = await blogs.get("/all");
         return response.data
+
     } catch (error) {
         handleError(error)
     }
 }
 
-export async function makeGetBrandsWithParams(dataObject, limit, sort, page, select) {
+export async function getBlogsWithParams(dataObject, limit, sort, page, select) {
     try {
-        const response = await types.get("/all", {
+        const response = await blogs.get("/all", {
             params: {
                 query: dataObject,
                 limit: limit,
@@ -29,29 +29,30 @@ export async function makeGetBrandsWithParams(dataObject, limit, sort, page, sel
     }
 }
 
-export async function getBrandById(id) {
+export async function createBlog(dataObject) {
     try {
-        const response = await brands.get(`/${id}`);
-        return response.data
-    } catch (error) {
-        handleError(error)
-    }
-}
-
-export async function updateBrand(id, formData) {
-    try {
-        const response = await brands.put(`/${id}`, formData);
+        const response = await blogs.post("/create", dataObject);
         return response.data;
     } catch (error) {
         handleError(error)
     }
 }
 
-export async function removeBrand(id) {
+export async function updateBlog(id, dataObject) {
     try {
-        const response = await brands.delete(`/${id}`);
-        return response.data
+        const response = await blogs.put(`/${id}`, dataObject);
+        return response.data;
     } catch (error) {
         handleError(error)
     }
 }
+
+export async function removeBlog(id) {
+    try {
+        const response = await blogs.delete(`/${id}`);
+        return response.data;
+    } catch (error) {
+        handleError(error)
+    }
+}
+

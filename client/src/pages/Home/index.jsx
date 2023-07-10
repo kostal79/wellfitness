@@ -1,7 +1,8 @@
 import React from "react";
 import Styles from "./Home.module.scss";
 import BannerSlider from "@components/Sliders/BannerSlider";
-import CategorySection from "./CategorySection";
+import CategorySectionHome from "./CategorySectionHome";
+import CategorySectionProf from "./CategorySectionProf";
 import CompilationsSection from "./CompilationsSection";
 import ProductsSlider from "@components/Sliders/ProductsSlider";
 import BrandsSection from "./BrandSection";
@@ -18,8 +19,8 @@ const Home = () => {
           <div className={Styles.banner}>
             <BannerSlider />
           </div>
-          <CategorySection title="Тренажеры для дома" usage="home"/>
-          <CategorySection title="Для фитнес клубов" usage="prof"/>
+          <CategorySectionHome title="Тренажеры для дома" usage="home"/>
+          <CategorySectionProf title="Для фитнес клубов" usage="prof"/>
         </div>
       </div>
       <ProductsSlider />

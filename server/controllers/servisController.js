@@ -56,8 +56,13 @@ class ServisController {
     }
 
     async readAll(req, res) {
+        const query = req.query ? req.query : {};
         try {
-            const orders = await Servis.find()
+            const orders = await Servis.find(query.query)
+                .limit(query.limit)
+                .sort(query.sort)
+                .skip((query.page - 1) * query.limit)
+                .select(query.select)
                 .populate("device.brand", "name")
                 .populate("device.model", "name")
             res.status(200).json(orders);
@@ -151,7 +156,7 @@ class ServisController {
             if (!deletedServis) {
                 return res.status(404).json({ message: "Order not found" });
             }
-            const fileRef= deletedServis.file_ref;
+            const fileRef = deletedServis.file_ref;
             const filePath = path.resolve(__dirname, `../static/servis/${fileRef}`)
             fs.unlinkSync(filePath);
             res.status(200).json({ message: "Order deleted successfully" });

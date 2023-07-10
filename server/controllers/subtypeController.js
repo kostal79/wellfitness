@@ -17,8 +17,14 @@ class SubtypeController {
         }
     }
     async readAll(req, res) {
+        const query = req.query ? req.query : {};
         try {
-            const collection = await Subtype.find().populate("devices");
+            const collection = await Subtype.find(query.query)
+                .limit(query.limit)
+                .sort(query.sort)
+                .skip((query.page - 1) * query.limit)
+                .select(query.select)
+                .populate("devices");
             return res.status(200).json(collection)
         } catch (error) {
             console.error(error);
@@ -30,7 +36,7 @@ class SubtypeController {
             const { subtypeId } = req.params;
             const subtype = await Subtype.findById(subtypeId).populate("devices");
             if (!subtype) {
-                return res.status(404).json({message: "Subtype not found"})
+                return res.status(404).json({ message: "Subtype not found" })
             }
             return res.status(200).json(subtype)
         } catch (error) {
@@ -40,11 +46,11 @@ class SubtypeController {
     }
     async update(req, res) {
         try {
-            const {subtypeId} = req.params;
+            const { subtypeId } = req.params;
             const subtypeData = req.body;
-            const updatedSubtype = await Subtype.findByIdAndUpdate(subtypeId, subtypeData, {new: true});
+            const updatedSubtype = await Subtype.findByIdAndUpdate(subtypeId, subtypeData, { new: true });
             if (!updatedSubtype) {
-                return res.status(404).json({message: "Subtype not found"})
+                return res.status(404).json({ message: "Subtype not found" })
             }
             return res.status(200).json(updatedSubtype);
         } catch (error) {
@@ -54,16 +60,16 @@ class SubtypeController {
     }
     async remove(req, res) {
         try {
-            const {subtypeId} = req.params;
+            const { subtypeId } = req.params;
             const subtype = await Subtype.findById(subtypeId);
             if (!subtype) {
-                return res.status(404).json({message: "Subtype not found"})
+                return res.status(404).json({ message: "Subtype not found" })
             }
             if (subtype.devices.length > 0) {
-                return res.status(403).json({message: "Subtype consist devices. Impossible delete subtype"})
+                return res.status(403).json({ message: "Subtype consist devices. Impossible delete subtype" })
             }
-            await Subtype.deleteOne({_id: subtypeId});
-            return res.status(200).json({message: "Subtype deleted successfully"})
+            await Subtype.deleteOne({ _id: subtypeId });
+            return res.status(200).json({ message: "Subtype deleted successfully" })
         } catch (error) {
             console.error(error);
             return res.status(500).json({ message: "Error in Subtype deleting" })

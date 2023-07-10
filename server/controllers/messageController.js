@@ -22,8 +22,13 @@ class MessageController {
     }
 
     async readAll(req, res) {
+        const query = req.query ? req.query : {}
         try {
-            const collection = await Message.find();
+            const collection = await Message.find(query.query)
+                .limit(query.limit)
+                .sort(query.sort)
+                .skip((query.page - 1) * query.limit)
+                .select(query.select)
             return res.status(200).json(collection)
         } catch (error) {
             console.error(error);
@@ -78,10 +83,10 @@ class MessageController {
                 return res.status(404).json({ message: "Message not found" });
             }
             if (!message.user_id.equals(userId)) {
-                return res.status(403).json({message: "Forbidden"});
+                return res.status(403).json({ message: "Forbidden" });
             }
             await Message.findByIdAndDelete(id);
-            await User.findByIdAndUpdate(userId, {$pull: {messages: message._id}});
+            await User.findByIdAndUpdate(userId, { $pull: { messages: message._id } });
             return res.status(200).json({ message: "Message deleted successfully" });
         } catch (error) {
             console.error(error);

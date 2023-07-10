@@ -24,8 +24,13 @@ class FeedbackController {
         }
     }
     async readAll(req, res) {
+        const query = req.query ? req.query : {}
         try {
-            const collection = await Feedback.find();
+            const collection = await Feedback.find(query.query)
+                .limit(query.limit)
+                .sort(query.sort)
+                .skip((query.page - 1) * query.limit)
+                .select(query.select)
             res.status(200).json(collection)
         } catch (error) {
             console.log(error);
@@ -51,11 +56,11 @@ class FeedbackController {
             const { id } = req.params;
             const postData = req.body;
             const candidate = await Feedback.findById(id);
-            if (!candidate ) return res.status(404).json({ message: "Post not found" });
+            if (!candidate) return res.status(404).json({ message: "Post not found" });
             if (String(candidate.user_id) !== String(userId)) {
-                return res.status(403).json({message: "Forbidden"});
+                return res.status(403).json({ message: "Forbidden" });
             }
-            const updatedPost = await Feedback.findByIdAndUpdate(id, postData, {new: true})
+            const updatedPost = await Feedback.findByIdAndUpdate(id, postData, { new: true })
             res.status(201).json(updatedPost);
 
         } catch (error) {
@@ -67,22 +72,22 @@ class FeedbackController {
     async remove(req, res) {
         try {
             const userId = req.user.id;
-            const {id} = req.params;
+            const { id } = req.params;
             const deletingPost = await Feedback.findById(id);
-            if(!deletingPost) {
-                return res.status(404).json({message: "Post not found"})
+            if (!deletingPost) {
+                return res.status(404).json({ message: "Post not found" })
             }
-            if (String(deletingPost.user_id) !== String(userId)){
-                return res.status(403).json({message: "Forbidden"});
+            if (String(deletingPost.user_id) !== String(userId)) {
+                return res.status(403).json({ message: "Forbidden" });
             }
             const device = await Device.findById(deletingPost.device_id);
             if (!device) {
-                return res.status(404).json({message: "Device not found"});
+                return res.status(404).json({ message: "Device not found" });
             }
             device.removePost(id, userId);
             await device.save();
             await deletingPost.deleteOne();
-            res.status(200).json({message: `Post id: ${id} was deleted`})
+            res.status(200).json({ message: `Post id: ${id} was deleted` })
         } catch (error) {
             console.log(error);
             res.status(500).json({ message: "Server error" });

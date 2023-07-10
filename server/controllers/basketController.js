@@ -23,8 +23,13 @@ class BasketController {
         }
     }
     async readAll(req, res) {
+        const query = req.query ? req.query : {}
         try {
-            const collection = await Basket.find();
+            const collection = await Basket.find(query.query)
+                .limit(query.limit)
+                .sort(query.sort)
+                .skip((query.page - 1) * query.limit)
+                .select(query.select)
             res.status(200).json(collection);
         } catch (error) {
             console.error(error);

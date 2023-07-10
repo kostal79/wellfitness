@@ -21,9 +21,13 @@ class DeviceController {
         }
     }
     async readAll(req, res) {
+        const query = req.query ? req.query : {};
         try {
-            const query = req.query;
-            let collection = await Device.find(query);
+            let collection = await Device.find(query.query)
+            .limit(query.limit)
+            .sort(query.sort)
+            .skip((query.page-1) * query.limit)
+            .select(query.select)
             return res.status(200).json(collection);
         } catch (error) {
             console.log(error);

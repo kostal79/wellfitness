@@ -4,9 +4,9 @@ import UniversalButton from "@components/buttons/UniversalButton";
 import { useCategory } from "../../../hooks/useCategory";
 import Loader from "@components/Loader"
 
-const CategorySection = ({ usage }) => {
+const CategorySectionProf = ({ usage }) => {
 
-  const [categories, error] = useCategory({usage, limit: 10, Styles: Styles});
+  const [categories, error] = useCategory({usage, limit: 7, Styles: Styles});
 
   const content = categories ? categories : error ? error : <Loader />
 
@@ -19,4 +19,4 @@ const CategorySection = ({ usage }) => {
   );
 };
 
-export default CategorySection;
+export default CategorySectionProf;

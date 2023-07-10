@@ -14,7 +14,7 @@ export function useCategory({usage, limit, sort, Styles}) {
                 const typeList = [];
                 const types = await makeGetTypesWithParams({ usage: usage }, limit, sort);
                 for (let item of types) {
-                    const categoryLink = `/devices?${makeQueryParams({
+                    const categoryLink = `/catalog?${makeQueryParams({
                         type: item.name,
                         usage: usage,
                     })}`;

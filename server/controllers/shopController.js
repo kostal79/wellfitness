@@ -46,8 +46,13 @@ class ShopController {
     }
 
     async readAll(req, res) {
+        const query = req.query ? req.query : {}
         try {
-            const shops = await Shop.find();
+            const shops = await Shop.find(query.query)
+                .limit(query.limit)
+                .sort(query.sort)
+                .skip((query.page - 1) * query.limit)
+                .select(query.select)
             res.status(200).json(shops);
         } catch (error) {
             console.error(error);
@@ -124,7 +129,7 @@ class ShopController {
             if (!deletedShop) {
                 return res.status(404).json({ message: "Shop not found" });
             }
-            const images_refs  = deletedShop.images_refs;
+            const images_refs = deletedShop.images_refs;
             if (images_refs && Array.isArray(images_refs)) {
                 images_refs.forEach((ref) => fs.unlinkSync(ref))
             }

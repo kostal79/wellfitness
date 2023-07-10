@@ -6,8 +6,13 @@ const Basket = require("../models/basket")
 
 class UserConroller {
     async getAll(req, res) {
+        const query = req.query ? req.query : {};
         try {
-            const collection = await User.find()
+            const collection = await User.find(query.query)
+            .limit(query.limit)
+            .sort(query.sort)
+            .skip((query.page-1) * query.limit)
+            .select(query.select)
             return res.json(collection)
         } catch (error) {
             console.log(error);

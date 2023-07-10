@@ -19,8 +19,13 @@ class OrderController {
     }
 
     async readAll(req, res) {
+        const query = req.query ? req.query : {}
         try {
-            const orders = await Order.find()
+            const orders = await Order.find(query.query)
+                .limit(query.limit)
+                .sort(query.sort)
+                .skip((query.page - 1) * query.limit)
+                .select(query.select)
                 .populate("user", "first_name last_name email tel city adress");
             res.status(200).json(orders);
         } catch (error) {
@@ -75,11 +80,11 @@ class OrderController {
             const userId = req.user.id;
 
             const deletedOrder = await Order.findByIdAndDelete(orderId);
-            
+
             if (!deletedOrder) {
                 return res.status(404).json({ message: "Order not found" });
             }
-            
+
             await User.findByIdAndUpdate(userId, { $pull: { orders: orderId } })
             res.status(200).json({ message: "Order deleted successfully" });
         } catch (error) {

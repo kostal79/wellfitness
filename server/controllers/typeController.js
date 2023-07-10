@@ -22,7 +22,12 @@ class TypeController {
     async readAll(req, res) {
         const query = req.query ? req.query : {};
         try {
-            const collection = await Type.find(query.query).limit(query.limit).sort(query.sort).populate("subtypes");
+            const collection = await Type.find(query.query)
+            .limit(query.limit)
+            .sort(query.sort)
+            .skip((query.page-1) * query.limit)
+            .select(query.select)
+            .populate("subtypes");
             res.status(200).json(collection)
         } catch (error) {
             console.error(error);
@@ -86,7 +91,7 @@ class TypeController {
                     fs.unlinkSync(filePath)
                 } catch (error) {
                     console.error(error);
-                    return res.status(500).json({message: "Error in deleting file"})
+                    return res.status(500).json({ message: "Error in deleting file" })
                 }
             }
             await Type.deleteOne({ _id: typeId });

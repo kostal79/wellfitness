@@ -6,11 +6,11 @@ class BrandController {
     async create(req, res) {
         try {
             const brandData = req.body;
-            const candidate = await Brand.findOne({name: brandData.name});
+            const candidate = await Brand.findOne({ name: brandData.name });
             if (candidate) {
                 return res.status(409).json({ message: "Brand name already exists" })
             }
-            const file = req.file ? req.file: "";
+            const file = req.file ? req.file : "";
             const newBrand = await Brand.create({
                 ...brandData,
                 logo_ref: file.filename,
@@ -23,8 +23,13 @@ class BrandController {
         }
     }
     async readAll(req, res) {
+        const query = req.query ? req.query : {}
         try {
-            const collection = await Brand.find();
+            const collection = await Brand.find(query.query)
+                .limit(query.limit)
+                .sort(query.sort)
+                .skip((query.page - 1) * query.limit)
+                .select(query.select)
             return res.status(200).json(collection);
         } catch (error) {
             console.error(error);
@@ -47,11 +52,11 @@ class BrandController {
         try {
             const { id } = req.params;
             const brandData = req.body;
-            const candidate = await Brand.findOne({name: brandData.name});
+            const candidate = await Brand.findOne({ name: brandData.name });
             if (candidate) {
                 return res.status(409).json({ message: "Brand name not exists" });
             }
-            const updatedBrand = await Brand.findByIdAndUpdate(id, {...brandData }, { new: true });
+            const updatedBrand = await Brand.findByIdAndUpdate(id, { ...brandData }, { new: true });
             if (!updatedBrand) {
                 return res.status(404).json({ message: "Brand not found" });
             }
@@ -72,8 +77,8 @@ class BrandController {
                 const logo_ref = path.resolve(__dirname, `../static/brands/${brand.logo_ref}`);
                 fs.unlinkSync(logo_ref);
                 await Brand.findByIdAndDelete(id);
-                res.status(200).json({message: `Brand id: ${id} was deleted`})
-            }         
+                res.status(200).json({ message: `Brand id: ${id} was deleted` })
+            }
         } catch (error) {
             console.error(error);
             return res.status(500).json({ message: "Server error" })

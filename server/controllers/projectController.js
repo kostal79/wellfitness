@@ -7,7 +7,7 @@ class ProjectController {
         try {
             const projectData = req.body;
             const files = req.files;
-            const images_refs = files && Array.isArray(files) ? files.map(file => file.filename) : []   ;
+            const images_refs = files && Array.isArray(files) ? files.map(file => file.filename) : [];
 
             const newProject = await Project.create({
                 ...projectData,
@@ -22,8 +22,13 @@ class ProjectController {
     }
 
     async readAll(req, res) {
+        const query = req.query ? req.query : {};
         try {
-            const collection = await Project.find();
+            const collection = await Project.find(query.query)
+                .limit(query.limit)
+                .sort(query.sort)
+                .skip((query.page - 1) * query.limit)
+                .select(query.select)
             return res.status(200).json(collection)
         } catch (error) {
             console.error(error);
@@ -33,7 +38,7 @@ class ProjectController {
 
     async readOne(req, res) {
         try {
-            const {id} = req.params;
+            const { id } = req.params;
             const post = await Project.findById(id);
             if (!post) {
                 return res.status(404).json({ message: "Post not found" })
@@ -74,7 +79,7 @@ class ProjectController {
                     const filePath = path.resolve(__dirname, `../static/companyProjects/${imageRef}`)
                     fs.unlinkSync(filePath)
                 });
-                await post.deleteOne({_id: id});
+                await post.deleteOne({ _id: id });
                 return res.status(200).json({ message: "Post deleted successfully" });
             }
         } catch (error) {
