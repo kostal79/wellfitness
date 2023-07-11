@@ -5,7 +5,7 @@ const multerDeviceMiddleware = require("../middleware/multerDeviceMiddleware");
 const isAuth = require("../middleware/isAuthMiddleware");
 const isAdmin = require("../middleware/isAdminMiddleware")
 
-router.post("/create", multerDeviceMiddleware.array("image", 10), deviceController.create);
+router.post("/create", multerDeviceMiddleware.array("device", 10), deviceController.create);
 router.get("/all", deviceController.readAll);
 router.get("/:id", deviceController.readOne);
 router.delete("/:id",  deviceController.remove);

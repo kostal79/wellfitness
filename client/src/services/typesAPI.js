@@ -47,6 +47,15 @@ export async function updateType(id, formData) {
     }
 }
 
+export async function getTypeByID(id) {
+    try {
+        const response = await types.get(`/${id}`)
+        return response.data;
+    } catch (error) {
+        handleError(error)
+    }
+}
+
 export async function removeType(id) {
     try {
         const response = await types.delete(`/${id}`);

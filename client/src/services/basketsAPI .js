@@ -29,6 +29,15 @@ export async function getBasketsWithParams(dataObject, limit, sort, page, select
     }
 }
 
+export async function getBasketByID(id) {
+    try {
+        const response = await baskets.get(`/${id}`)
+        return response.data;
+    } catch (error) {
+        handleError(error)
+    }
+}
+
 export async function createBasket(dataObject) {
     try {
         const response = await baskets.post("/create", dataObject);

@@ -1,8 +1,8 @@
 const path = require("path");
-const Servis = require("../models/servis");
+const Service = require("../models/service");
 const fs = require("fs");
 
-class ServisController {
+class ServiceController {
     async create(req, res) {
         try {
             const {
@@ -23,7 +23,7 @@ class ServisController {
             } = req.body;
             const file = req.file;
             const file_ref = file ? file.filename : "";
-            const newServis = await Servis.create(
+            const newService = await Service.create(
                 {
                     device: {
                         brand,
@@ -48,7 +48,7 @@ class ServisController {
                     file_ref,
                 }
             );
-            res.status(201).json(newServis);
+            res.status(201).json(newService);
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: "Error creating order" });
@@ -58,7 +58,7 @@ class ServisController {
     async readAll(req, res) {
         const query = req.query ? req.query : {};
         try {
-            const orders = await Servis.find(query.query)
+            const orders = await Service.find(query.query)
                 .limit(query.limit)
                 .sort(query.sort)
                 .skip((query.page - 1) * query.limit)
@@ -76,7 +76,7 @@ class ServisController {
         try {
             const { orderId } = req.params;
 
-            const order = await Servis.findById(orderId)
+            const order = await Service.findById(orderId)
                 .populate("device.brand", "name")
                 .populate("device.model", "name")
 
@@ -111,7 +111,7 @@ class ServisController {
                 email,
             } = req.body;
 
-            const updatedServis = await Servis.findByIdAndUpdate(
+            const updatedService = await Service.findByIdAndUpdate(
                 orderId,
                 {
                     device: {
@@ -138,11 +138,11 @@ class ServisController {
                 { new: true }
             );
 
-            if (!updatedServis) {
+            if (!updatedService) {
                 return res.status(404).json({ message: "Order not found" });
             }
 
-            res.status(200).json(updatedServis);
+            res.status(200).json(updatedService);
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: "Update order error" });
@@ -152,12 +152,12 @@ class ServisController {
     async remove(req, res) {
         try {
             const { orderId } = req.params;
-            const deletedServis = await Servis.findByIdAndDelete(orderId);
-            if (!deletedServis) {
+            const deletedService = await Service.findByIdAndDelete(orderId);
+            if (!deletedService) {
                 return res.status(404).json({ message: "Order not found" });
             }
-            const fileRef = deletedServis.file_ref;
-            const filePath = path.resolve(__dirname, `../static/servis/${fileRef}`)
+            const fileRef = deletedService.file_ref;
+            const filePath = path.resolve(__dirname, `../static/serviceFiles/${fileRef}`)
             fs.unlinkSync(filePath);
             res.status(200).json({ message: "Order deleted successfully" });
         } catch (error) {
@@ -167,4 +167,4 @@ class ServisController {
     }
 }
 
-module.exports = new ServisController();
+module.exports = new ServiceController();

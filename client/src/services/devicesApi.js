@@ -1,19 +1,18 @@
-import { handleError } from "../utils/handleError";
-import { brands } from "./api";
+import { devices } from "./api";
+import { handleError } from "@utils/handleError";
 
-
-export async function createBrand(formData) {
+export async function createDevice(formData) {
     try {
-        const response = await brands.post("/create", formData);
+        const response = await devices.post("/create", formData);
         return response.data
     } catch (error) {
         handleError(error)
     }
 }
 
-export async function getBrandsWithParams(dataObject, limit, sort, page, select) {
+export async function getDevicesWithParams(dataObject, limit, sort, page, select) {
     try {
-        const response = await brands.get("/all", {
+        const response = await devices.get("/all", {
             params: {
                 query: dataObject,
                 limit: limit,
@@ -29,27 +28,27 @@ export async function getBrandsWithParams(dataObject, limit, sort, page, select)
     }
 }
 
-export async function getBrandById(id) {
+export async function getDeviceById(id) {
     try {
-        const response = await brands.get(`/${id}`);
+        const response = await devices.get(`/${id}`);
         return response.data
     } catch (error) {
         handleError(error)
     }
 }
 
-export async function updateBrand(id, formData) {
+export async function updateDevice(id, formData) {
     try {
-        const response = await brands.put(`/${id}`, formData);
+        const response = await devices.put(`/${id}`, formData);
         return response.data;
     } catch (error) {
         handleError(error)
     }
 }
 
-export async function removeBrand(id) {
+export async function removeDevice(id) {
     try {
-        const response = await brands.delete(`/${id}`);
+        const response = await devices.delete(`/${id}`);
         return response.data
     } catch (error) {
         handleError(error)

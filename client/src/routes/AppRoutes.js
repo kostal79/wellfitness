@@ -1,6 +1,7 @@
 import {
   Route,
   RouterProvider,
+  ScrollRestoration,
   createBrowserRouter,
   createRoutesFromElements,
   defer,
@@ -12,7 +13,35 @@ import { getAllBrands } from "../services/brandsAPI";
 import { get } from "../services/api";
 import { brandsLoader } from "../pages/Brands";
 import ErrorPage from "../pages/ErrorPage";
-
+import {
+  ABOUT_PAGE,
+  BLOG_PAGE,
+  BRANDS_PAGE,
+  BUSINESS_PLAN_PAGE,
+  CATALOG_PAGE,
+  CATEGORIES_PAGE,
+  CONSALTING_PAGE,
+  CONTACTS_PAGE,
+  CREDIT_PAGE,
+  DELIVERY_PAGE,
+  ERROR_PAGE,
+  FAQ_PAGE,
+  FITNESS_CLUB_SERVICE_PAGE,
+  HOME_PAGE,
+  INSTRUCTIONS_PAGE,
+  LEASING_PAGE,
+  MISSION_PAGE,
+  NEWS_PAGE,
+  OUT_PROJECTS_PAGE,
+  POLICY_PAGE,
+  PROJECT_3D_PAGE,
+  REFOUND_PAGE,
+  SERVICE_REQUEST_PAGE,
+  SHOWROOMS_PAGE,
+  TEAM_PAGE,
+  TRANDIN_PAGE,
+  WARRANTY_PAGE
+} from "../constants";
 const Home = lazy(() => import("@pages/Home"));
 const Catalog = lazy(() => import("@pages/Catalog"));
 const Brands = lazy(() => import("@pages/Brands"));
@@ -26,7 +55,7 @@ const Warranty = lazy(() => import("@pages/Warranty"));
 const Project3D = lazy(() => import("@pages/Project3D"));
 const Consalting = lazy(() => import("@pages/Consalting"));
 const BizPlan = lazy(() => import("@pages/BizPlan"));
-const Lising = lazy(() => import("@pages/Lising"));
+const Leasing = lazy(() => import("@pages/Leasing"));
 const Tradein = lazy(() => import("@pages/Tradein"));
 const Credit = lazy(() => import("@pages/Credit"));
 const About = lazy(() => import("@pages/About"));
@@ -39,122 +68,127 @@ const Blog = lazy(() => import("@pages/Blog"));
 const Showrooms = lazy(() => import("@pages/Showrooms"));
 const Contacts = lazy(() => import("@pages/Contacts"));
 const PrivatePolicy = lazy(() => import("@pages/PrivatePolicy"));
+const Categories = lazy(() => import("@pages/Categories"));
 
 const AppRoutes = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
         <Route
-          path="/"
+          path={HOME_PAGE}
           element={<Home />}
 
         />
         <Route
-          path="/catalog"
+          path={CATALOG_PAGE}
           element={<Catalog />}
         />
         <Route
-          path="/brands"
+          path={BRANDS_PAGE}
           element={<Brands />}
           loader={brandsLoader}
         />
         <Route
-          path="/delivery"
+          path={DELIVERY_PAGE}
           element={<Delivery />}
         />
         <Route
-          path="/refound"
+          path={REFOUND_PAGE}
           element={<Refound />}
         />
         <Route
-          path="/servicerequest"
+          path={SERVICE_REQUEST_PAGE}
           element={<ServiceRequest />}
         />
         <Route
-          path="/fitnessclubsevrice"
+          path={FITNESS_CLUB_SERVICE_PAGE}
           element={<FitnessClubSevrice />}
         />
         <Route
-          path="/faq"
+          path={FAQ_PAGE}
           element={<Faq />}
         />
         <Route
-          path="/instructions"
+          path={INSTRUCTIONS_PAGE}
           element={<Instructions />}
         />
         <Route
-          path="/warranty"
+          path={WARRANTY_PAGE}
           element={<Warranty />}
         />
         <Route
-          path="/project3d"
+          path={PROJECT_3D_PAGE}
           element={<Project3D />}
         />
         <Route
-          path="/consalting"
+          path={CONSALTING_PAGE}
           element={<Consalting />}
         />
         <Route
-          path="/bizplan"
+          path={BUSINESS_PLAN_PAGE}
           element={<BizPlan />}
         />
         <Route
-          path="/lising"
-          element={<Lising />}
+          path={LEASING_PAGE}
+          element={<Leasing />}
         />
         <Route
-          path="/tradein"
+          path={TRANDIN_PAGE}
           element={<Tradein />}
         />
         <Route
-          path="/credit"
+          path={CREDIT_PAGE}
           element={<Credit />}
         />
         <Route
-          path="/about"
+          path={ABOUT_PAGE}
           element={<About />}
         >
 
           <Route
-            path="/about"
+            path={ABOUT_PAGE}
             element={<AboutIntro />}
           />
           <Route
-            path="/about/mission"
+            path={MISSION_PAGE}
             element={<Mission />}
           />
           <Route
-            path="/about/team"
+            path={TEAM_PAGE}
             element={<Team />}
           />
           <Route
-            path="/about/projects"
+            path={OUT_PROJECTS_PAGE}
             element={<OurProjects />}
           />
           <Route
-            path="/about/news"
+            path={NEWS_PAGE}
             element={<News />}
           />
 
         </Route>
         <Route
-          path="/blog"
+          path={BLOG_PAGE}
           element={<Blog />}
         />
         <Route
-          path="/showrooms"
+          path={SHOWROOMS_PAGE}
           element={<Showrooms />}
         />
         <Route
-          path="/contacts"
+          path={CONTACTS_PAGE}
           element={<Contacts />}
         />
         <Route
-          path="/private-policy"
+          path={POLICY_PAGE}
           element={<PrivatePolicy />}
         />
         <Route
-          path="/*"
+          path={CATEGORIES_PAGE}
+          element={<Categories />}
+        />
+        <Route
+          path={ERROR_PAGE}
           element={<ErrorPage />}
         />
 

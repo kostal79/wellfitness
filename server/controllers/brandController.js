@@ -26,10 +26,12 @@ class BrandController {
         const query = req.query ? req.query : {}
         try {
             const collection = await Brand.find(query.query)
+                .populate({path: "devices_types", select: "name"})
                 .limit(query.limit)
                 .sort(query.sort)
                 .skip((query.page - 1) * query.limit)
                 .select(query.select)
+
             return res.status(200).json(collection);
         } catch (error) {
             console.error(error);

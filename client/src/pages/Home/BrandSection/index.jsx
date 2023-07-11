@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Styles from "./BrandSection.module.scss";
-import {NavLink} from "react-router-dom"
-import UniversalLink from "@components/buttons/UniversalLink"
-import { getAllBrands } from "@services/brandsAPI";
-import {  SERVER_URL } from "../../../constants";
+import { NavLink } from "react-router-dom";
+import UniversalLink from "@components/buttons/UniversalLink";
+import { BRANDS_PAGE, SERVER_URL } from "../../../constants";
+import { getBrandsWithParams } from "@services/brandsAPI";
 
 const BrandSection = () => {
   const [filter, setFilter] = useState("Беговые дорожки");
@@ -11,21 +11,32 @@ const BrandSection = () => {
 
   useEffect(() => {
     async function getBrandList() {
-      const brandList = await getAllBrands();
-        const list = [];
-        for (let brand of brandList) {
-          list.push(
-            <NavLink to={`/brands/${brand._id}`} key={brand._id}>
-              <div className={Styles["grid-cell"]} >
-                <img src={`${SERVER_URL}/brands/${brand.logo_ref}`} alt={brand.name} />
-              </div>
-            </NavLink>
-          );
+      const brandList = await getBrandsWithParams();
+      const sortedList = brandList.filter((brand) => {
+        for (let type of brand.devices_types) {
+          if (type.name === filter) {
+            return true;
+          }
         }
-        setBrandList(list);
+        return false;
+      });
+
+      const list = sortedList.map((brand) => {
+        return (
+          <NavLink to={`/brands/${brand._id}`} key={brand._id}>
+            <div className={Styles["grid-cell"]}>
+              <img
+                src={`${SERVER_URL}/brands/${brand.logo_ref}`}
+                alt={brand.name}
+              />
+            </div>
+          </NavLink>
+        );
+      });
+      setBrandList(list);
     }
-    getBrandList()
-  }, [])
+    getBrandList();
+  }, [filter]);
 
   const filterHandler = (value) => {
     setFilter(value);
@@ -53,9 +64,6 @@ const BrandSection = () => {
     });
   };
 
-
-
-
   return (
     <div className={Styles.container}>
       <h3 className={Styles.title}>Популярные бренды</h3>
@@ -66,12 +74,12 @@ const BrandSection = () => {
           "Велотренажеры",
           "Силовые тренажеры",
           "Батуты",
-          "Игровые столы"
+          "Игровые столы",
         ])}
       </ul>
       <div className={Styles.grid}>{brandList}</div>
-      <div className={Styles.button} >
-        <UniversalLink text="Все бренды" styles="red-empty" />
+      <div className={Styles.button}>
+        <UniversalLink text="Все бренды" styles="red-empty" to={BRANDS_PAGE}/>
       </div>
     </div>
   );

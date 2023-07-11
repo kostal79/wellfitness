@@ -9,13 +9,13 @@ import { NavLink } from "react-router-dom";
  * @param {string} linkTo link to 
 
  *  
- * @description Universal button 
+ * @description Universal link
  */
 
-const UniversalLink = ({ text, styles, linkTo }) => {
+const UniversalLink = ({ text, styles, to }) => {
   const secondClassName = "button--" + String(styles);
   return (
-    <NavLink to={linkTo} >
+    <NavLink to={to} >
     <div
       className={`${Styles.button} ${Styles[secondClassName]}`}
     >

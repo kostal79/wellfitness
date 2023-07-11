@@ -38,6 +38,15 @@ export async function createBlog(dataObject) {
     }
 }
 
+export async function getBlogByID(id) {
+    try {
+        const response = await blogs.get(`/${id}`)
+        return response.data;
+    } catch (error) {
+        handleError(error)
+    }
+}
+
 export async function updateBlog(id, dataObject) {
     try {
         const response = await blogs.put(`/${id}`, dataObject);
