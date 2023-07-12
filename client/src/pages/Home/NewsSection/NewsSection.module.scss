@@ -12,6 +12,11 @@
   margin-bottom: 40px;
 }
 
+.cards::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
 .bookmarks {
   display: flex;
   flex-direction: row;

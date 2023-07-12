@@ -6,16 +6,17 @@ import Loader from "../components/Loader";
 import "./Layout.scss"
 
 export default function Layout() {
+
     return (
         <>
+            <ScrollRestoration />
             <Header />
-            <main className="layout">
+            <main className="layout" >
                 <Suspense fallback={<Loader />}>
                     <Outlet />
                 </Suspense>
             </main>
             <Footer />
-            <ScrollRestoration />
         </>
     )
 }

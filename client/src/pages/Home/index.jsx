@@ -12,6 +12,7 @@ import BecomePartnerSection from "./BecomePartnerSection";
 import NewsSection from "./NewsSection";
 
 const Home = () => {
+  
   return (
     <>
       <div className="wrapper">

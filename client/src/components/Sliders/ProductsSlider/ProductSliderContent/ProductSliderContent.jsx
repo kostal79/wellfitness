@@ -4,8 +4,8 @@ import { ReactComponent as LeftArrowSVG } from "@assets/svg/left-arrow.svg";
 import { ReactComponent as RightArrowSVG } from "@assets/svg/right-arrow.svg";
 
 /**
- * 
- * @param {array} content array of cards 
+ *
+ * @param {array} content array of cards
  * @returns carusel of cards
  */
 const ProductSliderContent = ({ content }) => {
@@ -13,8 +13,11 @@ const ProductSliderContent = ({ content }) => {
   const [scrollLeft, setScrollLeft] = useState(0);
   const [maxLeft, setMaxLeft] = useState(0);
 
+
   useEffect(() => {
-    setMaxLeft((prev) => contentRef.current.scrollLeftMax);
+    const scrolled = contentRef.current.scrollWidth - contentRef.current.clientWidth
+    setMaxLeft(scrolled);
+    console.log(contentRef.current)
     const handleScroll = () => {
       setScrollLeft((prev) => contentRef.current.scrollLeft);
     };
@@ -24,6 +27,13 @@ const ProductSliderContent = ({ content }) => {
       contentRef.current?.removeEventListener("scroll", handleScroll);
     };
   }, [contentRef.current]);
+
+  useEffect(() => {
+    const scrollToTop = () => {
+      contentRef.current.scrollTop = 0;
+    };
+    scrollToTop();
+  }, [content]);
 
   const slideRight = () => {
     contentRef.current.scrollLeft += contentRef.current.clientWidth / 2;
@@ -38,16 +48,16 @@ const ProductSliderContent = ({ content }) => {
       <div className={Styles.content} ref={contentRef}>
         <div className={Styles.slider}>{content}</div>
       </div>
-      {scrollLeft > 0 && (
+      {scrollLeft > 0 && 
         <div className={Styles["arrow-left"]} onClick={slideLeft}>
           <LeftArrowSVG />
         </div>
-      )}
-      {scrollLeft < maxLeft && (
+      }
+      {scrollLeft < maxLeft && 
         <div className={Styles["arrow-right"]} onClick={slideRight}>
           <RightArrowSVG />
         </div>
-      )}
+      }
     </div>
   );
 };
