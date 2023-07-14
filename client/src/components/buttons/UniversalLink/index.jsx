@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Styles from "./UniversalLink.module.scss";
 import { NavLink } from "react-router-dom";
 
@@ -25,4 +25,4 @@ const UniversalLink = ({ text, styles, to }) => {
   );
 };
 
-export default UniversalLink;
+export default memo(UniversalLink);

@@ -10,6 +10,7 @@ import Presence from "./Presence";
 import Stars from "./Stars";
 import InteractionIcons from "./InteractionIcons";
 import { NavLink } from "react-router-dom";
+import { CATALOG_PAGE } from "../../constants";
 
 const ProductCard = ({
   id,
@@ -42,7 +43,7 @@ const ProductCard = ({
           />
         </div>
       </div>
-      <NavLink to={`/catalog/devices/${id}`}>
+      <NavLink to={`${CATALOG_PAGE}/${id}`}>
         <div className={Styles.imagebox}>
           <img className={Styles.image} src={imageRef} alt="product" />
         </div>

@@ -12,7 +12,6 @@ import BecomePartnerSection from "./BecomePartnerSection";
 import NewsSection from "./NewsSection";
 
 const Home = () => {
-  
   return (
     <>
       <div className="wrapper">
@@ -20,8 +19,8 @@ const Home = () => {
           <div className={Styles.banner}>
             <BannerSlider />
           </div>
-          <CategorySectionHome title="Тренажеры для дома" usage="home"/>
-          <CategorySectionProf title="Для фитнес клубов" usage="prof"/>
+          <CategorySectionHome title="Тренажеры для дома" usage="home" />
+          <CategorySectionProf title="Для фитнес клубов" usage="prof" />
         </div>
       </div>
       <ProductsSlider />

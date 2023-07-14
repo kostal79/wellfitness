@@ -13,11 +13,10 @@ const ProductSliderContent = ({ content }) => {
   const [scrollLeft, setScrollLeft] = useState(0);
   const [maxLeft, setMaxLeft] = useState(0);
 
-
   useEffect(() => {
-    const scrolled = contentRef.current.scrollWidth - contentRef.current.clientWidth
+    const scrolled =
+      contentRef.current.scrollWidth - contentRef.current.clientWidth;
     setMaxLeft(scrolled);
-    console.log(contentRef.current)
     const handleScroll = () => {
       setScrollLeft((prev) => contentRef.current.scrollLeft);
     };
@@ -48,16 +47,16 @@ const ProductSliderContent = ({ content }) => {
       <div className={Styles.content} ref={contentRef}>
         <div className={Styles.slider}>{content}</div>
       </div>
-      {scrollLeft > 0 && 
+      {scrollLeft > 0 && (
         <div className={Styles["arrow-left"]} onClick={slideLeft}>
           <LeftArrowSVG />
         </div>
-      }
-      {scrollLeft < maxLeft && 
+      )}
+      {scrollLeft < maxLeft && (
         <div className={Styles["arrow-right"]} onClick={slideRight}>
           <RightArrowSVG />
         </div>
-      }
+      )}
     </div>
   );
 };

@@ -32,6 +32,11 @@
     color: $color-dark-grey;
 }
 
+.empty-message {
+    color: $color-red;
+    font-size: $fonts-medium;
+}
+
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

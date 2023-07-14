@@ -8,6 +8,7 @@
   height: 100%;
   background-color: transparentize($color: $color-dark-grey, $amount: 0.5);
   animation: fadeIn .3s;
+  z-index: 2;
 }
 
 .underlayer--closed {

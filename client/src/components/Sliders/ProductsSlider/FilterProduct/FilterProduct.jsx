@@ -29,8 +29,8 @@ const FilterProduct = ({ parameter, setParameter }) => {
         Новинки
       </p>
       <p
-        className={giveClassName("sign_recomend")}
-        onClick={() => clickHandler("sign_recomend")}
+        className={giveClassName("sign_recommend")}
+        onClick={() => clickHandler("sign_recommend")}
       >
         Мы рекомендуем
       </p>

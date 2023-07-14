@@ -3,7 +3,7 @@
 .presence_quantity {
   display: flex;
   flex-direction: row;
-  column-gap: 6px;
+  column-gap: 2px;
   align-items: center;
   color: $color-green;
   font-size: $fonts-small;
@@ -28,4 +28,8 @@
 
 .presence_quantity--inactive svg circle {
   stroke: $color-red;
+}
+
+.presence_text {
+  margin-right: 4px;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import Styles from "./NewsCard.module.scss";
 import { NavLink } from "react-router-dom";
+import { BLOG_PAGE } from "../../constants";
 
 /**
  * @description News and blog card for main page
@@ -14,7 +15,7 @@ const NewsCard = ({ id, imageRef, header, promotext, date }) => {
   return (
     <div className={Styles.container}>
       <div className={Styles["image-box"]}>
-        <NavLink to={`/news/${id}`}>
+        <NavLink to={`${BLOG_PAGE}/${id}`}>
           <img className={Styles.image} src={imageRef} alt={header} />
         </NavLink>
       </div>

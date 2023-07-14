@@ -5,17 +5,11 @@ const fs = require("fs");
 class BlogController {
     async create(req, res) {
         try {
-            const { header, promotext, text, use } = req.body;
+            const blogData = req.body;
             const files = req.files;
             const images_refs = files && files.map(file => file.filename);
 
-            const newBlog = await Blog.create({
-                header,
-                promotext,
-                text,
-                images_refs,
-                use,
-            });
+            const newBlog = await Blog.create({ ...blogData, images_refs: images_refs });
 
             return res.status(201).json(newBlog);
         } catch (error) {
@@ -56,14 +50,9 @@ class BlogController {
     async update(req, res) {
         try {
             const { id } = req.params;
-            const { header, promotext, text, images_refs, use } = req.body;
-            const updatedPost = await Blog.findByIdAndUpdate(id, {
-                header,
-                promotext,
-                text,
-                images_refs,
-                use
-            },
+            const blogData = req.body;
+            const updatedPost = await Blog.findByIdAndUpdate(id,
+                { ...blogData },
                 { new: true }
             );
             if (!updatedPost) {
@@ -88,8 +77,8 @@ class BlogController {
                     const filePath = path.resolve(__dirname, `../static/blogs/${imageRef}`)
                     fs.unlinkSync(filePath)
                 });
-                await post.remove();
-                return res.status(200).json({ message: "Post deleted successfully" });
+                await Brand.findByIdAndDelete(id);
+                return res.status(200).json({ message: `Post id: ${id} deleted successfully` });
             }
         } catch (error) {
             console.error(error);
