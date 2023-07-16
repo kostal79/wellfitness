@@ -2,6 +2,7 @@ import React from "react";
 import  "../Section.scss";
 import { useGiveClassName } from "../../../hooks/useGiveClassName";
 import { NavLink } from "react-router-dom";
+import { ABOUT_PAGE, BLOG_PAGE, CONTACTS_PAGE, MISSION_PAGE, NEWS_PAGE, OUT_PROJECTS_PAGE, SHOWROOMS_PAGE, TEAM_PAGE } from "../../../constants";
 
 const SectionAbout = () => {
   const giveName = useGiveClassName();
@@ -12,7 +13,7 @@ const SectionAbout = () => {
       <ul className="list">
         <li className="list_item">
           <NavLink
-            to={"/about"}
+            to={ABOUT_PAGE}
             className={(obj) => giveName({ ...obj, filter: "" })}
             end
           >
@@ -22,7 +23,7 @@ const SectionAbout = () => {
       </ul>
       <li className="list_item">
         <NavLink
-          to={"/about/mission"}
+          to={MISSION_PAGE}
           className={(obj) => giveName({ ...obj, filter: "" })}
           end
         >
@@ -31,7 +32,7 @@ const SectionAbout = () => {
       </li>
       <li className="list_item">
         <NavLink
-          to={"/about/team"}
+          to={TEAM_PAGE}
           className={(obj) => giveName({ ...obj, filter: "" })}
           end
         >
@@ -40,7 +41,7 @@ const SectionAbout = () => {
       </li>
       <li className="list_item">
         <NavLink
-          to={"/about/projects"}
+          to={OUT_PROJECTS_PAGE}
           className={(obj) => giveName({ ...obj, filter: "" })}
           end
         >
@@ -49,7 +50,7 @@ const SectionAbout = () => {
       </li>
       <li className="list_item">
         <NavLink
-          to={"/about/news"}
+          to={NEWS_PAGE}
           className={(obj) => giveName({ ...obj, filter: "" })}
           end
         >
@@ -58,7 +59,7 @@ const SectionAbout = () => {
       </li>
       <li className="list_item">
         <NavLink
-          to={"/blog"}
+          to={BLOG_PAGE}
           className={(obj) => giveName({ ...obj, filter: "" })}
         >
           Блог
@@ -66,7 +67,7 @@ const SectionAbout = () => {
       </li>
       <li className="list_item">
         <NavLink
-          to={"/showrooms"}
+          to={SHOWROOMS_PAGE}
           className={(obj) => giveName({ ...obj, filter: "" })}
         >
           Где купить
@@ -74,7 +75,7 @@ const SectionAbout = () => {
       </li>
       <li className="list_item">
         <NavLink
-          to={"/contacts"}
+          to={CONTACTS_PAGE}
           className={(obj) => giveName({ ...obj, filter: "" })}
         >
           Контакты

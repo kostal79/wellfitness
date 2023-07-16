@@ -1,0 +1,46 @@
+@import "@styles/main.scss";
+
+.container {
+  margin-top: 10px;
+  font-size: $fonts-small;
+  color: transparentize($color-secondary-light-grey, 0.6);
+}
+
+.list {
+  margin: 10px 0 0 10px;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  column-gap: 12px;
+  list-style: none;
+  align-items: center;
+}
+
+.list_item {
+  position: relative;
+}
+
+.list_item:not(:first-child) {
+  margin-right: 12px;
+}
+
+.list_item:not(:last-child):not(:first-child)::after {
+  content: "»";
+  position: absolute;
+  top: 0;
+  right: -14px;
+}
+
+@media screen and (min-width: 980px) {
+    .list {
+        margin: 40px 0 0 20px;
+    }
+}
+
+
+@media screen and (min-width: 1410px) {
+    .list {
+        max-width: 1410px;
+        margin: 60px auto 0 auto;
+    }
+}

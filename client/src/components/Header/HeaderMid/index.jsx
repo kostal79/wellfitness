@@ -5,12 +5,15 @@ import { ReactComponent as LogoSVG } from "@assets/svg/logo.svg";
 import MidRight from "./MidRight";
 import Navigation from "./Navigation";
 import CatalogButton from "@components/buttons/CatalogButton/CatalogButton";
+import { NavLink } from "react-router-dom";
 
 const HeaderMid = () => {
   return (
     <div className={Styles.container}>
       <div className={Styles.logo}>
-        <LogoSVG />
+        <NavLink to={"/"}>
+          <LogoSVG />
+        </NavLink>
       </div>
       <div className={Styles.midleft}>
         <div className={Styles.catalog}>

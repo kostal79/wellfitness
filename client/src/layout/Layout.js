@@ -4,6 +4,7 @@ import Footer from "../components/Footer/Footer";
 import { Suspense } from "react";
 import Loader from "../components/Loader";
 import "./Layout.scss"
+import Breadscrumbs from "../components/Breadscrumbs";
 
 export default function Layout() {
 
@@ -13,6 +14,7 @@ export default function Layout() {
             <Header />
             <main className="layout" >
                 <Suspense fallback={<Loader />}>
+                    <Breadscrumbs />
                     <Outlet />
                 </Suspense>
             </main>

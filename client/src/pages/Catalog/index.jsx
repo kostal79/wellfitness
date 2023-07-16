@@ -3,6 +3,7 @@ import Styles from "./Catalog.module.scss";
 import { useLocation } from "react-router-dom";
 import { getDevices } from "@services/devicesApi";
 import { getDevicesWithParams } from "../../services/devicesApi";
+import Breadscrumbs from "../../components/Breadscrumbs";
 
 const Catalog = () => {
   const location = useLocation();

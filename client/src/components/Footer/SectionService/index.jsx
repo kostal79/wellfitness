@@ -2,6 +2,7 @@ import React from "react";
 import "../Section.scss";
 import { NavLink } from "react-router-dom";
 import { useGiveClassName } from "../../../hooks/useGiveClassName";
+import { BUSINESS_PLAN_PAGE, CONSALTING_PAGE, CREDIT_PAGE, LEASING_PAGE, PROJECT_3D_PAGE, TRANDIN_PAGE } from "../../../constants";
 
 const SectionService = () => {
   const giveName = useGiveClassName();
@@ -12,7 +13,7 @@ const SectionService = () => {
       <ul className="list">
         <li className="list_item">
           <NavLink
-            to={"project3d"}
+            to={PROJECT_3D_PAGE}
             className={(obj) => giveName({ ...obj, filter: "" })}
             end
           >
@@ -21,7 +22,7 @@ const SectionService = () => {
         </li>
         <li className="list_item">
           <NavLink
-            to={"consalting"}
+            to={CONSALTING_PAGE}
             className={(obj) => giveName({ ...obj, filter: "" })}
             end
           >
@@ -30,7 +31,7 @@ const SectionService = () => {
         </li>
         <li className="list_item">
           <NavLink
-            to={"/bizplan"}
+            to={BUSINESS_PLAN_PAGE}
             className={(obj) => giveName({ ...obj, filter: "" })}
             end
           >
@@ -39,7 +40,7 @@ const SectionService = () => {
         </li>
         <li className="list_item">
           <NavLink
-            to={"/lising"}
+            to={LEASING_PAGE}
             className={(obj) => giveName({ ...obj, filter: "" })}
           >
             Лизинг
@@ -47,7 +48,7 @@ const SectionService = () => {
         </li>
         <li className="list_item">
           <NavLink
-            to={"/tradein"}
+            to={TRANDIN_PAGE}
             className={(obj) => giveName({ ...obj, filter: "" })}
           >
             Trade-IN
@@ -55,7 +56,7 @@ const SectionService = () => {
         </li>
         <li className="list_item">
           <NavLink
-            to={"/credit"}
+            to={CREDIT_PAGE}
             className={(obj) => giveName({ ...obj, filter: "" })}
           >
             В рассрочку

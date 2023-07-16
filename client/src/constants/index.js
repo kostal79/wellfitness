@@ -1,7 +1,7 @@
+import makeQueryParams from "../utils/makeQueryParams"
+
 export const SERVER_URL = "http://localhost:5000/"
 export const BASE_URL = "http://localhost:5000/api"
-export const CATALOG_FOR_HOME = "/catalog/for-home"
-export const CATALOG_FOR_FITNESS_CENTER = "/catalog/for-fitness-center"
 export const STATIC_BLOGS = "http://localhost:5000/blogs"
 export const STATIC_BRANDS = "http://localhost:5000/brands"
 export const STATIC_PROJECTS = "http://localhost:5000/companyProjects"
@@ -15,9 +15,14 @@ export const CATEGORIES_PAGE = "/categories"
 export const BRANDS_PAGE = "/brands"
 export const BLOG_PAGE = "/blog"
 export const CATALOG_PAGE = "/catalog"
+export const CATALOG_PAGE_FOR_HOME = `${CATALOG_PAGE}/for-home`
+export const CATALOG_PAGE_FOR_FITNESS_CENTER = `${CATALOG_PAGE}/for-fitness-center`
+export const CATALOG_PAGE_OFFER = `${CATALOG_PAGE}/special-offer`
+export const CATALOG_PAGE_COMPILATIONS = `${CATALOG_PAGE}/compilations-and-ideas`
+export const CATALOG_PAGE_NEW = `${CATALOG_PAGE}/new`
 export const DELIVERY_PAGE = "/delivery"
 export const REFOUND_PAGE = "/refound"
-export const SERVICE_REQUEST_PAGE = "/servicerequest"
+export const SERVICE_PAGE = "/service"
 export const FITNESS_CLUB_SERVICE_PAGE = "/fitnessclubsevrice"
 export const FAQ_PAGE = "/faq"
 export const INSTRUCTIONS_PAGE = "/instructions"
@@ -36,4 +41,5 @@ export const NEWS_PAGE = "/about/news"
 export const SHOWROOMS_PAGE = "/showrooms"
 export const CONTACTS_PAGE = "/contacts"
 export const POLICY_PAGE = "/private-policy"
+export const SUPPORT_PAGE = "/support"
 export const ERROR_PAGE = "/*"

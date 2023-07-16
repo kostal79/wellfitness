@@ -11,6 +11,7 @@ import ForDillers from "@components/Header/HeaderUpper/ForDillers";
 
 const MenuModalContent = ({ close }) => {
   const [isOpen, setIsOpen] = useState(true);
+  // const []
 
   const handleClose = (event) => {
     if (event.target.className === Styles.underlayer) {

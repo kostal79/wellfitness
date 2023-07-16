@@ -2,6 +2,7 @@ import React from "react";
 import "../Section.scss";
 import { NavLink } from "react-router-dom";
 import { useGiveClassName } from "../../../hooks/useGiveClassName";
+import { BRANDS_PAGE, CATALOG_PAGE_FOR_FITNESS_CENTER, CATALOG_PAGE_FOR_HOME, CATALOG_PAGE_NEW, CATALOG_PAGE_OFFER } from "../../../constants";
 
 const SectionCatalog = () => {
   const giveName = useGiveClassName();
@@ -12,7 +13,7 @@ const SectionCatalog = () => {
       <ul className="list">
         <li className="list_item">
           <NavLink
-            to={"/catalog?usage=home"}
+            to={CATALOG_PAGE_FOR_HOME}
             className={(obj) => giveName({ ...obj, filter: "usage=home" })}
             end
           >
@@ -21,7 +22,7 @@ const SectionCatalog = () => {
         </li>
         <li className="list_item">
           <NavLink
-            to={"/catalog?usage=prof"}
+            to={CATALOG_PAGE_FOR_FITNESS_CENTER}
             className={(obj) => giveName({ ...obj, filter: "usage=prof" })}
             end
           >
@@ -30,7 +31,7 @@ const SectionCatalog = () => {
         </li>
         <li className="list_item">
           <NavLink
-            to={"/catalog?sign_profit=true"}
+            to={CATALOG_PAGE_OFFER}
             className={(obj) =>
               giveName({ ...obj, filter: "sign_profit=true" })
             }
@@ -41,7 +42,7 @@ const SectionCatalog = () => {
         </li>
         <li className="list_item">
           <NavLink
-            to={"/catalog?sign_new=true"}
+            to={CATALOG_PAGE_NEW}
             className={(obj) => giveName({ ...obj, filter: "sign_new=true" })}
           >
             Новинки
@@ -49,7 +50,7 @@ const SectionCatalog = () => {
         </li>
         <li className="list_item">
           <NavLink
-            to={"/brands"}
+            to={BRANDS_PAGE}
             className={(obj) => giveName({ ...obj, filter: "" })}
           >
             Наши бренды

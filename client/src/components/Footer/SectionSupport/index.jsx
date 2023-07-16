@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useGiveClassName } from "../../../hooks/useGiveClassName";
+import { DELIVERY_PAGE, FAQ_PAGE, FITNESS_CLUB_SERVICE_PAGE, INSTRUCTIONS_PAGE, REFOUND_PAGE, SERVICE_PAGE, WARRANTY_PAGE } from "../../../constants";
 
 const SectionSupport = () => {
   const giveName = useGiveClassName();
@@ -10,7 +11,7 @@ const SectionSupport = () => {
       <ul className="list">
         <li className="list_item">
           <NavLink
-            to={"/delivery"}
+            to={DELIVERY_PAGE}
             className={(obj) => giveName({ ...obj, filter: "" })}
             end
           >
@@ -19,7 +20,7 @@ const SectionSupport = () => {
         </li>
         <li className="list_item">
           <NavLink
-            to={"/refound"}
+            to={REFOUND_PAGE}
             className={(obj) => giveName({ ...obj, filter: "" })}
             end
           >
@@ -28,7 +29,7 @@ const SectionSupport = () => {
         </li>
         <li className="list_item">
           <NavLink
-            to={"/servicerequest"}
+            to={SERVICE_PAGE}
             className={(obj) => giveName({ ...obj, filter: "" })}
             end
           >
@@ -37,7 +38,7 @@ const SectionSupport = () => {
         </li>
         <li className="list_item">
           <NavLink
-            to={"/fitnessclubsevrice"}
+            to={FITNESS_CLUB_SERVICE_PAGE}
             className={(obj) => giveName({ ...obj, filter: "" })}
           >
             Обслуживание фитнес клубов
@@ -45,7 +46,7 @@ const SectionSupport = () => {
         </li>
         <li className="list_item">
           <NavLink
-            to={"/faq"}
+            to={FAQ_PAGE}
             className={(obj) => giveName({ ...obj, filter: "" })}
           >
             FAQ
@@ -53,7 +54,7 @@ const SectionSupport = () => {
         </li>
         <li className="list_item">
           <NavLink
-            to={"/instructions"}
+            to={INSTRUCTIONS_PAGE}
             className={(obj) => giveName({ ...obj, filter: "" })}
           >
             Инструкции
@@ -61,7 +62,7 @@ const SectionSupport = () => {
         </li>
         <li className="list_item">
           <NavLink
-            to={"/warranty"}
+            to={WARRANTY_PAGE}
             className={(obj) => giveName({ ...obj, filter: "" })}
           >
             Гарантия

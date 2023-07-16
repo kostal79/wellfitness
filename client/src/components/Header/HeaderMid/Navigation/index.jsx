@@ -1,6 +1,7 @@
 import React from "react";
 import Styles from "./Navigation.module.scss";
 import { NavLink } from "react-router-dom";
+import { ABOUT_PAGE, BLOG_PAGE, BRANDS_PAGE, CONSALTING_PAGE, CONTACTS_PAGE, SERVICE_PAGE, SHOWROOMS_PAGE, SUPPORT_PAGE } from "../../../../constants";
 
 const Navigation = () => {
   return (
@@ -8,28 +9,28 @@ const Navigation = () => {
       <nav className={Styles.menu}>
         <ul className={Styles["menu_list"]}>
           <li className={Styles["menu_item"]}>
-            <NavLink to={"/brands"}>Бренды</NavLink>
+            <NavLink to={BRANDS_PAGE}>Бренды</NavLink>
           </li>
           <li className={Styles["menu_item"]}>
-            <NavLink to={"/servicerequest"}>Сервис</NavLink>
+            <NavLink to={SERVICE_PAGE}>Сервис</NavLink>
           </li>
           <li className={Styles["menu_item"]}>
-            <NavLink to={"/consalting"}>Услуги</NavLink>
+            <NavLink to={CONSALTING_PAGE}>Услуги</NavLink>
           </li>
           <li className={Styles["menu_item"]}>
-            <NavLink >Поддержка</NavLink>
+            <NavLink to={SUPPORT_PAGE}>Поддержка</NavLink>
           </li>
           <li className={Styles["menu_item"]}>
-            <NavLink to={"/about"}>О компании</NavLink>
+            <NavLink to={ABOUT_PAGE}>О компании</NavLink>
           </li>
           <li className={Styles["menu_item"]}>
-            <NavLink to={"/blog"}>Блог</NavLink>
+            <NavLink to={BLOG_PAGE}>Блог</NavLink>
           </li>
           <li className={Styles["menu_item"]}>
-            <NavLink to={"/showrooms"}>Где купить</NavLink>
+            <NavLink to={SHOWROOMS_PAGE}>Где купить</NavLink>
           </li>
           <li className={Styles["menu_item"]}>
-            <NavLink to={"/contacts"}>Контакты</NavLink>
+            <NavLink to={CONTACTS_PAGE}>Контакты</NavLink>
           </li>
         </ul>
       </nav>
