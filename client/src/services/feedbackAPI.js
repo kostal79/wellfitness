@@ -11,7 +11,7 @@ export async function getAllFeedbacks() {
     }
 }
 
-export async function makeGetFeedbacksWithParams(dataObject, limit, sort, page, select) {
+export async function getFeedbacksWithParams(dataObject, limit, sort, page, select) {
     try {
         const response = await feedback.get("/all", {
             params: {

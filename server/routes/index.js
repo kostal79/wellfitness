@@ -15,7 +15,7 @@ const servisRouter = require("./service.routes");
 const shopRouter = require("./shop.routes");
 const videoInstructionRouter = require("./videoInstruction.routes");
 const typeRouter = require("./type.routes")
-const subtypeRouter = require("./subtype.routes")
+const groupRouter = require("./group.routes")
 
 router.use("/auth", authRouter);
 router.use("/baskets", basketRouter);
@@ -32,6 +32,6 @@ router.use("/servis", servisRouter);
 router.use("/shops", shopRouter);
 router.use("/videoinstructions", videoInstructionRouter);
 router.use("/types", typeRouter);
-router.use("/subtypes", subtypeRouter);
+router.use("/groups", groupRouter);
 
 module.exports = router

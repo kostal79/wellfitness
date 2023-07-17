@@ -14,7 +14,7 @@ const SectionCatalog = () => {
         <li className="list_item">
           <NavLink
             to={CATALOG_PAGE_FOR_HOME}
-            className={(obj) => giveName({ ...obj, filter: "usage=home" })}
+            className={(obj) => giveName({ ...obj, filter: "" })}
             end
           >
             Для дома
@@ -23,7 +23,7 @@ const SectionCatalog = () => {
         <li className="list_item">
           <NavLink
             to={CATALOG_PAGE_FOR_FITNESS_CENTER}
-            className={(obj) => giveName({ ...obj, filter: "usage=prof" })}
+            className={(obj) => giveName({ ...obj, filter: "" })}
             end
           >
             Для фитнес клубов
@@ -33,7 +33,7 @@ const SectionCatalog = () => {
           <NavLink
             to={CATALOG_PAGE_OFFER}
             className={(obj) =>
-              giveName({ ...obj, filter: "sign_profit=true" })
+              giveName({ ...obj, filter: "" })
             }
             end
           >
@@ -43,7 +43,7 @@ const SectionCatalog = () => {
         <li className="list_item">
           <NavLink
             to={CATALOG_PAGE_NEW}
-            className={(obj) => giveName({ ...obj, filter: "sign_new=true" })}
+            className={(obj) => giveName({ ...obj, filter: "" })}
           >
             Новинки
           </NavLink>

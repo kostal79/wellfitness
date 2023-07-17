@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getDevicesWithParams } from "@services/devicesApi";
+import { getDevicesWithParams } from "@services/devicesAPI";
 import { STATIC_DEVICES } from "../constants";
 import ProductCard from "@components/ProductCard";
 import { quantityEvaluate } from "../utils/quantityEvaluate";

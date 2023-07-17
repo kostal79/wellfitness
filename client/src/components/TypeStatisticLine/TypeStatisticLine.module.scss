@@ -1,0 +1,16 @@
+@import"@styles/main.scss";
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: $fonts-small-upper;
+    line-height: 140%;
+    width: 100%;
+}
+
+.quantity {
+    font-size: $fonts-small;
+    font-weight: 700;
+    opacity: .4; 
+}

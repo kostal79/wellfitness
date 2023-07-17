@@ -26,8 +26,8 @@ class TypeController {
             .limit(query.limit)
             .sort(query.sort)
             .skip((query.page-1) * query.limit)
+            .populate("group")
             .select(query.select)
-            .populate("subtypes");
             res.status(200).json(collection)
         } catch (error) {
             console.error(error);
@@ -37,7 +37,7 @@ class TypeController {
     async readOne(req, res) {
         try {
             const { typeId } = req.params;
-            const type = await Type.findById(typeId).populate("subtypes");
+            const type = await Type.findById(typeId).populate("group");
             if (!type) {
                 return res.status(404).json({ message: "Type not found" })
             }
@@ -82,9 +82,7 @@ class TypeController {
             if (!type) {
                 return res.status(404).json({ message: "Type not found" })
             }
-            if (type.subtypes.length > 0) {
-                return res.status(403).json({ message: "Type consist subtypes. Impossible delete type" })
-            }
+
             if (type.image_ref) {
                 try {
                     const filePath = path.resolve(__dirname, `../static/typesImages/${type.image_ref}`)

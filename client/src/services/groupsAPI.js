@@ -1,9 +1,9 @@
 import { handleError } from "../utils/handleError";
-import { types } from "./api";
+import { groups } from "./api";
 
-export async function getAllTypes() {
+export async function getAllGroups() {
     try {
-        const response = await types.get("/all");
+        const response = await groups.get("/all");
         return response.data
 
     } catch (error) {
@@ -11,9 +11,9 @@ export async function getAllTypes() {
     }
 }
 
-export async function getTypesWithParams(dataObject, limit, sort, page, select) {
+export async function getGroupsWithParams(dataObject, limit, sort, page, select) {
     try {
-        const response = await types.get("/all", {
+        const response = await groups.get("/all", {
             params: {
                 query: dataObject,
                 limit: limit,
@@ -29,47 +29,50 @@ export async function getTypesWithParams(dataObject, limit, sort, page, select) 
     }
 }
 
-export async function createType(formData) {
+export async function createGroup(formData) {
     try {
-        const response = await types.post("/create", formData);
+        const response = await groups.post("/create", formData);
         return response.data;
     } catch (error) {
         handleError(error)
     }
 }
 
-export async function updateType(id, formData) {
+export async function updateGroup(id, formData) {
     try {
-        const response = await types.put(`/${id}`, formData);
+        const response = await groups.put(`/${id}`, formData);
         return response.data;
     } catch (error) {
         handleError(error)
     }
 }
 
-export async function getTypeByID(id) {
+export async function updateGroupImage(id, formData) {
     try {
-        const response = await types.get(`/${id}`)
+        const response = await groups.put(`/${id}/image`, formData);
         return response.data;
     } catch (error) {
         handleError(error)
     }
 }
 
-export async function removeType(id) {
+
+export async function getGroupByID(id) {
     try {
-        const response = await types.delete(`/${id}`);
+        const response = await groups.get(`/${id}`)
         return response.data;
     } catch (error) {
         handleError(error)
     }
 }
 
-export async function updateImageType(id, formData) {
+export async function removeGroup(id) {
     try {
-        const response = await types.put(`/${id}/image`, formData);
+        const response = await groups.delete(`/${id}`);
         return response.data;
     } catch (error) {
         handleError(error)
     }
 }
+
+

@@ -51,6 +51,7 @@ import {
 import HomeIcon from "@components/HomeIcon";
 const Home = lazy(() => import("@pages/Home"));
 const Catalog = lazy(() => import("@pages/Catalog"));
+const CatalogForHome = lazy(() => import("@pages/CatalogForHome"));
 const Brands = lazy(() => import("@pages/Brands"));
 const Delivery = lazy(() => import("@pages/Delivery"));
 const Refound = lazy(() => import("@pages/Refound"));
@@ -98,7 +99,7 @@ const AppRoutes = () => {
         >
           <Route
             path={CATALOG_PAGE_FOR_HOME}
-            element={<Catalog />}
+            element={<CatalogForHome />}
             handle={{
               crumb: () => <NavLink to={CATALOG_PAGE_FOR_HOME}>Для дома</NavLink>
             }}

@@ -3,7 +3,7 @@ import Styles from "./Home.module.scss";
 import BannerSlider from "@components/Sliders/BannerSlider";
 import CategorySectionHome from "./CategorySectionHome";
 import CategorySectionProf from "./CategorySectionProf";
-import CompilationsSection from "./CompilationsSection";
+import CompilationsSection from "@components/CompilationsSection";
 import ProductsSlider from "@components/Sliders/ProductsSlider";
 import BrandsSection from "./BrandSection";
 import LinkCardsSection from "./LinkCardsSection";

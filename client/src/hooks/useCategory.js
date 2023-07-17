@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { makeGetTypesWithParams } from "../services/typesAPI";
+import { getTypesWithParams } from "../services/typesAPI";
 import makeQueryParams from "../utils/makeQueryParams";
-import { SERVER_URL } from "../constants";
+import { CATALOG_PAGE, SERVER_URL, STATIC_TYPES } from "../constants";
 import { NavLink } from "react-router-dom";
 
 export function useCategory({usage, limit, sort, Styles}) {
@@ -12,9 +12,9 @@ export function useCategory({usage, limit, sort, Styles}) {
         async function getCategory() {
             try {
                 const typeList = [];
-                const types = await makeGetTypesWithParams({ usage: usage }, limit, sort);
+                const types = await getTypesWithParams({ usage: usage }, limit, sort);
                 for (let item of types) {
-                    const categoryLink = `/catalog?${makeQueryParams({
+                    const categoryLink = `${CATALOG_PAGE}?${makeQueryParams({
                         type: item.name,
                         usage: usage,
                     })}`;
@@ -26,7 +26,7 @@ export function useCategory({usage, limit, sort, Styles}) {
                                     <p className={Styles.category}>{item.name}</p>
                                     <img
                                         className={Styles.image}
-                                        src={`${SERVER_URL}/typesImages/${item.image_ref}`}
+                                        src={`${STATIC_TYPES}/${item.image_ref}`}
                                         alt={item.name}
                                     />
                                 </div>
