@@ -1,0 +1,19 @@
+.categories {
+  margin-bottom: 60px;
+  margin-top: -40px;
+}
+
+@media screen and (min-width: 980px) {
+  .categories {
+    margin-bottom: 80px;
+    margin-top: -50px;
+  }
+}
+
+@media screen and (min-width: 1410px) {
+    .categories {
+      margin-bottom: 120px;
+      margin-top: -90px;
+    }
+  }
+  

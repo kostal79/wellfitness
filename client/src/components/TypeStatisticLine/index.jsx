@@ -2,13 +2,11 @@ import React from "react";
 import Styles from "./TypeStatisticLine.module.scss";
 import { NavLink } from "react-router-dom";
 import { CATALOG_PAGE } from "../../constants";
-import makeQueryParams from "../../utils/makeQueryParams";
 
-const TypeStatisticLine = ({ name, quantity, usage, typeId }) => {
-  const linkTo = `${CATALOG_PAGE}?${makeQueryParams({
-    usage: usage,
-    "type.type_id": typeId,
-  })}`;
+const TypeStatisticLine = ({ name, quantity, usage, typeId, groupId }) => {
+  const linkTo = `${CATALOG_PAGE}/${
+    usage === "home" ? "for-home" : "for-fitness-center"
+  }/${groupId}/${typeId}`;
   return (
     <div className={Styles.container}>
       <NavLink to={linkTo}>

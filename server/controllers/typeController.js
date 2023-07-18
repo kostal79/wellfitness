@@ -27,6 +27,7 @@ class TypeController {
             .sort(query.sort)
             .skip((query.page-1) * query.limit)
             .populate("group")
+            .populate("devices_ids")
             .select(query.select)
             res.status(200).json(collection)
         } catch (error) {
@@ -37,7 +38,7 @@ class TypeController {
     async readOne(req, res) {
         try {
             const { typeId } = req.params;
-            const type = await Type.findById(typeId).populate("group");
+            const type = await Type.findById(typeId).populate("group").populate("devices_ids");
             if (!type) {
                 return res.status(404).json({ message: "Type not found" })
             }

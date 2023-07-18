@@ -4,23 +4,32 @@ import { loadImage } from "@utils/loadImage";
 import { useGroupStatistic } from "@hooks/useGroupStatistic";
 import TypeStatisticLine from "../TypeStatisticLine";
 import GroupCardSceleton from "./GroupCardSceleton/GroupCardSceleton";
+import { NavLink } from "react-router-dom";
 
-const GroupForHomeCards = ({ imageRef, group, usage }) => {
+const GroupForHomeCards = ({ imageRef, groupName, usage }) => {
   const image = loadImage(imageRef);
-  const [statisticData, isLoading] = useGroupStatistic(group, usage);
+  const [statisticData, isLoading] = useGroupStatistic(groupName, usage);
 
   return (
     <div className={Styles.container}>
-      <div className={Styles["image-box"]}>
-        <img className={Styles.image} src={image} alt={`group ${group}`} />
-      </div>
+      <NavLink to={statisticData.groupId}>
+        <div className={Styles["image-box"]}>
+          <img
+            className={Styles.image}
+            src={image}
+            alt={`group ${groupName}`}
+          />
+        </div>
+      </NavLink>
       <div className={Styles.info}>
-        <h5 className={Styles.title}>{group}</h5>
+        <NavLink to={statisticData && statisticData.groupId}>
+          <h5 className={Styles.title}>{groupName}</h5>
+        </NavLink>
         <ul className={Styles.list}>
           {isLoading ? (
             <GroupCardSceleton />
           ) : (
-            statisticData.map((data) => {
+            statisticData.statistic.map((data) => {
               return (
                 <li className={Styles["list-item"]} key={data._id}>
                   <TypeStatisticLine
@@ -28,6 +37,7 @@ const GroupForHomeCards = ({ imageRef, group, usage }) => {
                     quantity={data.devices_ids.length}
                     usage={usage}
                     typeId={data._id}
+                    groupId={data.group._id}
                   />
                 </li>
               );

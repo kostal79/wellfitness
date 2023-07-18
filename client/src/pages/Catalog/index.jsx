@@ -1,35 +1,32 @@
 import React, { useEffect, useState } from "react";
 import Styles from "./Catalog.module.scss";
-import { Outlet, useLocation } from "react-router-dom";
-import CompilationsSection from "../../components/CompilationsSection";
+import CompilationsSection from "@components/CompilationsSection";
 import ProductsSlider from "@components/Sliders/ProductsSlider";
-import {getDevicesWithParams} from "@services/devicesAPI"
-
+import CategorySectionHome from "@pages/Home/CategorySectionHome";
+import CategorySectionProf from "@pages/Home/CategorySectionProf";
+import { Outlet, useLocation } from "react-router-dom";
 
 const Catalog = () => {
-  // const location = useLocation();
-  // const queryParams = new URLSearchParams(location.search);
-  // const [devices, setDevices] = useState();
-
-  // useEffect(() => {
-  //   async function fetchData(){
-  //     const arr = await getDevicesWithParams(queryParams);
-  //     const content = arr.map(item => <p>{item?.name}</p>)
-  //     setDevices(content)
-  //   }
-  //   fetchData();
-  // }, [queryParams])
-
-  return (
-    <div className="wrapper">
-        <Outlet />
+  const location = useLocation();
+  const isMain = location.pathname === "/catalog";
+  if (isMain) {
+    return (
+      <div className="wrapper">
+        <div className="limited-wrapper">
+          <div className={Styles.categories}>
+            <CategorySectionHome />
+            <CategorySectionProf />
+          </div>
+        </div>
         <CompilationsSection />
-      <div className="limited-wrapper">
-      {/* {devices} */}
-        <ProductsSlider />
+        <div className="limited-wrapper">
+          <ProductsSlider />
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return <Outlet />;
+  }
 };
 
 export default Catalog;

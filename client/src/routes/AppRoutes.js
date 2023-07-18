@@ -2,16 +2,11 @@ import {
   NavLink,
   Route,
   RouterProvider,
-  ScrollRestoration,
   createBrowserRouter,
   createRoutesFromElements,
-  defer,
-  useLocation,
 } from "react-router-dom";
 import Layout from "@layout/Layout";
 import { lazy } from "react";
-import { getAllBrands } from "@services/brandsAPI";
-import { get } from "@services/api";
 import { brandsLoader } from "@pages/Brands";
 import ErrorPage from "@pages/ErrorPage";
 import {
@@ -25,7 +20,6 @@ import {
   CATALOG_PAGE_FOR_HOME,
   CATALOG_PAGE_NEW,
   CATALOG_PAGE_OFFER,
-  CATEGORIES_PAGE,
   CONSALTING_PAGE,
   CONTACTS_PAGE,
   CREDIT_PAGE,
@@ -49,6 +43,10 @@ import {
   WARRANTY_PAGE
 } from "../constants";
 import HomeIcon from "@components/HomeIcon";
+import { getDeviceById, getDevicesWithParams } from "@services/devicesAPI";
+import { loadCategory } from "@utils/loadCategory";
+import { loadGroup } from "@utils/loadGroup";
+const Device = lazy(() => import("@pages/Device"));
 const Home = lazy(() => import("@pages/Home"));
 const Catalog = lazy(() => import("@pages/Catalog"));
 const CatalogForHome = lazy(() => import("@pages/CatalogForHome"));
@@ -76,7 +74,8 @@ const Blog = lazy(() => import("@pages/Blog"));
 const Showrooms = lazy(() => import("@pages/Showrooms"));
 const Contacts = lazy(() => import("@pages/Contacts"));
 const PrivatePolicy = lazy(() => import("@pages/PrivatePolicy"));
-const Categories = lazy(() => import("@pages/Categories"));
+const Category = lazy(() => import("@pages/Category"));
+const Group = lazy(() => import("@pages/Group"));
 
 const AppRoutes = () => {
   const router = createBrowserRouter(
@@ -96,14 +95,47 @@ const AppRoutes = () => {
         <Route
           path={CATALOG_PAGE}
           element={<Catalog />}
+          handle={{
+            crumb: () => <NavLink to={CATALOG_PAGE}>Каталог</NavLink>
+          }}
         >
+
+          <Route
+            path={`${CATALOG_PAGE}/:deviceId`}
+            element={<Device />}
+            loader={({ params }) => getDeviceById(params.deviceId)}
+            handle={{
+              crumb: (data) => `${data.type.type_name} ${data.brand.brand_name} ${data.name}`
+            }}
+          />
           <Route
             path={CATALOG_PAGE_FOR_HOME}
             element={<CatalogForHome />}
             handle={{
               crumb: () => <NavLink to={CATALOG_PAGE_FOR_HOME}>Для дома</NavLink>
             }}
-          />
+          >
+            <Route
+              path={`${CATALOG_PAGE_FOR_HOME}/:groupId`}
+              element={<Group />}
+              loader={({ params }) => loadGroup(params.groupId)}
+              handle={{
+                crumb: (data) => <NavLink to={`${CATALOG_PAGE_FOR_HOME}/${data.groupId}`}>{data.name}</NavLink>
+              }}
+            >
+
+              <Route
+                path={`${CATALOG_PAGE_FOR_HOME}/:groupId/:typeId`}
+                element={<Category />}
+                loader={({ params }) => loadCategory(params.typeId)}
+                handle={{
+                  crumb: (data) => <NavLink to={`${CATALOG_PAGE_FOR_HOME}`}>{data.name}</NavLink>
+                }}
+              />
+
+            </Route>
+          </Route>
+
           <Route
             path={CATALOG_PAGE_FOR_FITNESS_CENTER}
             element={<Catalog />}
@@ -111,6 +143,7 @@ const AppRoutes = () => {
               crumb: () => <NavLink to={CATALOG_PAGE_FOR_FITNESS_CENTER}>Для фитнес клубов</NavLink>
             }}
           />
+
           <Route
             path={CATALOG_PAGE_OFFER}
             element={<Catalog />}
@@ -118,6 +151,7 @@ const AppRoutes = () => {
               crumb: () => <NavLink to={CATALOG_PAGE_OFFER}>Акции</NavLink>
             }}
           />
+
           <Route
             path={CATALOG_PAGE_COMPILATIONS}
             element={<Catalog />}
@@ -125,6 +159,7 @@ const AppRoutes = () => {
               crumb: () => <NavLink to={CATALOG_PAGE_COMPILATIONS}>Идеи и подборки</NavLink>
             }}
           />
+
           <Route
             path={CATALOG_PAGE_NEW}
             element={<Catalog />}
@@ -132,6 +167,7 @@ const AppRoutes = () => {
               crumb: () => <NavLink to={CATALOG_PAGE_NEW}>Новинки</NavLink>
             }}
           />
+
         </Route>
 
         <Route
@@ -317,14 +353,6 @@ const AppRoutes = () => {
           element={<PrivatePolicy />}
           handle={{
             crumb: () => <NavLink to={POLICY_PAGE}>Политика конфиленциальности</NavLink>
-          }}
-        />
-
-        <Route
-          path={CATEGORIES_PAGE}
-          element={<Categories />}
-          handle={{
-            crumb: () => <NavLink to={CATEGORIES_PAGE}>Categories page</NavLink>
           }}
         />
 

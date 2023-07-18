@@ -34,7 +34,7 @@ class GroupController {
     async readOne(req, res) {
         try {
             const { groupId } = req.params;
-            const group = await Group.findById(groupId).populate("devices");
+            const group = await Group.findById(groupId);
             if (!group) {
                 return res.status(404).json({ message: "Group not found" })
             }

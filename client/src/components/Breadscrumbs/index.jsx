@@ -8,7 +8,7 @@ const Breadscrumbs = () => {
     .filter((match) => Boolean(match.handle?.crumb))
     .map((match, index) => (
       <li className={Styles.list_item} key={index}>
-        {match.handle.crumb()}
+        {match.handle.crumb(match?.data)}
       </li>
     ));
   return (
