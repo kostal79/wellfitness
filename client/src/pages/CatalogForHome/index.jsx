@@ -3,12 +3,8 @@ import Styles from "./CatalogForHome.module.scss";
 import GroupCard from "@components/GroupCard";
 import CompilationsSection from "@components/CompilationsSection";
 import ProductsSlider from "@components/Sliders/ProductsSlider";
-import { Outlet, useLocation } from "react-router-dom";
 
 const CatalogForHome = () => {
-  const location = useLocation();
-  const isMain = location.pathname === "/catalog/for-home";
-  if (isMain) {
     return (
       <div className="wrapper">
         <div className="limited-wrapper">
@@ -64,9 +60,6 @@ const CatalogForHome = () => {
         </div>
       </div>
     );
-  } else {
-    return <Outlet />;
-  }
 };
 
 export default CatalogForHome;

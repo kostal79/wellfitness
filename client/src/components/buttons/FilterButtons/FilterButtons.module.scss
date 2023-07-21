@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  column-gap: 8px;
+  overflow-x: scroll;
+}
+
+@media screen and (min-width: 980px) {
+   .container {
+    flex-wrap: wrap;
+    overflow: hidden;
+    row-gap: 10px;
+   }
+}

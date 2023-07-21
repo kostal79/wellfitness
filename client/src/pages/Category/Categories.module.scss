@@ -1,0 +1,25 @@
+
+@media screen and (min-width: 980px) {
+    .container {
+        display: grid;
+        grid-template-columns: 1fr 200px;
+        padding: 18px 0 60px 0;
+        column-gap: 20px;
+    }
+
+    .aside {
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 2;
+        grid-column-end: 3;
+    }
+
+    .search-results {
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 1;
+        grid-column-end: 2;
+    }
+
+    
+}

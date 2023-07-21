@@ -7,9 +7,7 @@ import { HOME_PAGE } from "../../constants";
 const HomeIcon = () => {
   return (
     <div className={Styles.container}>
-      <NavLink to={HOME_PAGE}>
         <HomeSVG />
-      </NavLink>
     </div>
   );
 };

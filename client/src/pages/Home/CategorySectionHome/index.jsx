@@ -4,7 +4,7 @@ import UniversalLink from "@components/buttons/UniversalLink";
 import { useCategory } from "@hooks/useCategory";
 import Loader from "@components/Loader";
 import { CATALOG_PAGE_FOR_HOME, CATEGORIES_PAGE } from "../../../constants";
-import makeQueryParams from "../../../utils/makeQueryParams";
+import makeQueryParams from "@utils/makeQueryParams";
 
 const CategorySectionHome = ({ usage }) => {
   const [categories, error] = useCategory({ usage, limit: 10, Styles: Styles });

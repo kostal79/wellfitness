@@ -1,0 +1,41 @@
+@import "@styles/main.scss";
+
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+.container >* {
+    min-width: 145px !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 10px !important;
+
+}
+
+.container > * div:nth-child(3) div:nth-child(4){
+    grid-template-columns: 1fr;
+}
+
+@media screen and (min-width: 600px) {
+    .container {
+        grid-template-columns:repeat(3, 1fr);
+
+    }
+}
+
+@media screen and (min-width: 980px) {
+    .container > * div:nth-child(3) div:nth-child(1){
+        flex-wrap: wrap;
+    }
+
+    .container > * div div:nth-child(1){
+        left: 0px;
+    }
+
+    .container > * div  div:nth-child(2){
+        right: 0px;
+    }
+    
+}

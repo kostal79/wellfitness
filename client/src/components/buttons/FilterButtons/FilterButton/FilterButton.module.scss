@@ -1,0 +1,14 @@
+@import "@styles/main.scss";
+
+.active {
+    @include filterButtonElementActive;
+}
+
+.inactive {
+    @include filterButtonElementInactive;
+}
+
+.pending {
+    @include filterButtonElementActive;
+    opacity: .5;
+}

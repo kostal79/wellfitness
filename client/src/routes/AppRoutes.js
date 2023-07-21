@@ -1,5 +1,4 @@
 import {
-  NavLink,
   Route,
   RouterProvider,
   createBrowserRouter,
@@ -43,9 +42,12 @@ import {
   WARRANTY_PAGE
 } from "../constants";
 import HomeIcon from "@components/HomeIcon";
-import { getDeviceById, getDevicesWithParams } from "@services/devicesAPI";
+import { getDeviceById } from "@services/devicesAPI";
 import { loadCategory } from "@utils/loadCategory";
 import { loadGroup } from "@utils/loadGroup";
+import { groupLoader } from "../pages/Group";
+import {categoryLoader} from "@pages/Category";
+
 const Device = lazy(() => import("@pages/Device"));
 const Home = lazy(() => import("@pages/Home"));
 const Catalog = lazy(() => import("@pages/Catalog"));
@@ -88,7 +90,7 @@ const AppRoutes = () => {
         }}>
 
         <Route
-          path={HOME_PAGE}
+          index
           element={<Home />}
         />
 
@@ -96,86 +98,93 @@ const AppRoutes = () => {
           path={CATALOG_PAGE}
           element={<Catalog />}
           handle={{
-            crumb: () => <NavLink to={CATALOG_PAGE}>Каталог</NavLink>
+            crumb: () => <span>Каталог</span>
+          }}
+        />
+
+        <Route
+          path={CATALOG_PAGE_FOR_HOME}
+          handle={{
+            crumb: () => <span>Для дома</span>
           }}
         >
-
           <Route
-            path={`${CATALOG_PAGE}/:deviceId`}
-            element={<Device />}
-            loader={({ params }) => getDeviceById(params.deviceId)}
-            handle={{
-              crumb: (data) => `${data.type.type_name} ${data.brand.brand_name} ${data.name}`
-            }}
+            index
+            element={<CatalogForHome />}
           />
           <Route
-            path={CATALOG_PAGE_FOR_HOME}
-            element={<CatalogForHome />}
+            path={`:groupId`}
+            loader={groupLoader}
             handle={{
-              crumb: () => <NavLink to={CATALOG_PAGE_FOR_HOME}>Для дома</NavLink>
+              crumb: (data) => <span>{data.groupName}</span>
             }}
+            element={<Group />}
           >
             <Route
-              path={`${CATALOG_PAGE_FOR_HOME}/:groupId`}
-              element={<Group />}
-              loader={({ params }) => loadGroup(params.groupId)}
+              path={`:typeId`}
+              element={<Category />}
+              loader={categoryLoader}
               handle={{
-                crumb: (data) => <NavLink to={`${CATALOG_PAGE_FOR_HOME}/${data.groupId}`}>{data.name}</NavLink>
+                // crumb: (data) => <span>{data.name}</span>
               }}
-            >
-
-              <Route
-                path={`${CATALOG_PAGE_FOR_HOME}/:groupId/:typeId`}
-                element={<Category />}
-                loader={({ params }) => loadCategory(params.typeId)}
-                handle={{
-                  crumb: (data) => <NavLink to={`${CATALOG_PAGE_FOR_HOME}`}>{data.name}</NavLink>
-                }}
-              />
-
-            </Route>
+            />
           </Route>
-
-          <Route
-            path={CATALOG_PAGE_FOR_FITNESS_CENTER}
-            element={<Catalog />}
-            handle={{
-              crumb: () => <NavLink to={CATALOG_PAGE_FOR_FITNESS_CENTER}>Для фитнес клубов</NavLink>
-            }}
-          />
-
-          <Route
-            path={CATALOG_PAGE_OFFER}
-            element={<Catalog />}
-            handle={{
-              crumb: () => <NavLink to={CATALOG_PAGE_OFFER}>Акции</NavLink>
-            }}
-          />
-
-          <Route
-            path={CATALOG_PAGE_COMPILATIONS}
-            element={<Catalog />}
-            handle={{
-              crumb: () => <NavLink to={CATALOG_PAGE_COMPILATIONS}>Идеи и подборки</NavLink>
-            }}
-          />
-
-          <Route
-            path={CATALOG_PAGE_NEW}
-            element={<Catalog />}
-            handle={{
-              crumb: () => <NavLink to={CATALOG_PAGE_NEW}>Новинки</NavLink>
-            }}
-          />
-
         </Route>
+
+        <Route
+          path={CATALOG_PAGE_FOR_FITNESS_CENTER}
+          element={<Catalog />}
+          handle={{
+            crumb: () => <span>Для фитнес клубов</span>
+          }}
+        >
+          <Route
+            path={`:groupId`}
+            element={<Group />}
+            loader={({ params }) => loadGroup(params.groupId)}
+            handle={{
+              crumb: (data) => <span>{data.name}</span>
+            }}
+          />
+
+          {/* <Route
+            path={`:groupId/:typeId`}
+            element={<Category />}
+          /> */}
+        </Route>
+
+        <Route
+          path={CATALOG_PAGE_OFFER}
+          element={<Catalog />}
+          handle={{
+            crumb: () => <span>Акции</span>
+          }}
+        />
+
+        <Route
+          path={CATALOG_PAGE_COMPILATIONS}
+          element={<Catalog />}
+          handle={{
+            crumb: () => <span>Идеи и подборки</span>
+          }}
+        />
+
+        <Route
+          path={CATALOG_PAGE_NEW}
+          element={<Catalog />}
+          handle={{
+            crumb: () => <span>Новинки</span>
+          }}
+        />
+
+
 
         <Route
           path={BRANDS_PAGE}
           element={<Brands />}
           loader={brandsLoader}
           handle={{
-            crumb: () => <NavLink to={BRANDS_PAGE}>Брэнды</NavLink>
+            crumb: () => <span>Брэнды</span>
           }}
         />
 
@@ -183,7 +192,7 @@ const AppRoutes = () => {
           path={DELIVERY_PAGE}
           element={<Delivery />}
           handle={{
-            crumb: () => <NavLink to={DELIVERY_PAGE}>Доставка</NavLink>
+            crumb: () => <span>Доставка</span>
           }}
         />
 
@@ -191,7 +200,7 @@ const AppRoutes = () => {
           path={REFOUND_PAGE}
           element={<Refound />}
           handle={{
-            crumb: () => <NavLink to={REFOUND_PAGE}>Возврат</NavLink>
+            crumb: () => <span>Возврат</span>
           }}
         />
 
@@ -199,7 +208,7 @@ const AppRoutes = () => {
           path={SERVICE_PAGE}
           element={<ServiceRequest />}
           handle={{
-            crumb: () => <NavLink to={SERVICE_PAGE}>Сервис</NavLink>
+            crumb: () => <span>Сервис</span>
           }}
         />
 
@@ -207,7 +216,7 @@ const AppRoutes = () => {
           path={FITNESS_CLUB_SERVICE_PAGE}
           element={<FitnessClubSevrice />}
           handle={{
-            crumb: () => <NavLink to={FITNESS_CLUB_SERVICE_PAGE}>Сервис для клубов</NavLink>
+            crumb: () => <span>Сервис для клубов</span>
           }}
         />
 
@@ -215,7 +224,7 @@ const AppRoutes = () => {
           path={FAQ_PAGE}
           element={<Faq />}
           handle={{
-            crumb: () => <NavLink to={FAQ_PAGE}>FAQ</NavLink>
+            crumb: () => <span>FAQ</span>
           }}
         />
 
@@ -223,7 +232,7 @@ const AppRoutes = () => {
           path={INSTRUCTIONS_PAGE}
           element={<Instructions />}
           handle={{
-            crumb: () => <NavLink to={INSTRUCTIONS_PAGE}>Инструкции</NavLink>
+            crumb: () => <span>Инструкции</span>
           }}
         />
 
@@ -231,7 +240,7 @@ const AppRoutes = () => {
           path={WARRANTY_PAGE}
           element={<Warranty />}
           handle={{
-            crumb: () => <NavLink to={WARRANTY_PAGE}>Гарантия</NavLink>
+            crumb: () => <span>Гарантия</span>
           }}
         />
 
@@ -239,7 +248,7 @@ const AppRoutes = () => {
           path={PROJECT_3D_PAGE}
           element={<Project3D />}
           handle={{
-            crumb: () => <NavLink to={PROJECT_3D_PAGE}>3D проккты</NavLink>
+            crumb: () => <span>3D проккты</span>
           }}
         />
 
@@ -247,7 +256,7 @@ const AppRoutes = () => {
           path={CONSALTING_PAGE}
           element={<Consalting />}
           handle={{
-            crumb: () => <NavLink to={CONSALTING_PAGE}>Консалтинг</NavLink>
+            crumb: () => <span>Консалтинг</span>
           }}
         />
 
@@ -255,7 +264,7 @@ const AppRoutes = () => {
           path={BUSINESS_PLAN_PAGE}
           element={<BizPlan />}
           handle={{
-            crumb: () => <NavLink to={BUSINESS_PLAN_PAGE}>Бизнес план</NavLink>
+            crumb: () => <span>Бизнес план</span>
           }}
         />
 
@@ -263,7 +272,7 @@ const AppRoutes = () => {
           path={LEASING_PAGE}
           element={<Leasing />}
           handle={{
-            crumb: () => <NavLink to={LEASING_PAGE}>Лизинг</NavLink>
+            crumb: () => <span>Лизинг</span>
           }}
         />
 
@@ -271,7 +280,7 @@ const AppRoutes = () => {
           path={TRANDIN_PAGE}
           element={<Tradein />}
           handle={{
-            crumb: () => <NavLink to={TRANDIN_PAGE}>Trade-IN</NavLink>
+            crumb: () => <span>Trade-IN</span>
           }}
         />
 
@@ -279,7 +288,7 @@ const AppRoutes = () => {
           path={CREDIT_PAGE}
           element={<Credit />}
           handle={{
-            crumb: () => <NavLink to={CREDIT_PAGE}>Кредит</NavLink>
+            crumb: () => <span>Кредит</span>
           }}
         />
 
@@ -287,7 +296,7 @@ const AppRoutes = () => {
           path={ABOUT_PAGE}
           element={<About />}
           handle={{
-            crumb: () => <NavLink to={ABOUT_PAGE}>О нас</NavLink>
+            crumb: () => <span>О нас</span>
           }}
         >
           <Route
@@ -298,28 +307,28 @@ const AppRoutes = () => {
             path={MISSION_PAGE}
             element={<Mission />}
             handle={{
-              crumb: () => <NavLink to={ABOUT_PAGE}>Наша миссия</NavLink>
+              crumb: () => <span>Наша миссия</span>
             }}
           />
           <Route
             path={TEAM_PAGE}
             element={<Team />}
             handle={{
-              crumb: () => <NavLink to={TEAM_PAGE}>Наша команда</NavLink>
+              crumb: () => <span>Наша команда</span>
             }}
           />
           <Route
             path={OUT_PROJECTS_PAGE}
             element={<OurProjects />}
             handle={{
-              crumb: () => <NavLink to={OUT_PROJECTS_PAGE}>Наши проекты</NavLink>
+              crumb: () => <span>Наши проекты</span>
             }}
           />
           <Route
             path={NEWS_PAGE}
             element={<News />}
             handle={{
-              crumb: () => <NavLink to={NEWS_PAGE}>Новости</NavLink>
+              crumb: () => <span>Новости</span>
             }}
           />
         </Route>
@@ -328,7 +337,7 @@ const AppRoutes = () => {
           path={BLOG_PAGE}
           element={<Blog />}
           handle={{
-            crumb: () => <NavLink to={BLOG_PAGE}>Блог</NavLink>
+            crumb: () => <span>Блог</span>
           }}
         />
 
@@ -336,7 +345,7 @@ const AppRoutes = () => {
           path={SHOWROOMS_PAGE}
           element={<Showrooms />}
           handle={{
-            crumb: () => <NavLink to={SHOWROOMS_PAGE}>Где купить</NavLink>
+            crumb: () => <span>Где купить</span>
           }}
         />
 
@@ -344,7 +353,7 @@ const AppRoutes = () => {
           path={CONTACTS_PAGE}
           element={<Contacts />}
           handle={{
-            crumb: () => <NavLink to={CONTACTS_PAGE}>Контакты</NavLink>
+            crumb: () => <span>Контакты</span>
           }}
         />
 
@@ -352,7 +361,7 @@ const AppRoutes = () => {
           path={POLICY_PAGE}
           element={<PrivatePolicy />}
           handle={{
-            crumb: () => <NavLink to={POLICY_PAGE}>Политика конфиленциальности</NavLink>
+            crumb: () => <span>Политика конфиленциальности</span>
           }}
         />
 

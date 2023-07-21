@@ -66,6 +66,15 @@ export async function getGroupByID(id) {
     }
 }
 
+export async function getTypeArrByGroupID(id) {
+    try {
+        const response = await groups.get(`/${id}`)
+        return response.data;
+    } catch (error) {
+        handleError(error)
+    }
+}
+
 export async function removeGroup(id) {
     try {
         const response = await groups.delete(`/${id}`);

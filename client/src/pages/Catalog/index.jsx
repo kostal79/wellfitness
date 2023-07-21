@@ -7,26 +7,20 @@ import CategorySectionProf from "@pages/Home/CategorySectionProf";
 import { Outlet, useLocation } from "react-router-dom";
 
 const Catalog = () => {
-  const location = useLocation();
-  const isMain = location.pathname === "/catalog";
-  if (isMain) {
-    return (
-      <div className="wrapper">
-        <div className="limited-wrapper">
-          <div className={Styles.categories}>
-            <CategorySectionHome />
-            <CategorySectionProf />
-          </div>
-        </div>
-        <CompilationsSection />
-        <div className="limited-wrapper">
-          <ProductsSlider />
+  return (
+    <div className="wrapper">
+      <div className="limited-wrapper">
+        <div className={Styles.categories}>
+          <CategorySectionHome usage="home"/>
+          <CategorySectionProf usage="prof"/>
         </div>
       </div>
-    );
-  } else {
-    return <Outlet />;
-  }
+      <CompilationsSection />
+      <div className="limited-wrapper">
+        <ProductsSlider />
+      </div>
+    </div>
+  );
 };
 
 export default Catalog;

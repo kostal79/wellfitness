@@ -4,9 +4,7 @@ import { NavLink } from "react-router-dom";
 import { CATALOG_PAGE } from "../../constants";
 
 const TypeStatisticLine = ({ name, quantity, usage, typeId, groupId }) => {
-  const linkTo = `${CATALOG_PAGE}/${
-    usage === "home" ? "for-home" : "for-fitness-center"
-  }/${groupId}/${typeId}`;
+  const linkTo = `${CATALOG_PAGE}/${usage}/${groupId}/${typeId}`;
   return (
     <div className={Styles.container}>
       <NavLink to={linkTo}>
