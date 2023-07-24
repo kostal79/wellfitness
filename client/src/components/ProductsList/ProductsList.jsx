@@ -16,7 +16,7 @@ const ProductsList = () => {
     <ProductCard
       key={device._id}
       id={device._id}
-      name={device.name}
+      name={device.full_name}
       imageRef={`${STATIC_DEVICES}/${device.images_refs[0]}`}
       signProfit={device.sign_profit}
       signRecommend={device.sign_recommend}

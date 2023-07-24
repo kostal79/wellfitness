@@ -10,17 +10,15 @@ export async function createDevice(formData) {
     }
 }
 
-export async function getDevicesWithParams(dataObject, limit, sort, page, select) {
+export async function getDevicesWithParams(query, limit, sort, page, select) {
     try {
-        const response = await devices.get("/all", {
-            params: {
-                query: dataObject,
-                limit: limit,
-                sort: sort,
-                page: page,
-                select: select,
-            }
-        })
+        const params = { query }
+        if (limit !== null) params.limit = limit;
+        if (sort !== null) params.sort = sort;
+        if (page !== null) params.page = page;
+        if (select !== null) params.select = select;
+
+        const response = await devices.get("/all", {params})
         return response.data
 
     } catch (error) {

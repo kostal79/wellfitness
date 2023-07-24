@@ -6,14 +6,12 @@ const AsideFilter = () => {
   const devices = useAsyncValue();
   const [searcParams, setSearchParams] = useSearchParams()
   const brandsMap = new Map([]);
-  console.log(devices);
   devices.forEach((device) => {
     brandsMap.set(device.brand.brand_name, device.brand.brand_id);
   });
 
   const selectBrandHandler = (event) => {
-    console.log(event.target.value)
-
+    setSearchParams({"brand.brand_id" : event.target.value})
   }
 
   const brands = [];

@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import Styles from "./Categories.module.scss";
 import { Await, defer, useLoaderData, useSearchParams } from "react-router-dom";
 import { getTypeByID } from "@services/typesAPI";
@@ -8,7 +8,6 @@ import AsideFilter from "@components/AsideFilter/AsideFilter";
 
 const Categories = () => {
   const { typeName, devices } = useLoaderData();
-  const [searchParams, setSearchParams] = useSearchParams();
 
   return (
     <div className={Styles.container}>
@@ -37,11 +36,18 @@ export default Categories;
 
 export async function categoryLoader({ params, request }) {
   const typeId = params.typeId;
-  const type = getTypeByID(typeId);
-  const typeName = type.name;
-  const usage = type.usage;
-  return defer({
-    name: typeName,
-    devices: await getDevicesWithParams({ usage, "type.type_id": typeId }),
-  });
+  const url = new URL(request.url);
+  const searchParams = new URLSearchParams(url.search);
+  const page = searchParams.has("page") && searchParams.get("page") || 1;
+  const brand = searchParams.has("brand.brand_id") && searchParams.get("brand.brand_id") || null;
+  console.log(brand)
+  if (typeId === "all") {
+    return defer({
+      devices: getDevicesWithParams({ usage: "home", "brand.brand_id": brand }, 20, null, page),
+    });
+  } else {
+    return defer({
+      devices: getDevicesWithParams({usage: "home", "type.type_id": typeId, "brand.brand_id": brand }, 20, null, page)
+    })
+  }
 }

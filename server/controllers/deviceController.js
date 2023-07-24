@@ -24,9 +24,9 @@ class DeviceController {
         const query = req.query ? req.query : {};
         try {
             let collection = await Device.find(query.query)
+            .skip((query.page-1) * query.limit)
             .limit(query.limit)
             .sort(query.sort)
-            .skip((query.page-1) * query.limit)
             .select(query.select)
             return res.status(200).json(collection);
         } catch (error) {

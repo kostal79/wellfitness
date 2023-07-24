@@ -1,22 +1,15 @@
 import React, { Suspense } from "react";
 import Styles from "./Group.module.scss";
-import {
-  Await,
-  Outlet,
-  defer,
-  useLoaderData,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { Await, Outlet, defer, useLoaderData } from "react-router-dom";
 import { getGroupByID } from "@services/groupsAPI";
 import { getTypesWithParams } from "@services/typesAPI";
-import FilterButtons from "../../components/buttons/FilterButtons/FilterButtons";
+import FilterButtons from "@components/buttons/FilterButtons/FilterButtons";
 import Loader from "@components/Loader";
+import Categories from "../Category";
 
 const Group = () => {
   const { groupName, typesArr } = useLoaderData();
-
+  
   return (
     <div className="wrapper">
       <h1 className={Styles.title}>{groupName}</h1>
@@ -38,7 +31,7 @@ export default Group;
 
 export async function groupLoader({ request, params }) {
   const group = await getGroupByID(params.groupId);
-  const groupName = group.name
+  const groupName = group.name;
 
   return defer({
     groupName,

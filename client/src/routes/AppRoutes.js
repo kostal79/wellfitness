@@ -42,11 +42,10 @@ import {
   WARRANTY_PAGE
 } from "../constants";
 import HomeIcon from "@components/HomeIcon";
-import { getDeviceById } from "@services/devicesAPI";
-import { loadCategory } from "@utils/loadCategory";
 import { loadGroup } from "@utils/loadGroup";
 import { groupLoader } from "../pages/Group";
-import {categoryLoader} from "@pages/Category";
+import { categoryLoader } from "@pages/Category";
+import { allHomeDevicesLoader } from "../pages/Category";
 
 const Device = lazy(() => import("@pages/Device"));
 const Home = lazy(() => import("@pages/Home"));
@@ -120,6 +119,7 @@ const AppRoutes = () => {
             }}
             element={<Group />}
           >
+
             <Route
               path={`:typeId`}
               element={<Category />}
@@ -141,7 +141,7 @@ const AppRoutes = () => {
           <Route
             path={`:groupId`}
             element={<Group />}
-            loader={({ params }) => loadGroup(params.groupId)}
+            loader={({ params, request }) => loadGroup(params.groupId)}
             handle={{
               crumb: (data) => <span>{data.name}</span>
             }}

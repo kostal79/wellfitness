@@ -101,6 +101,10 @@ const DeviceSchema = new Schema({
         type_name: { type: String },//Беговая дорожка
         type_id: { type: ObjectId, ref: "Type" }
     },
+    group: {
+        group_name: {type: String},
+        group_id: {type: ObjectId, ref: "Group"}
+    },
     feedback: {
         feedbacks_ids: { type: [ObjectId], ref: "Feedback" },
         users_ids: { type: [ObjectId], ref: "User" }
