@@ -28,12 +28,16 @@ const Group = () => {
 
 export default Group;
 
-export async function groupLoader({ request, params }) {
-  const group = await getGroupByID(params.groupId);
+async function getGroupName(groupId) {
+  const group = await getGroupByID(groupId);
   const groupName = group.name;
+  return groupName;
+}
+
+export async function groupLoader({ request, params }) {
 
   return defer({
-    groupName,
+    groupName: await getGroupName(params.groupId),
     typesArr: getTypesWithParams({ group: params.groupId }),
   });
 }

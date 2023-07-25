@@ -45,9 +45,8 @@ import HomeIcon from "@components/HomeIcon";
 import { loadGroup } from "@utils/loadGroup";
 import { groupLoader } from "../pages/Group";
 import { categoryLoader } from "@pages/Category";
-import { allGroupLoader } from "../pages/Group/GroupAllDevices/GroupAllDevices";
+import { allCategoriesLoader } from "../pages/Category";
 
-const GroupAllDevices = lazy(() => import ("@pages/Group/GroupAllDevices/GroupAllDevices"))
 const Device = lazy(() => import("@pages/Device"));
 const Home = lazy(() => import("@pages/Home"));
 const Catalog = lazy(() => import("@pages/Catalog"));
@@ -122,8 +121,8 @@ const AppRoutes = () => {
           >
             <Route
               index
-              loader={allGroupLoader}
-              element={<GroupAllDevices />}
+              loader={allCategoriesLoader}
+              element={<Category all={true} />}
             />
 
             <Route

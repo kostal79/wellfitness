@@ -1,22 +1,25 @@
 import React, { createRef, useEffect, useRef, useState } from "react";
 import Styles from "./AsideFilter.module.scss";
-import { useSearchParams } from "react-router-dom";
+import {
+  useActionData,
+  useAsyncValue,
+  useLocation,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { getBrandNamesByTypes } from "../../services/devicesAPI";
 
-let renders = createRef(1)
-const AsideFilter = ({ typesIds }) => {
-  console.log("asideFilter renders: ", ++renders.current)
+let renders = createRef(1);
+const AsideFilter = () => {
+  const typesIds = useAsyncValue();
   const [brandsList, setBrandsList] = useState();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
+  const search = location.hash
+  console.log(Object.getOwnPropertyNames(location))
 
   const selectBrandHandler = (event) => {
     if (event.target.checked) {
-      if(searchParams.get("brand.brand_id")) {
-        const searchBrand = searchParams.get("brand.brand_id")
-      } else {
-        setSearchParams({"brand.brand_id": [event.target.value]})
-        const searchBrand = searchParams.get("brand.brand_id")
-      }
+
     }
   };
 
@@ -41,7 +44,7 @@ const AsideFilter = ({ typesIds }) => {
       ));
       setBrandsList(brands);
     })();
-  }, [typesIds]);
+  }, []);
 
   return (
     <div className={Styles.container}>
