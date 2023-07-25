@@ -5,7 +5,6 @@ import { getGroupByID } from "@services/groupsAPI";
 import { getTypesWithParams } from "@services/typesAPI";
 import FilterButtons from "@components/buttons/FilterButtons/FilterButtons";
 import Loader from "@components/Loader";
-import Categories from "../Category";
 
 const Group = () => {
   const { groupName, typesArr } = useLoaderData();

@@ -12,7 +12,7 @@ const GroupForHomeCards = ({ imageRef, groupName, usage }) => {
 
   return (
     <div className={Styles.container}>
-      <NavLink to={`${statisticData.groupId}/all?page=1`}>
+      <NavLink to={`${statisticData.groupId}`}>
         <div className={Styles["image-box"]}>
           <img
             className={Styles.image}
@@ -22,7 +22,7 @@ const GroupForHomeCards = ({ imageRef, groupName, usage }) => {
         </div>
       </NavLink>
       <div className={Styles.info}>
-        <NavLink to={statisticData && `${statisticData.groupId}/all?page=1`}>
+        <NavLink to={statisticData && `${statisticData.groupId}`}>
           <h5 className={Styles.title}>{groupName}</h5>
         </NavLink>
         <ul className={Styles.list}>
