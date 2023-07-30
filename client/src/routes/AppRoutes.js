@@ -42,15 +42,13 @@ import {
   WARRANTY_PAGE
 } from "../constants";
 import HomeIcon from "@components/HomeIcon";
-import { loadGroup } from "@utils/loadGroup";
-import { groupLoader } from "../pages/Group";
-import { categoryLoader } from "@pages/Category";
-import { allCategoriesLoader } from "../pages/Category";
-
+import { groupLoader } from "@pages/CatalogByGroup";
+import { categoryLoader } from "@pages/CatalogByCategory";
+import { allCategoriesLoader } from "@pages/CatalogByCategory";
 const Device = lazy(() => import("@pages/Device"));
 const Home = lazy(() => import("@pages/Home"));
 const Catalog = lazy(() => import("@pages/Catalog"));
-const CatalogForHome = lazy(() => import("@pages/CatalogForHome"));
+const CatalogByUsage = lazy(() => import("@pages/CatalogByUsage"));
 const Brands = lazy(() => import("@pages/Brands"));
 const Delivery = lazy(() => import("@pages/Delivery"));
 const Refound = lazy(() => import("@pages/Refound"));
@@ -75,8 +73,8 @@ const Blog = lazy(() => import("@pages/Blog"));
 const Showrooms = lazy(() => import("@pages/Showrooms"));
 const Contacts = lazy(() => import("@pages/Contacts"));
 const PrivatePolicy = lazy(() => import("@pages/PrivatePolicy"));
-const Category = lazy(() => import("@pages/Category"));
-const Group = lazy(() => import("@pages/Group"));
+const CatalogByCategory = lazy(() => import("@pages/CatalogByCategory"));
+const CatalogByGroup = lazy(() => import("@pages/CatalogByGroup"));
 
 const AppRoutes = () => {
   const router = createBrowserRouter(
@@ -92,7 +90,6 @@ const AppRoutes = () => {
           index
           element={<Home />}
         />
-
         <Route
           path={CATALOG_PAGE}
           element={<Catalog />}
@@ -100,16 +97,15 @@ const AppRoutes = () => {
             crumb: () => <span>Каталог</span>
           }}
         />
-
         <Route
-          path={CATALOG_PAGE_FOR_HOME}
+          path={`${CATALOG_PAGE}/:usage`}
           handle={{
             crumb: () => <span>Для дома</span>
           }}
         >
           <Route
             index
-            element={<CatalogForHome />}
+            element={<CatalogByUsage />}
           />
           <Route
             path={`:groupId`}
@@ -117,47 +113,26 @@ const AppRoutes = () => {
             handle={{
               crumb: (data) => <span>{data.groupName}</span>
             }}
-            element={<Group />}
+            element={<CatalogByGroup />}
           >
+
             <Route
               index
               loader={allCategoriesLoader}
-              element={<Category all={true} />}
+              element={<CatalogByCategory all={true} />}
             />
-
             <Route
               path={`:typeId`}
-              element={<Category />}
+              element={<CatalogByCategory />}
               loader={categoryLoader}
               handle={{
                 // crumb: (data) => <span>{data.name}</span>
               }}
             />
+
           </Route>
+
         </Route>
-
-        <Route
-          path={CATALOG_PAGE_FOR_FITNESS_CENTER}
-          element={<Catalog />}
-          handle={{
-            crumb: () => <span>Для фитнес клубов</span>
-          }}
-        >
-          <Route
-            path={`:groupId`}
-            element={<Group />}
-            loader={({ params, request }) => loadGroup(params.groupId)}
-            handle={{
-              crumb: (data) => <span>{data.name}</span>
-            }}
-          />
-
-          {/* <Route
-            path={`:groupId/:typeId`}
-            element={<Category />}
-          /> */}
-        </Route>
-
         <Route
           path={CATALOG_PAGE_OFFER}
           element={<Catalog />}
@@ -165,7 +140,6 @@ const AppRoutes = () => {
             crumb: () => <span>Акции</span>
           }}
         />
-
         <Route
           path={CATALOG_PAGE_COMPILATIONS}
           element={<Catalog />}
@@ -173,7 +147,6 @@ const AppRoutes = () => {
             crumb: () => <span>Идеи и подборки</span>
           }}
         />
-
         <Route
           path={CATALOG_PAGE_NEW}
           element={<Catalog />}
@@ -181,9 +154,6 @@ const AppRoutes = () => {
             crumb: () => <span>Новинки</span>
           }}
         />
-
-
-
         <Route
           path={BRANDS_PAGE}
           element={<Brands />}
@@ -192,7 +162,6 @@ const AppRoutes = () => {
             crumb: () => <span>Брэнды</span>
           }}
         />
-
         <Route
           path={DELIVERY_PAGE}
           element={<Delivery />}
@@ -200,7 +169,6 @@ const AppRoutes = () => {
             crumb: () => <span>Доставка</span>
           }}
         />
-
         <Route
           path={REFOUND_PAGE}
           element={<Refound />}
@@ -208,7 +176,6 @@ const AppRoutes = () => {
             crumb: () => <span>Возврат</span>
           }}
         />
-
         <Route
           path={SERVICE_PAGE}
           element={<ServiceRequest />}
@@ -216,7 +183,6 @@ const AppRoutes = () => {
             crumb: () => <span>Сервис</span>
           }}
         />
-
         <Route
           path={FITNESS_CLUB_SERVICE_PAGE}
           element={<FitnessClubSevrice />}
@@ -224,7 +190,6 @@ const AppRoutes = () => {
             crumb: () => <span>Сервис для клубов</span>
           }}
         />
-
         <Route
           path={FAQ_PAGE}
           element={<Faq />}
@@ -232,7 +197,6 @@ const AppRoutes = () => {
             crumb: () => <span>FAQ</span>
           }}
         />
-
         <Route
           path={INSTRUCTIONS_PAGE}
           element={<Instructions />}
@@ -240,7 +204,6 @@ const AppRoutes = () => {
             crumb: () => <span>Инструкции</span>
           }}
         />
-
         <Route
           path={WARRANTY_PAGE}
           element={<Warranty />}
@@ -248,7 +211,6 @@ const AppRoutes = () => {
             crumb: () => <span>Гарантия</span>
           }}
         />
-
         <Route
           path={PROJECT_3D_PAGE}
           element={<Project3D />}
@@ -256,7 +218,6 @@ const AppRoutes = () => {
             crumb: () => <span>3D проккты</span>
           }}
         />
-
         <Route
           path={CONSALTING_PAGE}
           element={<Consalting />}
@@ -264,7 +225,6 @@ const AppRoutes = () => {
             crumb: () => <span>Консалтинг</span>
           }}
         />
-
         <Route
           path={BUSINESS_PLAN_PAGE}
           element={<BizPlan />}
@@ -272,7 +232,6 @@ const AppRoutes = () => {
             crumb: () => <span>Бизнес план</span>
           }}
         />
-
         <Route
           path={LEASING_PAGE}
           element={<Leasing />}
@@ -280,7 +239,6 @@ const AppRoutes = () => {
             crumb: () => <span>Лизинг</span>
           }}
         />
-
         <Route
           path={TRANDIN_PAGE}
           element={<Tradein />}
@@ -288,7 +246,6 @@ const AppRoutes = () => {
             crumb: () => <span>Trade-IN</span>
           }}
         />
-
         <Route
           path={CREDIT_PAGE}
           element={<Credit />}
@@ -296,7 +253,6 @@ const AppRoutes = () => {
             crumb: () => <span>Кредит</span>
           }}
         />
-
         <Route
           path={ABOUT_PAGE}
           element={<About />}
@@ -304,6 +260,7 @@ const AppRoutes = () => {
             crumb: () => <span>О нас</span>
           }}
         >
+
           <Route
             path={ABOUT_PAGE}
             element={<AboutIntro />}
@@ -345,7 +302,6 @@ const AppRoutes = () => {
             crumb: () => <span>Блог</span>
           }}
         />
-
         <Route
           path={SHOWROOMS_PAGE}
           element={<Showrooms />}
@@ -353,7 +309,6 @@ const AppRoutes = () => {
             crumb: () => <span>Где купить</span>
           }}
         />
-
         <Route
           path={CONTACTS_PAGE}
           element={<Contacts />}
@@ -361,7 +316,6 @@ const AppRoutes = () => {
             crumb: () => <span>Контакты</span>
           }}
         />
-
         <Route
           path={POLICY_PAGE}
           element={<PrivatePolicy />}
@@ -369,7 +323,6 @@ const AppRoutes = () => {
             crumb: () => <span>Политика конфиленциальности</span>
           }}
         />
-
         <Route
           path={ERROR_PAGE}
           element={<ErrorPage />}

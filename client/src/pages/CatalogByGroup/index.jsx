@@ -1,12 +1,12 @@
 import React, { Suspense } from "react";
-import Styles from "./Group.module.scss";
+import Styles from "./CatalogByGroup.module.scss";
 import { Await, Outlet, defer, useLoaderData } from "react-router-dom";
 import { getGroupByID } from "@services/groupsAPI";
 import { getTypesWithParams } from "@services/typesAPI";
 import FilterButtons from "@components/buttons/FilterButtons/FilterButtons";
 import Loader from "@components/Loader";
 
-const Group = () => {
+const CatalogByGroup = () => {
   const { groupName, typesArr } = useLoaderData();
   
   return (
@@ -26,7 +26,7 @@ const Group = () => {
   );
 };
 
-export default Group;
+export default CatalogByGroup;
 
 async function getGroupName(groupId) {
   const group = await getGroupByID(groupId);

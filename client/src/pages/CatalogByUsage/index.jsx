@@ -1,16 +1,19 @@
 import React from "react";
-import Styles from "./CatalogForHome.module.scss";
+import Styles from "./CatalogByUsage.module.scss";
 import GroupCard from "@components/GroupCard";
 import CompilationsSection from "@components/CompilationsSection";
 import ProductsSlider from "@components/Sliders/ProductsSlider";
+import { useParams } from "react-router-dom";
 
-const CatalogForHome = () => {
+const CatalogByUsage = () => {
+  const {usage} = useParams();
+  
     return (
       <div className="wrapper">
         <div className="limited-wrapper">
           <div className={Styles.container}>
             <h1 className={Styles.title}>Тренажеры для дома</h1>
-            <div className={Styles.grid}>
+            {usage === "home" && <div className={Styles.grid}>
               <GroupCard
                 imageRef="cardio.png"
                 groupName="Кардиотренажеры"
@@ -51,7 +54,7 @@ const CatalogForHome = () => {
                 groupName="Функциональный тренинг"
                 usage="home"
               />
-            </div>
+            </div>}
           </div>
         </div>
         <CompilationsSection />
@@ -62,4 +65,4 @@ const CatalogForHome = () => {
     );
 };
 
-export default CatalogForHome;
+export default CatalogByUsage;

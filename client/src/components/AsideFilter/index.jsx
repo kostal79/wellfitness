@@ -7,19 +7,18 @@ import {
   useParams,
   useSearchParams,
 } from "react-router-dom";
-import { getBrandNamesByTypes } from "../../services/devicesAPI";
+import { getBrandNamesByTypes } from "@services/devicesAPI";
 
 let renders = createRef(1);
 const AsideFilter = () => {
   const typesIds = useAsyncValue();
   const [brandsList, setBrandsList] = useState();
+  const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
-  const search = location.hash
-  console.log(Object.getOwnPropertyNames(location))
 
   const selectBrandHandler = (event) => {
     if (event.target.checked) {
-
+      setSearchParams(prev => {return {...prev, "brand.brand_id" : event.target.value}});
     }
   };
 
@@ -44,7 +43,7 @@ const AsideFilter = () => {
       ));
       setBrandsList(brands);
     })();
-  }, []);
+  }, [typesIds]);
 
   return (
     <div className={Styles.container}>

@@ -1,12 +1,12 @@
 import React, { Suspense } from "react";
-import { Await, defer, useLoaderData } from "react-router-dom";
+import { Await, defer, useLoaderData, useParams } from "react-router-dom";
 import { getDevicesWithParams } from "@services/devicesAPI";
 import { getTypesWithParams } from "@services/typesAPI";
-import Styles from "./Category.module.scss";
+import Styles from "./CatalogByCategory.module.scss";
 import ProductsList from "@components/ProductsList";
 import AsideFilter from "@components/AsideFilter";
 
-const Categories = () => {
+const CatalogByCategories = () => {
   const { devices, typesIds } = useLoaderData();
 
   return (
@@ -32,7 +32,7 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default CatalogByCategories;
 
 export async function categoryLoader({ params, request }) {
   const typeId = params.typeId;
