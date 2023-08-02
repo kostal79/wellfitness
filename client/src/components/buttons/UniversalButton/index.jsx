@@ -10,7 +10,6 @@ import Styles from "./UniversalButton.module.scss";
  *  
  * @description Universal button 
  */
-
 const UniversalButton = ({ text, click, styles }) => {
   const secondClassName = "button--" + String(styles);
   return (

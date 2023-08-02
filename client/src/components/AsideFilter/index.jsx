@@ -1,56 +1,120 @@
-import React, { createRef, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Styles from "./AsideFilter.module.scss";
-import {
-  useActionData,
-  useAsyncValue,
-  useLocation,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
-import { getBrandNamesByTypes } from "@services/devicesAPI";
+import { useParams, useSearchParams } from "react-router-dom";
+import { useGetBrandNames } from "../../hooks/useGetBrandNames";
+import BrandFilter from "./BrandFilter/BrandFilter";
+import SpecialOffersFilter from "./SpecialOffersFilter/SpecialOffersFilter";
+import PriceSlider from "./PriceSlider/PriceSlider";
+import UniversalButton from "@components/buttons/UniversalButton";
+import { getDevicesWithParams } from "../../services/devicesAPI";
 
-let renders = createRef(1);
 const AsideFilter = () => {
-  const typesIds = useAsyncValue();
-  const [brandsList, setBrandsList] = useState();
+  const { typeId } = useParams();
+  const brands = useGetBrandNames(typeId);
   const [searchParams, setSearchParams] = useSearchParams();
-  const location = useLocation();
+  const role = "diler"; //TODO: make price type define;
 
-  const selectBrandHandler = (event) => {
-    if (event.target.checked) {
-      setSearchParams(prev => {return {...prev, "brand.brand_id" : event.target.value}});
-    }
-  };
+  const [filter, setFilter] = useState({
+    brand: [],
+    profit: false,
+    new: false,
+    inStock: false,
+    recommend: false,
+    minPrice: 0,
+    maxPrice: 0,
+    initialPrice: {
+      min: 0,
+      max: 0,
+    },
+  });
 
   useEffect(() => {
-    (async function () {
-      const brandsArr = await getBrandNamesByTypes(typesIds);
-      const brands = brandsArr.map((brand) => (
-        <div className={Styles.checkbox} key={brand.id}>
-          <input
-            className={Styles.input}
-            type="checkbox"
-            value={brand.id}
-            name={brand.name}
-            onChange={(event) => {
-              selectBrandHandler(event);
-            }}
-          />
-          <label className={Styles.label} htmlFor={brand.name}>
-            {brand.name}
-          </label>
-        </div>
-      ));
-      setBrandsList(brands);
-    })();
-  }, [typesIds]);
+    async function fetchPriceBounderies() {
+      const devices = await getDevicesWithParams({ "type.type_id": typeId });
+      let maxPrice = 0;
+      let minPrice = Infinity;
+
+      devices.forEach((device) => {
+        const price =
+          role === "diler"
+            ? device.special_price.diler
+            : device.special_price.retail;
+        if (price > maxPrice) maxPrice = price;
+        if (price < minPrice) minPrice = price;
+      });
+
+      setFilter((prevFilter) => ({
+        ...prevFilter,
+        minPrice: minPrice === Infinity ? 0 : minPrice,
+        maxPrice: maxPrice,
+        initialPrice: {
+          min: minPrice,
+          max: maxPrice,
+        },
+      }));
+    }
+    fetchPriceBounderies();
+  }, [typeId]);
+
+  const resetFilter = useCallback(() => {
+    setFilter((prevFilter) => ({
+      ...prevFilter,
+      brand: [],
+      profit: false,
+      new: false,
+      inStock: false,
+      recommend: false,
+      minPrice: filter.initialPrice.min,
+      maxPrice: filter.initialPrice.max,
+    }));
+  });
+
+  const submitFilter = useCallback(() => {
+    setSearchParams(filter);
+  });
+
+  useEffect(() => {
+    resetFilter();
+  }, [typeId]);
+
+  const brandFilter = brands?.map(({ id, name }) => (
+    <BrandFilter
+      id={id}
+      name={name}
+      setFilter={setFilter}
+      filter={filter}
+      key={id}
+    />
+  ));
+
+  const specialOffersFilter = (
+    <SpecialOffersFilter filter={filter} setFilter={setFilter} />
+  );
 
   return (
     <div className={Styles.container}>
-      <section className={Styles.section}>
-        <p>Производители</p>
-        {brandsList}
-      </section>
+      <form onSubmit={(event) => event.preventDefault()}>
+        <section className={Styles.section}>
+          <p>Производители</p>
+          <ul>{brandFilter}</ul>
+        </section>
+        <section className={Styles.section}>
+          <p>Акции, наличие</p>
+          <ul>{specialOffersFilter}</ul>
+        </section>
+        <section className={Styles.section}>
+          <PriceSlider
+            minPrice={filter.minPrice}
+            maxPrice={filter.maxPrice}
+            setFilter={setFilter}
+            initialPrice={filter.initialPrice}
+          />
+        </section>
+        <section className={Styles.section}>
+          <UniversalButton text="Применить" click={submitFilter} />
+          <UniversalButton text="Очистить" click={resetFilter} />
+        </section>
+      </form>
     </div>
   );
 };

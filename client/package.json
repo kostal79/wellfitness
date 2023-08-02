@@ -11,6 +11,7 @@
     "axios": "^1.4.0",
     "dateformat": "^5.0.3",
     "dotenv": "^16.3.1",
+    "rc-slider": "^10.2.1",
     "react": "^18.2.0",
     "react-content-loader": "^6.2.1",
     "react-dom": "^18.2.0",

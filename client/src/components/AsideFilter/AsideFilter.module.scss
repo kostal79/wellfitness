@@ -1,0 +1,32 @@
+.section {
+  padding: 20px;
+}
+
+.input-price {
+  margin-bottom: 20px;
+}
+
+.slider {
+  width: 100%;
+}
+
+.input-price--min,
+.input-price--max {
+    width: 100%;
+}
+
+/* Hide the spin buttons for input type number */
+.input-price--min::-webkit-inner-spin-button,
+.input-price--max::-webkit-inner-spin-button,
+.input-price--min::-webkit-outer-spin-button,
+.input-price--max::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  display: none;
+}
+
+/* hide the spin buttons in Firefox as well */
+.input-price--max[type="number"],
+.input-price--min[type="number"] {
+  -moz-appearance: textfield;
+}

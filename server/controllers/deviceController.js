@@ -22,6 +22,7 @@ class DeviceController {
     }
     async readAll(req, res) {
         const query = req.query ? req.query : {};
+        console.log("query: ", query.query)
         try {
             let collection = await Device.find(query.query)
             .skip((query.page-1) * query.limit)

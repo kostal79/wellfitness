@@ -46,7 +46,7 @@ const DeviceSchema = new Schema({
     quantity: { type: Number, default: 0 },
     characteristics: {
         main: {
-            type: String,
+            type: {type: String},
             engine_power: Number,
             engine_type: String,
             speed_control_min: Number,
@@ -60,7 +60,7 @@ const DeviceSchema = new Schema({
             training_programm: String,
         },
         multimedia: {
-            type: String,
+            type: {type: String},
             engine_power: Number,
             engine_type: String,
             speed_control_min: Number,
@@ -74,7 +74,7 @@ const DeviceSchema = new Schema({
             training_programm: String,
         },
         additionaly: {
-            type: String,
+            type: {type: String},
             engine_power: Number,
             engine_type: String,
             speed_control_min: Number,
