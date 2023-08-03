@@ -6,7 +6,7 @@ export const useGetBrandNames = (typeId) => {
 
     useEffect(() => {
         async function fetchBrands() {
-            const brandsArr = await getBrandNamesByTypes(typeId);
+            const brandsArr = await getBrandNamesByTypes(typeId, "brand");
             setBrands(brandsArr)
         }
         fetchBrands()

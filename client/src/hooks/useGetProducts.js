@@ -13,7 +13,7 @@ export const useGetProducts = () => {
 
     useEffect(() => {
         async function getProductList() {
-            const result = await getDevicesWithParams({ [`${parameter}`]: true }, 10);
+            const result = await getDevicesWithParams({ [`${parameter}`]: true } , 10);
             const cards =
                 result.length > 0 ? (
                     result.map((device) => (

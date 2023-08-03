@@ -12,13 +12,9 @@ export async function createDevice(formData) {
 
 export async function getDevicesWithParams(query, limit, sort, page, select) {
     try {
-        console.log("query: ", query)
         const params = { query }
-        if (limit !== null) params.limit = limit;
-        if (sort !== null) params.sort = sort;
-        if (page !== null) params.page = page;
-        if (select !== null) params.select = select;
-        const response = await devices.get("/all", { params })
+
+        const response = await devices.get("/all", { params, headers: { 'Content-Type': 'application/json' } })
         return response.data
 
     } catch (error) {
@@ -53,25 +49,11 @@ export async function removeDevice(id) {
     }
 }
 
-export async function getBrandNamesByTypes(typesIds) {
+export async function getBrandNamesByTypes(typeId, field) {
     try {
-        const devices = await getDevicesWithParams({ "type.type_id": { $in: typesIds } });
-        const uniqueIds = []
-        const brandsList = devices.map(device => {
-            return ({
-                id: device.brand.brand_id,
-                name: device.brand.brand_name,
-            })
-        }).filter((item) => {
-            if (!uniqueIds.includes(item.id)) {
-                uniqueIds.push(item.id)
-                return true
-            } else {
-
-                return false
-            }
-        })
-        return brandsList;
+        const query = { "type.type_id":  typeId };
+        const brandList = await devices.get("/dist", {params: {query, field: field}})
+        return brandList.data;
     } catch (error) {
         console.error(error)
     }

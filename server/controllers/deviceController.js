@@ -22,7 +22,6 @@ class DeviceController {
     }
     async readAll(req, res) {
         const query = req.query ? req.query : {};
-        console.log("query: ", query.query)
         try {
             let collection = await Device.find(query.query)
             .skip((query.page-1) * query.limit)
@@ -76,6 +75,21 @@ class DeviceController {
             });
             await Device.findByIdAndDelete(id);
             res.status(200).json({ message: `Device id: ${id} was deleted` })
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ message: "Server error" })
+        }
+    }
+
+    async getListOfUnique(req, res) {
+        const {query, field} = req.query;
+        console.log("query: ---", query);
+        console.log("field: ----", field)
+        console.log("params: ----", req.query)
+        try {
+            const result = await Device.distinct(field, query);
+            console.log("result:    ", result)
+            return res.status(200).json(result)
         } catch (error) {
             console.log(error);
             res.status(500).json({ message: "Server error" })

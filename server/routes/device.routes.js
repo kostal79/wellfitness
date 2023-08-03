@@ -7,6 +7,7 @@ const isAdmin = require("../middleware/isAdminMiddleware")
 
 router.post("/create", multerDeviceMiddleware.array("device", 10), deviceController.create);
 router.get("/all", deviceController.readAll);
+router.get("/dist", deviceController.getListOfUnique)
 router.get("/:id", deviceController.readOne);
 router.delete("/:id",  deviceController.remove);
 router.put("/:id", deviceController.update);

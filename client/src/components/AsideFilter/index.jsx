@@ -77,13 +77,13 @@ const AsideFilter = () => {
     resetFilter();
   }, [typeId]);
 
-  const brandFilter = brands?.map(({ id, name }) => (
+  const brandFilter = brands?.map(({ brand_id, brand_name }) => (
     <BrandFilter
-      id={id}
-      name={name}
+      id={brand_id}
+      name={brand_name}
       setFilter={setFilter}
       filter={filter}
-      key={id}
+      key={brand_id}
     />
   ));
 
