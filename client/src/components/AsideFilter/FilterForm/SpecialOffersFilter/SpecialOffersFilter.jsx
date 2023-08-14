@@ -1,15 +1,28 @@
 import React from "react";
-import Styles from "../AsideFilter.module.scss";
+import Styles from "../../AsideFilter.module.scss";
 import { useSearchParams } from "react-router-dom";
 
-const SpecialOffersFilter = ({ filter, setFilter }) => {
+const SpecialOffersFilter = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const changeHandler = (event) => {
     const { name, checked } = event.target;
     if (checked) {
-      setFilter((prevFilter) => ({ ...prevFilter, [name]: true }));
-
+      searchParams.set(name, true);
+      setSearchParams(searchParams);
     } else {
-      setFilter((prevFilter) => ({ ...prevFilter, [name]: false }));
+      searchParams.delete(name);
+      setSearchParams(searchParams);
+    }
+  };
+
+  const isChecked = (event) => {
+    const { name } = event.target;
+    console.log(searchParams.get(name))
+    if (searchParams.get(name)) {
+      return true;
+    } else {
+      return false;
     }
   };
 
@@ -20,7 +33,7 @@ const SpecialOffersFilter = ({ filter, setFilter }) => {
           className={Styles.input}
           type="checkbox"
           name={"profit"}
-          checked={filter.profit}
+          checked={searchParams.get("profit") === "true"}
           onChange={changeHandler}
         />
         <label className={Styles.label} htmlFor={"profit"}>
@@ -32,7 +45,7 @@ const SpecialOffersFilter = ({ filter, setFilter }) => {
           className={Styles.input}
           type="checkbox"
           name={"new"}
-          checked={filter.new}
+          checked={searchParams.get("new") === "true"}
           onChange={changeHandler}
         />
         <label className={Styles.label} htmlFor={"new"}>
@@ -44,7 +57,7 @@ const SpecialOffersFilter = ({ filter, setFilter }) => {
           className={Styles.input}
           type="checkbox"
           name={"inStock"}
-          checked={filter.inStock}
+          checked={searchParams.get("inStock") === "true"}
           onChange={changeHandler}
         />
         <label className={Styles.label} htmlFor={"inStock"}>
@@ -56,7 +69,7 @@ const SpecialOffersFilter = ({ filter, setFilter }) => {
           className={Styles.input}
           type="checkbox"
           name={"recommend"}
-          checked={filter.recommend}
+          checked={searchParams.get("recommend") === "true"}
           onChange={changeHandler}
         />
         <label className={Styles.label} htmlFor={"recommend"}>

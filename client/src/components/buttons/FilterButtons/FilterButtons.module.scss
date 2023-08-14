@@ -1,14 +1,38 @@
 .container {
+  overflow-x: scroll;
+  scrollbar-width: none;
+}
+
+.types-buttons {
   display: flex;
   flex-direction: row;
   column-gap: 8px;
-  overflow-x: scroll;
+}
+
+.filter-navigation--mobile {
+  display: flex;
+  flex-direction: row;
+  column-gap: 12px;
+  margin: 15px 0;
+  padding: 0;
+}
+
+.container::-webkit-scrollbar {
+  height: 0; /* adjust as needed */
+}
+
+.container::-webkit-scrollbar-track {
+  background: transparent; /* or any color you want */
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: transparent; /* or any color you want */
 }
 
 @media screen and (min-width: 980px) {
-   .container {
+  .types-buttons {
     flex-wrap: wrap;
     overflow: hidden;
     row-gap: 10px;
-   }
+  }
 }

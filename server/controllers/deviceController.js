@@ -21,13 +21,28 @@ class DeviceController {
         }
     }
     async readAll(req, res) {
-        const query = req.query ? req.query : {};
         try {
-            let collection = await Device.find(query.query)
-            .skip((query.page-1) * query.limit)
-            .limit(query.limit)
-            .sort(query.sort)
-            .select(query.select)
+            const { page, limit, sort, ascending, select, minPriceDiler, maxPriceDiler, minPriceRetail, maxPriceRetail, quantity, ...rest } = req.query;
+            const query = rest;
+            if (quantity) {
+                query.quantity = { $gte: 1 }
+            } else {
+                query.quantity = { $gte: 0 }
+            }
+
+            if (minPriceDiler || maxPriceDiler) {
+                query["special_price.diler"] = { $gte: parseInt(minPriceDiler), $lte: parseInt(maxPriceDiler) } 
+
+            } else if (minPriceRetail || maxPriceRetail) {
+                query["special_price.retail"] = { $gte: parseInt(minPriceRetail), $lte: parseInt(maxPriceRetail) } 
+                   
+            }
+            let collection = await Device.find(query)
+                .skip((page - 1) * limit)
+                .limit(limit)
+                .sort({[sort]: ascending})
+                .select(select)
+
             return res.status(200).json(collection);
         } catch (error) {
             console.log(error);
@@ -82,13 +97,9 @@ class DeviceController {
     }
 
     async getListOfUnique(req, res) {
-        const {query, field} = req.query;
-        console.log("query: ---", query);
-        console.log("field: ----", field)
-        console.log("params: ----", req.query)
+        const { query, field } = req.query;
         try {
             const result = await Device.distinct(field, query);
-            console.log("result:    ", result)
             return res.status(200).json(result)
         } catch (error) {
             console.log(error);
@@ -110,7 +121,8 @@ class DeviceController {
             if (comfort) device.voteRatingComfort(functionality, userId)
             if (price) device.voteRatingPrice(functionality, userId)
             const updatedDevice = await Device.findByIdAndUpdate(deviceId, {
-                rating: device.rating
+                rating: device.rating,
+                rating_average: device.calcAverageRating(),
             }, { new: true });
             res.status(200).json(updatedDevice)
         } catch (error) {

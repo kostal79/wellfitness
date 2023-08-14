@@ -1,0 +1,15 @@
+@import "@styles/main.scss";
+
+.filter__button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.filter__content {
+    @include centerElement;
+    font-size: $fonts-small;
+    font-weight: 700;
+    color: $color-secondary-light-grey;
+    column-gap: 2px;
+}

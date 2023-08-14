@@ -58,7 +58,7 @@ const start = async () => {
             console.log(`server starts at port ${PORT}`)
         })
     } catch (error) {
-        console.error(error)
+        console.error("DB connection error: " , error)
     }
 }
 

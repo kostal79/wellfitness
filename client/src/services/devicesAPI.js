@@ -10,11 +10,9 @@ export async function createDevice(formData) {
     }
 }
 
-export async function getDevicesWithParams(query, limit, sort, page, select) {
+export async function getDevicesWithParams(params) {
     try {
-        const params = { query }
-
-        const response = await devices.get("/all", { params, headers: { 'Content-Type': 'application/json' } })
+        const response = await devices.get("/all", { params })
         return response.data
 
     } catch (error) {

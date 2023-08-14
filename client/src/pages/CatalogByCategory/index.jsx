@@ -1,13 +1,19 @@
-import React, { Suspense } from "react";
-import { Await, defer, useLoaderData, useParams } from "react-router-dom";
+import React, { Suspense, useState } from "react";
+import {
+  Await,
+  defer,
+  useLoaderData,
+} from "react-router-dom";
 import { getDevicesWithParams } from "@services/devicesAPI";
 import { getTypesWithParams } from "@services/typesAPI";
 import Styles from "./CatalogByCategory.module.scss";
 import ProductsList from "@components/ProductsList";
 import AsideFilter from "@components/AsideFilter";
 
+
 const CatalogByCategories = () => {
   const { devices } = useLoaderData();
+
 
   return (
     <div className={Styles.container}>
@@ -42,60 +48,92 @@ export async function categoryLoader({ params, request }) {
       : null;
   const profit = searchParams.get("profit") === "true" ? true : null;
   const isNew = searchParams.get("new") === "true" ? true : null;
-  const quantity =
-    searchParams.get("inStock") === "true" ? { $gte: 1 } : { $gte: 0 };
+  const quantity = searchParams.get("inStock") === "true" ? true : null;
   const recommend = searchParams.get("recommend") === "true" ? true : null;
-  const minPrice =
-    Number(searchParams.get("minPrice")) > 0
-      ? Number(searchParams.get("minPrice"))
-      : -Infinity;
-  const maxPrice =
-    Number(searchParams.get("maxPrice")) > 0
-      ? Number(searchParams.get("maxPrice"))
-      : Infinity;
-  const priceSpanDiler =
-    role === "diler" ? { $gte: minPrice, $lte: maxPrice } : null;
-  const priceSpanRetail =
-    role === "retail" ? { $gte: minPrice, $lte: maxPrice } : null;
+  const sort = searchParams.get("sort") !== "null" ? searchParams.get("sort") : null;
+  const ascending = searchParams.get("ascending") === "true" ? 1 : -1;
+  let minPriceDiler;
+  let maxPriceDiler;
+  let minPriceRetail;
+  let maxPriceRetail;
+
+  if (role === "diler") {
+    minPriceDiler = searchParams.get("minPrice");
+    maxPriceDiler = searchParams.get("maxPrice");
+  } else if (role === "retail") {
+    minPriceRetail = searchParams.get("minPrice");
+    maxPriceRetail = searchParams.get("maxPrice");
+  }
 
   return defer({
-    devices: getDevicesWithParams(
-      {
-        usage,
-        "type.type_id": { $in: typeId },
-        "brand.brand_id": { $in: brand },
-        sign_profit: profit,
-        sign_new: isNew,
-        sign_recommend: recommend,
-        quantity: quantity,
-        "special_price.diler": 22410,
-        "special_price.retail": priceSpanRetail,
-      },
-      20,
-      null,
-      page
-    ),
+    devices: getDevicesWithParams({
+      usage,
+      "type.type_id": { $in: typeId },
+      "brand.brand_id": { $in: brand },
+      sign_profit: profit,
+      sign_new: isNew,
+      sign_recommend: recommend,
+      quantity: quantity,
+      minPriceDiler,
+      maxPriceDiler,
+      minPriceRetail,
+      maxPriceRetail,
+      page,
+      limit: 20,
+      select: null,
+      sort: sort,
+      ascending: ascending,
+    }),
   });
 }
 
 export async function allCategoriesLoader({ params, request }) {
   const { usage, groupId } = params;
+  const role = "diler"; //TODO
   const url = new URL(request.url);
   const searchParams = new URLSearchParams(url.search);
   const page = searchParams.get("page") || 1;
-  const brand = searchParams.getAll("brand.brand_id") || null;
+  const brand =
+    searchParams.getAll("brand").length > 0
+      ? searchParams.getAll("brand")
+      : null;
+  const profit = searchParams.get("profit") === "true" ? true : null;
+  const isNew = searchParams.get("new") === "true" ? true : null;
+  const quantity = searchParams.get("inStock") === "true" ? true : null;
+  const recommend = searchParams.get("recommend") === "true" ? true : null;
+  const sort = searchParams.get("sort");
+  const ascending = searchParams.get("ascending") === "true" ? 1 : -1;
+  let minPriceDiler;
+  let maxPriceDiler;
+  let minPriceRetail;
+  let maxPriceRetail;
+
+  if (role === "diler") {
+    minPriceDiler = searchParams.get("minPrice");
+    maxPriceDiler = searchParams.get("maxPrice");
+  } else if (role === "retail") {
+    minPriceRetail = searchParams.get("minPrice");
+    maxPriceRetail = searchParams.get("maxPrice");
+  }
 
   return defer({
-    devices: getDevicesWithParams(
-      {
-        usage,
-        "group.group_id": groupId,
-        "brand.brand_id": { $in: brand },
-      },
-      20,
-      null,
-      page
-    ),
+    devices: getDevicesWithParams({
+      usage,
+      "brand.brand_id": { $in: brand },
+      sign_profit: profit,
+      sign_new: isNew,
+      sign_recommend: recommend,
+      quantity: quantity,
+      minPriceDiler,
+      maxPriceDiler,
+      minPriceRetail,
+      maxPriceRetail,
+      page,
+      limit: 20,
+      select: null,
+      sort: sort,
+      ascending: ascending,
+    }),
   });
 }
 

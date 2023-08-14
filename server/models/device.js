@@ -11,6 +11,14 @@ const DeviceSchema = new Schema({
         diler: { type: Number, default: 0 },
         retail: { type: Number, default: 0 },
     },
+    discount: {
+        diler: { type: Number, default: 0 }, //60 (discount 60%)
+        retail: { type: Number, default: 0 },//60 (discount 60%)
+    },
+    special_price: {
+        diler: { type: Number, default: 0 },
+        retail: { type: Number, default: 0 },
+    },
     configuration: {
         size: Number,
         weight: Number,
@@ -41,12 +49,13 @@ const DeviceSchema = new Schema({
             user_ids: { type: [ObjectId], ref: "User" },
         },
     },
+    rating_average: {type: Number, default: 0},
     images_refs: [String],//references
     is_in_showroom: Boolean,//is device in show-room
     quantity: { type: Number, default: 0 },
     characteristics: {
         main: {
-            type: {type: String},
+            type: { type: String },
             engine_power: Number,
             engine_type: String,
             speed_control_min: Number,
@@ -60,7 +69,7 @@ const DeviceSchema = new Schema({
             training_programm: String,
         },
         multimedia: {
-            type: {type: String},
+            type: { type: String },
             engine_power: Number,
             engine_type: String,
             speed_control_min: Number,
@@ -74,7 +83,7 @@ const DeviceSchema = new Schema({
             training_programm: String,
         },
         additionaly: {
-            type: {type: String},
+            type: { type: String },
             engine_power: Number,
             engine_type: String,
             speed_control_min: Number,
@@ -88,10 +97,7 @@ const DeviceSchema = new Schema({
             training_programm: String,
         }
     },
-    discount: {
-        diler: { type: Number, default: 0 }, //60 (discount 60%)
-        retail: { type: Number, default: 0 },//60 (discount 60%)
-    },
+
     usage: String,//"home", "prof"
     bonuses: Number,
     sign_profit: Boolean,
@@ -102,21 +108,23 @@ const DeviceSchema = new Schema({
         type_id: { type: ObjectId, ref: "Type" }
     },
     group: {
-        group_name: {type: String},
-        group_id: {type: ObjectId, ref: "Group"}
+        group_name: { type: String },
+        group_id: { type: ObjectId, ref: "Group" }
     },
     feedback: {
         feedbacks_ids: { type: [ObjectId], ref: "Feedback" },
         users_ids: { type: [ObjectId], ref: "User" }
     },
-    docs_ids: [{ type: ObjectId, ref: "Doc" }]
+    docs_ids: [{ type: ObjectId, ref: "Doc" }],
+    created_at: {type: Date, default: Date.now()}
 }, {
     toObject: {
         virtuals: true
     },
     toJSON: {
         virtuals: true
-    }
+    },
+
 })
 
 DeviceSchema.virtual('rating_quality_average').get(function () {
@@ -159,27 +167,9 @@ DeviceSchema.virtual('rating_functionality_average').get(function () {
     }
 });
 
-DeviceSchema.virtual('rating_average').get(function () {
+DeviceSchema.method('calcAverageRating', function () {
     const totalScores = this.rating_quality_average + this.rating_comfort_average + this.rating_price_average + this.rating_functionality_average;
     return Math.round(totalScores / 4)
-});
-
-DeviceSchema.virtual('special_price.diler').get(function () {
-    if (this.discount.diler > 0 && this.price.diler > 0) {
-        const newPrice = this.price.diler - (this.price.diler * this.discount.diler / 100)
-        return Math.round(newPrice);
-    } else {
-        return this.price.diler;
-    }
-});
-
-DeviceSchema.virtual('special_price.retail').get(function () {
-    if (this.discount.retail > 0 && this.price.retail > 0) {
-        const newPrice = this.price.retail - (this.price.retail * this.discount.retail / 100)
-        return Math.round(newPrice);
-    } else {
-        return this.price.retail;
-    }
 });
 
 DeviceSchema.virtual('full_name').get(function () {
@@ -244,3 +234,32 @@ DeviceSchema.method("removePost", function (feedId, userId) {
 });
 
 module.exports = new model("Device", DeviceSchema)
+
+// special_price: {
+//     diler: {
+//         type: Number,
+//         default: true,
+//         set: function () {
+//             console.log("this.discount.diler: ", this)
+//             console.log("this.price.diler: ", this.price.diler)
+//             if (this.discount.diler > 0 && this.price.diler > 0) {
+//                 const newPrice = this.price.diler - (this.price.diler * this.discount.diler / 100)
+//                 return Math.round(newPrice);
+//             } else {
+//                 return this.price.diler;
+//             }
+//         }
+//     },
+//     retail: {
+//         type: Number,
+//         default: true,
+//         set: function () {
+//             if (this.discount.retail > 0 && this.price.retail > 0) {
+//                 const newPrice = this.price.retail - (this.price.retail * this.discount.retail / 100)
+//                 return Math.round(newPrice);
+//             } else {
+//                 return this.price.retail;
+//             }
+//         }
+//     }
+// },
