@@ -1,92 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import Styles from "../../AsideFilter.module.scss";
-import { getDevicesWithParams } from "@services/devicesAPI";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { usePriceSlider } from "@hooks/usePriceSlider";
 
 const PriceSlider = () => {
   const { typeId } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const role = "diler"; //TODO: make price type define;
-  const [filter, setFilter] = useState({
-    minPrice: 0,
-    maxPrice: 0,
-    initialPrice: {
-      min: 0,
-      max: 0,
-    },
-  });
-
-  useEffect(() => {
-    async function fetchPriceBounderies() {
-      const devices = await getDevicesWithParams({ "type.type_id": typeId });
-      const searchMinPrice = Number(searchParams.get("minPrice"));
-      const searchMaxPrice = Number(searchParams.get("maxPrice"));
-      let maxPrice = 0;
-      let minPrice = Infinity;
-
-      devices.forEach((device) => {
-        const price =
-          role === "diler"
-            ? device.special_price.diler
-            : device.special_price.retail;
-        if (price > maxPrice) maxPrice = price;
-        if (price < minPrice) minPrice = price;
-      });
-
-      setFilter((prevFilter) => ({
-        minPrice:
-          minPrice === Infinity
-            ? 0
-            : minPrice < searchMinPrice
-            ? minPrice
-            : searchMinPrice,
-        maxPrice: maxPrice > searchMaxPrice ? searchMaxPrice : maxPrice,
-        initialPrice: {
-          min: minPrice,
-          max: maxPrice,
-        },
-      }));
-    }
-    fetchPriceBounderies();
-  }, [typeId]);
-
-  useEffect(() => {
-    const slider = document.querySelector(".rc-slider")
-    function setPriceParams() {
-      setSearchParams(searchParams)
-      slider.removeEventListener("mouseup", setPriceParams)
-    }
-    slider.addEventListener("mouseup", setPriceParams)
-  }, [searchParams])
-
-  function debounce(func, delay) {
-    let timeoutId;
-    return function (...args) {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        console.log("slideHandler");
-        return func(...args);
-      }, delay);
-    };
-  }
-
-  const changeHandler = (event) => {
-    const { name, value } = event.target;
-    setFilter((prevFilter) => ({ ...prevFilter, [name]: Number(value) }));
-    searchParams.set(name, value);
-    setSearchParams(searchParams);
-  };
-
-  const sliderHandler = (event) => {
-    const [minPrice, maxPrice] = [event[0], event[1]];
-    setFilter((prevFilter) => ({ ...prevFilter, minPrice, maxPrice }));
-    searchParams.set("minPrice", minPrice);
-    searchParams.set("maxPrice", maxPrice);
-  };
-
-
+  const { filter, changeHandler, sliderHandler, afterChangeSliderHandler } =
+    usePriceSlider(typeId);
 
   return (
     <div className={Styles.container}>
@@ -119,6 +41,7 @@ const PriceSlider = () => {
           filter.maxPrice || filter.initialPrice.max,
         ]}
         onChange={sliderHandler}
+        onAfterChange={afterChangeSliderHandler}
         range
       />
     </div>
