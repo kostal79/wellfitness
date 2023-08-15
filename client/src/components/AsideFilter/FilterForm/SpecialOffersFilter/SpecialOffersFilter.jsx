@@ -18,7 +18,6 @@ const SpecialOffersFilter = () => {
 
   const isChecked = (event) => {
     const { name } = event.target;
-    console.log(searchParams.get(name))
     if (searchParams.get(name)) {
       return true;
     } else {

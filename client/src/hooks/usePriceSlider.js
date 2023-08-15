@@ -4,6 +4,7 @@ import { getDevicesWithParams } from "@services/devicesAPI";
 
 export const usePriceSlider = (typeId) => {
     const [searchParams, setSearchParams] = useSearchParams();
+    console.log("searchParams:  ", searchParams)
     const role = "diler";
     const [filter, setFilter] = useState({
         minPrice: 0,
@@ -43,27 +44,26 @@ export const usePriceSlider = (typeId) => {
     }, [typeId, searchParams]);
 
     const changeHandler = useCallback((event) => {
+        console.log("changed fields")
         const { name, value } = event.target;
-        const newSearchParams = new URLSearchParams(searchParams);
-        newSearchParams.set(name, value);
-        setSearchParams(newSearchParams);
+        setFilter((prevFilter) => ({ ...prevFilter, [name] : value }))
+        searchParams.set(name, value);
         // eslint-disable-next-line
-    }, [])
+    }, [searchParams])
 
     const sliderHandler = useCallback((event) => {
         const [minPrice, maxPrice] = event;
+        console.log(minPrice, maxPrice)
         setFilter((prevFilter) => ({ ...prevFilter, minPrice, maxPrice }));
         // eslint-disable-next-line
     }, []);
 
     const afterChangeSliderHandler = useCallback((event) => {
-        const [minPrice, maxPrice] = event;
-        const newSearchParams = new URLSearchParams(searchParams);
-        newSearchParams.set("minPrice", minPrice);
-        newSearchParams.set("maxPrice", maxPrice);
-        setSearchParams(newSearchParams);
+        searchParams.set("minPrice", event[0]);
+        searchParams.set("maxPrice", event[1]);
+        setSearchParams(searchParams);
         // eslint-disable-next-line
-    }, []);
+    }, [searchParams, setSearchParams]);
 
     return {
         filter,

@@ -1,19 +1,19 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback } from "react";
 import Styles from "./FilterForm.module.scss";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useGetBrandNames } from "@hooks/useGetBrandNames";
 import BrandFilter from  "./BrandFilter/BrandFilter"
 import SpecialOffersFilter from "./SpecialOffersFilter/SpecialOffersFilter";
-import { getDevicesWithParams } from "@services/devicesAPI";
 import PriceSlider from "./PriceSlider/PriceSlider";
 import UniversalButton from "@components/buttons/UniversalButton";
 
 const FilterForm = () => {
   const { typeId } = useParams();
   const brands = useGetBrandNames(typeId);
+  const [_, setSearchParams] = useSearchParams();
 
   const resetFilter = useCallback(() => {
-   
+   setSearchParams()
   }, []);
 
   const brandFilter = brands?.map(({ brand_id, brand_name }) => (
@@ -39,7 +39,7 @@ const FilterForm = () => {
         <PriceSlider/>
       </section>
       <section className={Styles.section}>
-        <UniversalButton text="Очистить" click={resetFilter} />
+        <UniversalButton text="Очистить" click={resetFilter} styles="red-empty"/>
       </section>
     </form>
   );

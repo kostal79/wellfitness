@@ -17,7 +17,7 @@ const PriceSlider = () => {
           className={Styles["input-price--min"]}
           type="number"
           name="minPrice"
-          value={filter.minPrice || filter.initialPrice.min}
+          value={filter.minPrice ? filter.minPrice : filter.initialPrice.min !== Infinity ? filter.initialPrice.min : 0}
           onChange={changeHandler}
           max={filter.initialPrice.max}
           min={filter.initialPrice.min}
