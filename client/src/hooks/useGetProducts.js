@@ -15,8 +15,8 @@ export const useGetProducts = () => {
         async function getProductList() {
             const result = await getDevicesWithParams({ [`${parameter}`]: true, limit: 10 });
             const cards =
-                result.length > 0 ? (
-                    result.map((device) => (
+                result.collection.length > 0 ? (
+                    result.collection.map((device) => (
                         <ProductCard
                             id={device._id}
                             name={device.full_name}

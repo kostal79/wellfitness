@@ -9,6 +9,7 @@ import { getTypesWithParams } from "@services/typesAPI";
 import Styles from "./CatalogByCategory.module.scss";
 import ProductsList from "@components/ProductsList";
 import AsideFilter from "@components/AsideFilter";
+import { CARDS_PER_PAGE } from "../../constants";
 
 
 const CatalogByCategories = () => {
@@ -52,6 +53,7 @@ export async function categoryLoader({ params, request }) {
   const recommend = searchParams.get("recommend") === "true" ? true : null;
   const sort = searchParams.get("sort") !== "null" ? searchParams.get("sort") : null;
   const ascending = searchParams.get("ascending") === "true" ? 1 : -1;
+  const limit = searchParams.get("limit") ? searchParams.get("limit") : CARDS_PER_PAGE;
   let minPriceDiler;
   let maxPriceDiler;
   let minPriceRetail;
@@ -79,7 +81,7 @@ export async function categoryLoader({ params, request }) {
       minPriceRetail,
       maxPriceRetail,
       page,
-      limit: 20,
+      limit,
       select: null,
       sort: sort,
       ascending: ascending,
@@ -103,6 +105,7 @@ export async function allCategoriesLoader({ params, request }) {
   const recommend = searchParams.get("recommend") === "true" ? true : null;
   const sort = searchParams.get("sort");
   const ascending = searchParams.get("ascending") === "true" ? 1 : -1;
+  const limit = searchParams.get("limit") ? searchParams.get("limit") : CARDS_PER_PAGE;
   let minPriceDiler;
   let maxPriceDiler;
   let minPriceRetail;
@@ -129,7 +132,7 @@ export async function allCategoriesLoader({ params, request }) {
       minPriceRetail,
       maxPriceRetail,
       page,
-      limit: 20,
+      limit,
       select: null,
       sort: sort,
       ascending: ascending,

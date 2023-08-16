@@ -28,50 +28,50 @@ const SpecialOffersFilter = () => {
   return (
     <>
       <li className={Styles["list-item"]}>
-        <input
-          className={Styles.input}
-          type="checkbox"
-          name={"profit"}
-          checked={searchParams.get("profit") === "true"}
-          onChange={changeHandler}
-        />
         <label className={Styles.label} htmlFor={"profit"}>
+          <input
+            className={Styles.input}
+            type="checkbox"
+            name={"profit"}
+            checked={searchParams.get("profit") === "true"}
+            onChange={changeHandler}
+          />
           Акция
         </label>
       </li>
       <li className={Styles["list-item"]}>
-        <input
-          className={Styles.input}
-          type="checkbox"
-          name={"new"}
-          checked={searchParams.get("new") === "true"}
-          onChange={changeHandler}
-        />
         <label className={Styles.label} htmlFor={"new"}>
+          <input
+            className={Styles.input}
+            type="checkbox"
+            name={"new"}
+            checked={searchParams.get("new") === "true"}
+            onChange={changeHandler}
+          />
           Новинки
         </label>
       </li>
       <li className={Styles["list-item"]}>
-        <input
-          className={Styles.input}
-          type="checkbox"
-          name={"inStock"}
-          checked={searchParams.get("inStock") === "true"}
-          onChange={changeHandler}
-        />
         <label className={Styles.label} htmlFor={"inStock"}>
+          <input
+            className={Styles.input}
+            type="checkbox"
+            name={"inStock"}
+            checked={searchParams.get("inStock") === "true"}
+            onChange={changeHandler}
+          />
           В наличии
         </label>
       </li>
       <li className={Styles["list-item"]}>
-        <input
-          className={Styles.input}
-          type="checkbox"
-          name={"recommend"}
-          checked={searchParams.get("recommend") === "true"}
-          onChange={changeHandler}
-        />
         <label className={Styles.label} htmlFor={"recommend"}>
+          <input
+            className={Styles.input}
+            type="checkbox"
+            name={"recommend"}
+            checked={searchParams.get("recommend") === "true"}
+            onChange={changeHandler}
+          />
           Наш выбор
         </label>
       </li>

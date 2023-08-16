@@ -43,3 +43,4 @@ export const CONTACTS_PAGE = "/contacts"
 export const POLICY_PAGE = "/private-policy"
 export const SUPPORT_PAGE = "/support"
 export const ERROR_PAGE = "/*"
+export const CARDS_PER_PAGE = 4

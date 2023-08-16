@@ -4,7 +4,6 @@ import { getDevicesWithParams } from "@services/devicesAPI";
 
 export const usePriceSlider = (typeId) => {
     const [searchParams, setSearchParams] = useSearchParams();
-    console.log("searchParams:  ", searchParams)
     const role = "diler";
     const [filter, setFilter] = useState({
         minPrice: 0,
@@ -23,7 +22,7 @@ export const usePriceSlider = (typeId) => {
             let maxPrice = 0;
             let minPrice = Infinity;
 
-            devices.forEach((device) => {
+            devices.collection.forEach((device) => {
                 const price =
                     role === "diler" ? device.special_price.diler : device.special_price.retail;
                 if (price > maxPrice) maxPrice = price;
@@ -32,8 +31,8 @@ export const usePriceSlider = (typeId) => {
 
             setFilter((prevFilter) => ({
                 minPrice:
-                    minPrice === Infinity ? 0 : minPrice < searchMinPrice ? minPrice : searchMinPrice,
-                maxPrice: maxPrice > searchMaxPrice ? searchMaxPrice : maxPrice,
+                    minPrice === Infinity ? 0 : searchMaxPrice ? searchMinPrice : minPrice,
+                maxPrice: searchMaxPrice ? searchMaxPrice : maxPrice,
                 initialPrice: {
                     min: minPrice,
                     max: maxPrice,
@@ -44,7 +43,6 @@ export const usePriceSlider = (typeId) => {
     }, [typeId, searchParams]);
 
     const changeHandler = useCallback((event) => {
-        console.log("changed fields")
         const { name, value } = event.target;
         setFilter((prevFilter) => ({ ...prevFilter, [name] : value }))
         searchParams.set(name, value);
@@ -53,7 +51,6 @@ export const usePriceSlider = (typeId) => {
 
     const sliderHandler = useCallback((event) => {
         const [minPrice, maxPrice] = event;
-        console.log(minPrice, maxPrice)
         setFilter((prevFilter) => ({ ...prevFilter, minPrice, maxPrice }));
         // eslint-disable-next-line
     }, []);

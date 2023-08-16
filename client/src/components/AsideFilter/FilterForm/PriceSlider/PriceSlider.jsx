@@ -2,6 +2,7 @@ import React from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import Styles from "../../AsideFilter.module.scss";
+import "./PriceSlider.scss";
 import { useParams } from "react-router-dom";
 import { usePriceSlider } from "@hooks/usePriceSlider";
 
@@ -11,17 +12,24 @@ const PriceSlider = () => {
     usePriceSlider(typeId);
 
   return (
-    <div className={Styles.container}>
+    <div className={Styles["slider__container"]}>
       <div className={Styles["input-price"]}>
         <input
           className={Styles["input-price--min"]}
           type="number"
           name="minPrice"
-          value={filter.minPrice ? filter.minPrice : filter.initialPrice.min !== Infinity ? filter.initialPrice.min : 0}
+          value={
+            filter.minPrice
+              ? filter.minPrice
+              : filter.initialPrice.min !== Infinity
+              ? filter.initialPrice.min
+              : 0
+          }
           onChange={changeHandler}
           max={filter.initialPrice.max}
           min={filter.initialPrice.min}
         />
+        <div className={Styles["slider__rectangle"]}></div>
         <input
           className={Styles["input-price--max"]}
           type="number"
@@ -33,7 +41,7 @@ const PriceSlider = () => {
         />
       </div>
       <Slider
-        className={Styles.sliders}
+        className={Styles.slider}
         min={filter.initialPrice.min || 0}
         max={filter.initialPrice.max || 0}
         value={[

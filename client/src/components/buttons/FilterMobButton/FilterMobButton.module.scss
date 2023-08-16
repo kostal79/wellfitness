@@ -13,3 +13,9 @@
     color: $color-secondary-light-grey;
     column-gap: 2px;
 }
+
+@media screen and (min-width: 980px) {
+    .filter__button {
+        display: none;
+    }
+}

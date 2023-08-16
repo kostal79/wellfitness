@@ -4,13 +4,15 @@ import { useAsyncValue, useSearchParams } from "react-router-dom";
 import FilterButton from "./FilterButton/FilterButton";
 import FilterMobButton from "@components/buttons/FilterMobButton";
 import SortButton from "@components/buttons/SortButton/SortButton";
+import { useDispatch } from "react-redux";
+import { showAsideModal } from "@redux/slices/modalSlices";
+
 
 const FilterButtons = () => {
   const arr = useAsyncValue();
-
-  const [showModal, setShowModal] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const role = "diler"; //TODO
+  const dispatch = useDispatch();
 
   const sortTypes = {
     "По новизне": "created_at",
@@ -55,8 +57,8 @@ const FilterButtons = () => {
     return res;
   };
 
-  const closeModal = () => {
-    setShowModal(false);
+  const showModal = () => {
+    dispatch(showAsideModal())
   };
 
   const buttons = arr.map((item) => {
@@ -75,7 +77,7 @@ const FilterButtons = () => {
       <div className={Styles.container}>
         <div className={Styles["types-buttons"]}>{buttons}</div>
         <nav className={Styles["filter-navigation--mobile"]}>
-          <FilterMobButton onClick={closeModal} />
+          <FilterMobButton onClick={showModal} />
           {sortButtonsDisplay()}
         </nav>
       </div>

@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import Styles from "./FilterForm.module.scss";
+import Styles from "../AsideFilter.module.scss";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useGetBrandNames } from "@hooks/useGetBrandNames";
 import BrandFilter from  "./BrandFilter/BrandFilter"
@@ -26,16 +26,17 @@ const FilterForm = () => {
 
 
   return (
-    <form onSubmit={(event) => event.preventDefault()}>
+    <form className={Styles.form} onSubmit={(event) => event.preventDefault()}>
       <section className={Styles.section}>
-        <p>Производители</p>
-        <ul>{brandFilter}</ul>
+        <p className={Styles.title}>Производители</p>
+        <ul className={Styles.list}>{brandFilter}</ul>
       </section>
       <section className={Styles.section}>
-        <p>Акции, наличие</p>
-        <ul>{<SpecialOffersFilter />}</ul>
+        <p className={Styles.title}>Акции, наличие</p>
+        <ul className={Styles.list}>{<SpecialOffersFilter />}</ul>
       </section>
       <section className={Styles.section}>
+      <p className={Styles.title}>Цена</p>
         <PriceSlider/>
       </section>
       <section className={Styles.section}>

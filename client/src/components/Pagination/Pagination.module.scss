@@ -1,0 +1,20 @@
+@import "@styles/main.scss";
+
+.container {
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+.button {
+    border: none;
+    color: $color-red;
+    background-color: transparent;
+    font-size: $fonts-small-upper;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.button:disabled {
+    opacity: .5;
+    cursor: auto;
+}

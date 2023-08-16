@@ -111,6 +111,7 @@ const AppRoutes = () => {
             path={`:groupId`}
             loader={groupLoader}
             handle={{
+              scrollMode: "pathname",
               crumb: (data) => <span>{data.groupName}</span>
             }}
             element={<CatalogByGroup />}
@@ -125,9 +126,7 @@ const AppRoutes = () => {
               path={`:typeId`}
               element={<CatalogByCategory />}
               loader={categoryLoader}
-              handle={{
-                // crumb: (data) => <span>{data.name}</span>
-              }}
+              handle={{scrollMode: "pathname"}}
             />
 
           </Route>

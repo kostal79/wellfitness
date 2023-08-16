@@ -1,20 +1,117 @@
+@import "@styles/main.scss";
+
 .section {
   padding: 20px;
+  position: relative;
+  border-bottom: 1px solid transparentize($color-fonts-grey, 0.85);
 }
 
+.section:nth-child(1) {
+  border-top: 1px solid transparentize($color-fonts-grey, 0.85);
+}
 
-/* Hide the spin buttons for input type number */
-.input-price--min::-webkit-inner-spin-button,
 .input-price--max::-webkit-inner-spin-button,
-.input-price--min::-webkit-outer-spin-button,
-.input-price--max::-webkit-outer-spin-button {
+.input-price--min::-webkit-inner-spin-button,
+.input-price--min::-webkit-outer-spin-button
+  .input-price--max::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
   display: none;
 }
 
-/* hide the spin buttons in Firefox as well */
 .input-price--max[type="number"],
 .input-price--min[type="number"] {
   -moz-appearance: textfield;
 }
+
+.list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  font-size: $fonts-small-upper;
+  color: transparentize($color-secondary-light-grey, 0.2);
+}
+
+.title {
+  margin-bottom: 12px;
+  font-weight: 700;
+  font-size: $fonts-small-upper;
+  color: $color-secondary-light-grey;
+}
+
+.label {
+  display: grid;
+  grid-template-columns: 12px auto;
+  gap: 16px;
+  align-self: center;
+}
+
+.list-item input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: #fff;
+  /* Not removed via appearance */
+  margin: 0;
+  color: $color-fonts-grey;
+  width: 16px;
+  height: 16px;
+  border: 2px solid $color-fonts-grey;
+  border-radius: 4px;
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+
+.list-item input[type="checkbox"]::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border: 2px solid $color-green;
+  border-radius: 4px;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  background-color: $color-green;
+  background-image: url("../../assets/svg/check-box-active.svg");
+}
+
+.list-item input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+.input-price {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    column-gap: 4px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.input-price--min, .input-price--max {
+    width: 48%;
+    border-radius: 4px;
+    padding: 6px 13px;
+    outline: none;
+    border: 1px solid transparentize($color-secondary-light-grey, .8);
+    color: $color-secondary-light-grey;
+    font-size: $fonts-small;
+    
+}
+
+.slider__rectangle {
+    width: 19px;
+    height: 1px;
+    border: 1px solid transparentize($color-secondary-light-grey, .8);
+    border-radius: 1px;
+    background-color: transparentize($color-secondary-light-grey, .8);
+}
+
+.section:nth-child(4) {
+  display: flex;
+  justify-content: center;
+
+}
+

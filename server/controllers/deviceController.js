@@ -31,19 +31,21 @@ class DeviceController {
             }
 
             if (minPriceDiler || maxPriceDiler) {
-                query["special_price.diler"] = { $gte: parseInt(minPriceDiler), $lte: parseInt(maxPriceDiler) } 
+                query["special_price.diler"] = { $gte: parseInt(minPriceDiler), $lte: parseInt(maxPriceDiler) }
 
             } else if (minPriceRetail || maxPriceRetail) {
-                query["special_price.retail"] = { $gte: parseInt(minPriceRetail), $lte: parseInt(maxPriceRetail) } 
-                   
+                query["special_price.retail"] = { $gte: parseInt(minPriceRetail), $lte: parseInt(maxPriceRetail) }
+
             }
+            let fullCollection = await Device.find(query);
+            const fullCollectionLength = fullCollection.length;
             let collection = await Device.find(query)
                 .skip((page - 1) * limit)
                 .limit(limit)
-                .sort({[sort]: ascending})
+                .sort({ [sort]: ascending })
                 .select(select)
 
-            return res.status(200).json(collection);
+            return res.status(200).json({ collection: collection, fullCollectionLength: fullCollectionLength });
         } catch (error) {
             console.log(error);
             res.status(500).json({ message: "Server error" })
